@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>The Camp Photobook</title>
+        <link rel="stylesheet" type="text/css" href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./assets/stylesheets/photoedit.css">
+        <link rel="manifest" href="./assets/manifest.json">
+        <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
+        <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+        <script src="./assets/scripts/index.js"></script>
+    </head>
+    <body>
+        <div class="nav nav-background">
+            <div class="nav-chapter-number">
+                <h1 class="nav-chapter-number main-color">03</h1>
+            </div>
+            <div class="nav-chapter-title col-2">
+                <h1 class="nav-chapter-title main-color">Edit 페이지</h1>
+            </div>
+            <svg class="nav-line">
+                <line class="nav-line main-color" x1=0 y1=2 x2=100% y2=2></line>
+            </svg>
+            <div class="col-3"></div>
+            <div class="nav-item">
+                <h1 class="nav-item main-color">인화지</h1>
+            </div>
+            <div class="nav-item">
+                <h1 class="nav-item main-color disabled">인쇄지</h1>
+            </div>
+            <div class="nav-item">
+                <h1 class="nav-item main-color disabled">커버 선택/변경</h1>
+            </div>
+        </div>
+        <div class="main-content">
+            <table class="content-control">
+                <tr class="top-bottom-bordered bold">
+                    <td class="content-logo">THE CAMP</td>
+                    <td class="content-type">포토북 (커버제목, 17 X 10 cm, 인화지, 이지커팅-유, 20p)</td>
+                    <td class="content-value">9,900원</td>
+                    <td class="bordered">옵션변경</td>
+                    <td class="bordered">저장</td>
+                    <td class="bordered">미리보기</td>
+                    <td class="blue-button">장바구니</td>
+                </tr>
+                <tr>
+                    <td class="content-actions"><img src="assets/images/input.png"> 글쓰기</td>
+                    <td class="content-actions"><img src="assets/images/cover_design.png"> 커버디자인선택/변경</td>
+                </tr>
+            </table>
+            <div class="main-editor">
+                <div class="background-white">
+                    <div class="row">
+                        <div class="col-6 border-right"></div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-6"></div>
+                                        <div id="info-insert" class="col-6"></div>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    <button id="add-photo" onclick="fileopen();">+</button>
+                                    <input type="file" id="openfile" onchange="afterfileopen();">
+                                    <canvas id="main_canvas" width="4725" height="3600">
+                                        
+                                    </canvas>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="thumbnail-list">
+
+            </div>
+        </div>
+    </body>
+</html>

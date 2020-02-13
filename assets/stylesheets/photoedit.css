@@ -1,0 +1,153 @@
+div.nav {
+    height: 6vw;
+}
+
+.nav-background {
+    background-color: #3f5058;
+}
+
+.main-color {
+    color: white;
+}
+
+svg.nav-line {
+    margin-top:auto;
+    margin-bottom: auto;
+    height: 1vw;
+    flex: 0 0 5%;
+    max-width: 5%;
+}
+
+line.nav-line {
+    stroke: white;
+    stroke-width: 0.1vw;
+}
+
+div.nav div {
+    display: flex;
+}
+
+div.nav-chapter-number {
+    flex: 0 0 10%;
+    max-width: 10%;
+}
+
+h1.nav-chapter-number {
+    font-size:4vw;
+    text-shadow: 0.3vw 0.3vw 0.3vw #1e262a;
+    margin: auto 0 auto auto;
+}
+
+h1.nav-chapter-title {
+    font-size: 2vw;
+    margin:auto;
+}
+
+div.nav-item {
+    flex: 0 0 12%;
+    max-width: 12%;
+}
+
+h1.nav-item {
+    font-size: 1.6vw;
+    margin: auto;
+}
+
+h1.disabled {
+    color: #657379 !important;
+}
+
+div.main-content {
+    margin: 10px 8vw 0px 8vw;
+}
+
+tr.top-bottom-bordered {
+    border-top: 1px solid #d4d4d4;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+table.content-control td {
+    font-size: 1vw;
+}
+
+table.content-control tr{
+    height: 3vw;
+}
+
+td.content-logo {
+    width: 8vw;
+}
+
+td.content-type {
+    width: 45vw;
+}
+
+td.content-value {
+    width: 5vw;
+}
+
+td.bordered {
+    text-align: center;
+    border: 1px solid #d4d4d4;
+    width: 7vw;
+}
+
+td.blue-button {
+    text-align: center;
+    color:white;
+    background-color: #0e5983;
+    width: 7vw;
+}
+
+.bold {
+    font-weight: 900;
+}
+
+.content-actions img {
+    height: 1.5vw;
+}
+
+div.main-editor {
+    background-color: #d4d4d4;
+    margin: 10px 0px;
+    width: 1350px;
+    height: 400px;
+    padding: 20px;
+}
+
+div.background-white {
+    background-color: white;
+}
+
+div.border-right {
+    border-right: 1px solid #d4d4d4;
+}
+
+div.main-editor div {
+    height: 100%;
+}
+
+div.main-editor canvas {
+    width: 100%;
+    height: 100%;
+}
+
+#add-photo {
+    height:40px; 
+    width:40px; 
+    margin: -20px -20px -20px -20px; 
+    border-radius: 20px;
+    border: 0px;
+    color: white;
+    font-size: 20px;
+    background-color: #d4d4d4;
+    position:relative;
+    top:50%;
+    left:50%;
+}
+
+#openfile {
+    height: 0px;
+    opacity: 0;
+    display: none;
+}
