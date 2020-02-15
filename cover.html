@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>The Camp Photobook</title>
+        <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/fontawesome.min.css">
+        <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./assets/stylesheets/cover.css">
+        <link rel="stylesheet" type="text/css" href="./assets/plugins/cropperjs/cropper.min.css">
+        <link rel="stylesheet" type="text/css" href="./assets/plugins/page.css">
+        <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
+        <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="nav nav-background">
+            <div class="nav-chapter-number">
+                <h1 class="nav-chapter-number main-color">03</h1>
+            </div>
+            <div class="nav-chapter-title col-2">
+                <h1 class="nav-chapter-title main-color">Edit 페이지</h1>
+            </div>
+            <svg class="nav-line">
+                <line class="nav-line main-color" x1=0 y1=2 x2=100% y2=2></line>
+            </svg>
+            <div class="col-3"></div>
+            <div class="nav-item">
+                <h1 class="nav-item main-color disabled">인화지</h1>
+            </div>
+            <div class="nav-item">
+                <h1 class="nav-item main-color disabled">인쇄지</h1>
+            </div>
+            <div class="nav-item">
+                <h1 class="nav-item main-color">커버 선택/변경</h1>
+            </div>
+        </div>
+        <div class="main-content">
+            <div id="cover-select-caption" style="text-align: center;">
+                선택 C.일반 셀프커버
+            </div>
+            <div class="main-editor" id="main-editor">
+                <div class="background-white full-height">
+                    <div class="row full-height" id="cover-show">
+                    </div>
+                </div>
+            </div>
+            <div class="thumbnail-region">
+                <div style="width:100%;text-align: center;">커버디자인리스트</div>
+                <div class="thumbnail-list"></div>
+            </div>
+        </div>
+    </body>
+    <script src="./assets/plugins/cropperjs/cropper.min.js"></script>
+    <script src="./assets/plugins/html2canvas.js"></script>
+    <script src="./assets/scripts/cover.js"></script>
+</html>
