@@ -1,3 +1,5 @@
+const COVER_SEND_URL = "";
+
 function screenShot() {
   $("#btns").hide();
   html2canvas(document.getElementById('main-editor')).then(function(canvas){
@@ -11,29 +13,68 @@ function screenShot() {
 
 var max_thumbnail = 20;
 function init() {
-  var div;
-  var number = max_thumbnail;
-  for (var i = 0; i < number; i++) {
-    img = document.createElement('img');
-    figcaption = document.createElement('figcaption');
-    img.src = "./assets/images/photos/" + (i + 1) + ".png";
+  const cover_get_url = "http://thecamp.inity.co.kr/Book/CoverInfo.asp";
+  $.get(
+    cover_get_url,
+    {},
+    function(data, status){
+      if (status=="success") {
+        showCovers(JSON.parse(data));
+      }
+      else {
+        alert("오유가 발생하였습니다.");
+      }
+    }
+  );
+  // showCovers(data);
+}
+
+function showCovers(data) {
+  // data = {
+  //     "coverinfo": [
+  //         {
+  //             "num": 22,
+  //             "url": "http://thecamp.inity.co.kr/Storage/Cover/2002/Cover_2002201445350939.jpg",
+  //             "thumb": "http://thecamp.inity.co.kr/Storage/Cover/2002/th_Cover_2002201445350939.jpg",
+  //             "title": "커버3"
+  //         },
+  //         {
+  //             "num": 21,
+  //             "url": "http://thecamp.inity.co.kr/Storage/Cover/2002/Cover_2002201445350919.jpg",
+  //             "thumb": "http://thecamp.inity.co.kr/Storage/Cover/2002/th_Cover_2002201445350919.jpg",
+  //             "title": "커버2"
+  //         },
+  //         {
+  //             "num": 20,
+  //             "url": "http://thecamp.inity.co.kr/Storage/Cover/2002/Cover_2002201445350909.jpg",
+  //             "thumb": "http://thecamp.inity.co.kr/Storage/Cover/2002/th_Cover_2002201445350909.jpg",
+  //             "title": "커버1"
+  //         }
+  //     ]
+  // };
+  var coverInfo = data.coverinfo;
+  coverInfo.forEach(element => {
+    var img = document.createElement('img');
+    var figcaption = document.createElement('figcaption');
+    img.src = element.thumb;
+    img.setAttribute('imgurl', element.url);
     img.addEventListener('click', coverSelect);
-    figcaption.innerHTML = "커버" + (i + 1);
-    div = document.createElement('div');
+    figcaption.innerHTML = element.title;
+    var div = document.createElement('div');
     div.classList.add('thumbnail-item');
     div.appendChild(img);
     div.appendChild(figcaption);
-    div.setAttribute('page', i + 1);
+    div.setAttribute('page', element.num);
     div.addEventListener('click', selectItem);
     document.getElementsByClassName('thumbnail-list')[0].appendChild(div);
-  }
+  });
 }
 
 const coverSelect = function() {
     var coverShow = document.getElementById('cover-show');
     coverShow.innerHTML = "";
     var img = document.createElement('img');
-    img.src = this.src;
+    img.src = this.getAttribute('imgurl');
     coverShow.appendChild(img);
 }
 
@@ -51,6 +92,26 @@ const selectItem = function() {
   this.classList.add("current-item");
 }
 
-var cur_thumbnail;
+function saveCover() {
+  var type = sessionStorage.getItem("type");
+  var easy_cutting = sessionStorage.getItem("easy_cutting");
+  if (type === null) {
+    type = 0;
+    sessionStorage.setItem("type", type);
+  }
+  if (easy_cutting === null) {
+    easy_cutting = 0;
+    sessionStorage.setItem("easy_cutting", easy_cutting);
+  }
+  sessionStorage.setItem("cover", cur_thumbnail);
+  sendCover(cur_thumbnail, type, easy_cutting);
+}
+
+function goBack() {
+  saveCover();
+  window.history.back();
+}
+
+var cur_thumbnail = 0;
 
 init();

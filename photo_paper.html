@@ -7,46 +7,24 @@
         <link rel="stylesheet" type="text/css" href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/stylesheets/photoedit.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/cropperjs/cropper.min.css">
-        <link rel="stylesheet" type="text/css" href="./assets/plugins/page.css">
         <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
         <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="nav nav-background">
-            <div class="nav-chapter-number">
-                <h1 class="nav-chapter-number main-color">03</h1>
-            </div>
-            <div class="nav-chapter-title col-2">
-                <h1 class="nav-chapter-title main-color">Edit 페이지</h1>
-            </div>
-            <svg class="nav-line">
-                <line class="nav-line main-color" x1=0 y1=2 x2=100% y2=2></line>
-            </svg>
-            <div class="col-3"></div>
-            <div class="nav-item">
-                <h1 class="nav-item main-color">인화지</h1>
-            </div>
-            <div class="nav-item">
-                <h1 class="nav-item main-color disabled">인쇄지</h1>
-            </div>
-            <div class="nav-item">
-                <h1 class="nav-item main-color disabled">커버 선택/변경</h1>
-            </div>
-        </div>
         <div class="main-content">
             <table class="content-control">
                 <tr class="top-bottom-bordered bold">
                     <td class="content-logo">THE CAMP</td>
-                    <td class="content-type">포토북 (커버제목, 17 X 10 cm, 인화지, 이지커팅-유, <span id="page">20</span>p)</td>
+                    <td class="content-type">포토북 (커버제목, 17 X 10 cm, <span id="type">인화지</span>, 이지커팅-<span id="easy_cutting">유</span>, <span id="page">20</span>p)</td>
                     <td class="content-value"><span id="value">9900</span>원</td>
-                    <td class="bordered">옵션변경</td>
-                    <td class="bordered">저장</td>
-                    <td class="bordered">미리보기</td>
-                    <td class="blue-button">장바구니</td>
+                    <td class="bordered" onclick="location.href='option.html'">옵션변경</td>
+                    <td class="bordered" onclick="savePage();">저장</td>
+                    <td class="bordered" onclick="preview();">미리보기</td>
+                    <td class="blue-button" onclick="my_cart();">완성</td>
                 </tr>
                 <tr>
-                    <td class="content-actions" onclick="addText();"><img src="assets/images/input.png"> 글쓰기</td>
-                    <td class="content-actions"><img src="assets/images/cover_design.png"> 커버디자인선택/변경</td>
+                    <td class="content-actions" onclick="addSideText();"><img src="assets/images/input.png"> 글쓰기</td>
+                    <td class="content-actions" onclick="location.href='cover.html';"><img src="assets/images/cover_design.png"> 커버디자인선택/변경</td>
                 </tr>
             </table>
             <div class="main-editor" id="main-editor">
@@ -94,5 +72,6 @@
     </body>
     <script src="./assets/plugins/cropperjs/cropper.min.js"></script>
     <script src="./assets/plugins/html2canvas.js"></script>
+    <script src="./assets/scripts/index.js"></script>
     <script src="./assets/scripts/photoedit.js"></script>
 </html>

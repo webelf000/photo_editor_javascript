@@ -1,3 +1,11 @@
+html {
+    text-align: center;
+}
+body {
+    display: inline-block;
+    width: 1380px;
+}
+
 div.nav {
     height: 6vw;
 }
@@ -58,7 +66,8 @@ h1.disabled {
 }
 
 div.main-content {
-    margin: 10px 8vw 0px 8vw;
+    width: 1320px;
+    margin: 30px;
 }
 
 tr.top-bottom-bordered {
@@ -66,12 +75,16 @@ tr.top-bottom-bordered {
     border-bottom: 1px solid #d4d4d4;
 }
 
+table.content-control {
+    width: 1320px;
+}
+
 table.content-control td {
-    font-size: 1vw;
+    font-size: 15px;
 }
 
 table.content-control tr{
-    height: 3vw;
+    height: 50px;
 }
 
 td.content-logo {
@@ -110,7 +123,7 @@ td.blue-button {
 div.main-editor {
     background-color: #d4d4d4;
     margin: 10px 0px;
-    width: 1350px;
+    width: 1320px;
     height: 400px;
     padding: 20px;
 }
@@ -134,6 +147,12 @@ div.ctrl-btn-group {
     top:65%;
     left:30%;
 }
+
+/* @media screen and (max-width: 1024px) {
+    div.ctrl-btn-group {
+        left:15%;
+    }
+} */
 
 div.main-editor canvas {
     width: 100%;
@@ -194,7 +213,7 @@ div.main-editor canvas {
 }
 
 .thumbnail-region {
-    width: 1350px;
+    width: 100%;
 }
 
 .thumbnail-region > div{
@@ -202,11 +221,15 @@ div.main-editor canvas {
 }
 
 .thumbnail-list {
-    width: 1240px;
+    width: 90%;
     height: 120px;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+}
+
+.thumbnail-list.cover-list {
+    width: 100%;
 }
 
 .thumbnail-list > div {
@@ -232,11 +255,23 @@ div.main-editor canvas {
     margin: 30px 10px 0px 10px;
 }
 
-div.current-item {
-    height: 100%;
-    border: 1px solid royalblue;
+div.current-item img{
+    border: 2px solid royalblue;
 }
 
 div#info-insert {
     padding-top: 20px;
+}
+
+div#info-insert.print-paper {
+    margin:30% auto auto auto;
+    text-align: center;
+    height: 40px;
+}
+
+#cover-show img {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
 }

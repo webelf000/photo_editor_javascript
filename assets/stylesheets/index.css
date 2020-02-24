@@ -151,8 +151,11 @@ a:hover, a:link, a:visited, a:active {
     text-decoration: none;
 }
 
+h3.content-title {
+    font-size: 40px
+}
 .content-title {
-    margin-top: 15vh;
+    margin-top: 180px;
     margin-bottom: 16px;
 }
 
@@ -167,9 +170,13 @@ table.content-table tr{
 }
 
 table.table td {
+    font-size: 30px;
     padding:16px;
     border: transparent;
     vertical-align: middle;
+}
+table.table option, table.table select, table.table label {
+    font-size:20px;
 }
 
 td.button {
