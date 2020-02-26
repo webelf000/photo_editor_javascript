@@ -108,8 +108,24 @@ function saveCover() {
 }
 
 function goBack() {
+  const sidx = sessionStorage.getItem('sidx');
+  if (sidx == null) {
+    alert("되돌아가실 수 없습니다.");
+    return false;
+  }
+  else {
   saveCover();
   window.history.back();
+  }
+}
+
+function goOption() {
+  const sidx = sessionStorage.getItem('sidx');
+  if (sidx == null) {
+    alert("커버를 저장하세요.");
+    return false;
+  } else
+  location.href='option.html';
 }
 
 var cur_thumbnail = 0;

@@ -1,9 +1,18 @@
 html {
     text-align: center;
 }
+
+#cover-select-caption * {
+    font-size: 32px;
+}
+
 body {
     display: inline-block;
     width: 1380px;
+}
+
+#cover-select-caption span {
+    margin-right: -40px;
 }
 
 div.nav {
@@ -80,7 +89,8 @@ table.content-control {
 }
 
 table.content-control td {
-    font-size: 15px;
+    box-sizing: content-box;
+    font-size: 24px;
 }
 
 table.content-control tr{
@@ -88,28 +98,30 @@ table.content-control tr{
 }
 
 td.content-logo {
-    width: 8vw;
+    /* width: 8vw; */
 }
 
 td.content-type {
-    width: 45vw;
+    /* width: 45vw; */
+    font-size: 18px
 }
 
 td.content-value {
-    width: 5vw;
+    /* width: 5vw; */
 }
 
 td.bordered {
     text-align: center;
     border: 1px solid #d4d4d4;
-    width: 7vw;
+    width: 100px;
 }
 
 td.blue-button {
     text-align: center;
     color:white;
     background-color: #0e5983;
-    width: 7vw;
+    width: 100px;
+    /* width: 7vw; */
 }
 
 .bold {
@@ -146,6 +158,10 @@ div.ctrl-btn-group {
     position: relative;
     top:65%;
     left:30%;
+}
+
+div.ctrl-btn-group button {
+    font-size: 20px;
 }
 
 /* @media screen and (max-width: 1024px) {
@@ -248,7 +264,7 @@ div.main-editor canvas {
 }
 
 .thumbnail-list figcaption {
-    font-size: 12px;
+    font-size: 24px;
 }
 
 .thumbnail-control {
@@ -274,4 +290,26 @@ div#info-insert.print-paper {
     margin: 0 auto;
     width: 100%;
     height: 100%;
+}
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+body.loading .modal {
+    overflow: hidden;   
+}
+
+body.loading .modal {
+    display: block;
 }

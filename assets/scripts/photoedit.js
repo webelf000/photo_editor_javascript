@@ -14,6 +14,7 @@ function fileopen() {
 }
 
 function afterfileopen() {
+  console.log('fileopen');
     var input = document.getElementById("openfile");
     var fReader = new FileReader();
     fReader.readAsDataURL(input.files[0]);
@@ -56,9 +57,6 @@ function crop() {
     img.src = canvas.toDataURL("image/png");
     img.setAttribute('id', 'image');
     document.getElementById('image-workplace').appendChild(img);
-    // var context = canvas.getContext("2d");
-    // var data = context.getImageData(0, 0, canvas.width, canvas.height);
-    // console.log(data);
   }
   $('.ctrl-btn').toggleClass('btn-hidden');
 }
@@ -107,17 +105,14 @@ function savePage() {
   $("#btns").hide();
   html2canvas(document.getElementById('main-editor'), {dpi: 300}).then(function(canvas){
     var img = canvas.toDataURL('image/jpg');
-    var page = document.getElementById('main-editor').innerHTML;
-    // img = JSON.stringify(img);
-    page = JSON.stringify(page);
+
     sendImage(img);
-    sendPage(page);
-    $("#btns").show();
   });
 }
 
 var max_thumbnail = 20;
 function init() {
+  sessionStorage.setItem("editing", 1);
   sidx = sessionStorage.getItem("sidx");
   defaultEditer = document.getElementById('main-editor').innerHTML;
   type = sessionStorage.getItem("type");
@@ -148,9 +143,6 @@ function init() {
       }
     }
   );
-  
-  // data = {};
-  // getCover(data, img);
   var number = max_thumbnail;
   for (var i = 0; i < number; i++) {
     img = document.createElement('img');
@@ -164,22 +156,14 @@ function init() {
     div.setAttribute('page', i + 1);
     div.addEventListener('click', selectItem);
     document.getElementsByClassName('thumbnail-list')[0].appendChild(div);
+    
   }
 
   thumbnailSet();
     
-  // data = {};
-  // setThumbnails(data);
-
-  // img = document.createElement('img');
-  // img.src = "./assets/images/white.png";
-  // figcaption = document.createElement('figcaption');
-  // figcaption.innerHTML = "뒤커버";
   div = document.createElement('div');
   div.classList.add('thumbnail-item');
-  // div.appendChild(img);
-  // div.appendChild(figcaption);
-  // div.setAttribute('page', number + 1);
+
   document.getElementsByClassName('thumbnail-list')[0].appendChild(div);
 
   var tag = document.getElementById('value');
@@ -188,6 +172,15 @@ function init() {
   tag.innerHTML = (type == 0 ? "인화지" : "인쇄지");
   tag = document.getElementById('easy_cutting');
   tag.innerHTML = (easy_cutting == 0 ? "유" : "무");
+  document.getElementById('add-photo').addEventListener('click', fileopen);
+  document.getElementById('btn-rotate').addEventListener('click', rotate);
+  document.getElementById('btn-cropstart').addEventListener('click', crop);
+  document.getElementById('btn-del').addEventListener('click', del);
+  document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
+  document.getElementById('btn-cropsave').addEventListener('click', crop);
+  document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
+  document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
+  document.getElementById('openfile').addEventListener('change', afterfileopen);
 }
 
 thumbnailSet = function () {
@@ -212,47 +205,14 @@ thumbnailSet = function () {
 }
 
 function getCover(data, img) {
-  // data = {
-  //   "coverinfo": [
-  //         {
-  //             "num": 22,
-  //             "url": "http://thecamp.inity.co.kr/Storage/Cover/2002/Cover_2002201445350939.jpg",
-  //             "thumb": "http://thecamp.inity.co.kr/Storage/Cover/2002/th_Cover_2002201445350939.jpg",
-  //             "title": "커버3"
-  //         },
-  //         {
-  //             "num": 21,
-  //             "url": "http://thecamp.inity.co.kr/Storage/Cover/2002/Cover_2002201445350919.jpg",
-  //             "thumb": "http://thecamp.inity.co.kr/Storage/Cover/2002/th_Cover_2002201445350919.jpg",
-  //             "title": "커버2"
-  //         },
-  //         {
-  //             "num": 20,
-  //             "url": "http://thecamp.inity.co.kr/Storage/Cover/2002/Cover_2002201445350909.jpg",
-  //             "thumb": "http://thecamp.inity.co.kr/Storage/Cover/2002/th_Cover_2002201445350909.jpg",
-  //             "title": "커버1"
-  //         }
-  //     ]
-  // };
-  
   data.coverinfo.forEach(element => {
     if (element.num == cover) {
       document.getElementsByClassName("thumbnail-list")[0].getElementsByTagName('img')[0].src = element.url;
-      // img.src = element.url;
     }
   });
 }
 
 function setThumbnails(data) {
-  // data = {
-  //   "imginfo":[
-  //     {
-  //       "page":1,
-  //       "url":"http://thecamp.inity.co.kr/Storage/data/20200221/126671358257230571e32a9497bc9ce85a05dda04543fd6.jpg"
-  //     }
-  //   ]
-  // };
-  
   var urlArray = [];
   data.imginfo.forEach(element => {
     urlArray[element.page] = element.url;
@@ -269,6 +229,7 @@ function setThumbnails(data) {
 } 
 
 var selectItem = function() {
+  $("#btns").hide();
   var items = document.getElementsByClassName('thumbnail-item');
   for (const key in items) {
     if (items.hasOwnProperty(key)) {
@@ -280,30 +241,9 @@ var selectItem = function() {
     }
   }
   this.classList.add("current-item");
-  $("#btns").show();
+
 
   const url = "http://thecamp.inity.co.kr/Book/pageGetData.asp";
-    // $.get(
-    //   url,
-    //   {
-    //      sidx: sidx,
-    //      page: cur_thumbnail
-    //    },
-    //   function(data, status){
-    //     console.log(status);
-    //     if (status=="success") {
-    //       try{
-    //       showPage(JSON.parse(data));
-    //       } catch(e) {
-    //         document.getElementById('main-editor').innerHTML = "";
-    //       }
-    //     }
-    //   },
-    //   function(data, status) {
-    //     console.log(data);
-    //   }
-    // );
-
     $.ajax({
       url: url,
       type: 'GET',
@@ -315,20 +255,32 @@ var selectItem = function() {
     .done(function(data) {
       showPage(JSON.parse(data));
     })
-    .fail(function() {document.getElementById('main-editor').innerHTML = defaultEditer;});
-    // data = {};
-  // showPage(data);
-  // alert(cur_thumbnail+"번째 항목 선택됨...");
+    .fail(function() {
+      document.getElementById('main-editor').innerHTML = defaultEditer;
+      document.getElementById('add-photo').addEventListener('click', fileopen);
+      document.getElementById('btn-rotate').addEventListener('click', rotate);
+      document.getElementById('btn-cropstart').addEventListener('click', crop);
+      document.getElementById('btn-del').addEventListener('click', del);
+      document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
+      document.getElementById('btn-cropsave').addEventListener('click', crop);
+      document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
+      document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
+      document.getElementById('openfile').addEventListener('change', afterfileopen);
+    });
 }
 
 function showPage(data) {
-  // data = {
-  //   data : '<div>OK</div>'
-  // }
-  console.log(data);
-  var temp = data.data.replace(/\\n/g, '').replace(/\\"/g, '"').replace(/^\"+|\"+$/, "");
-
+  var temp = data.data.replace(/\\n/g, '').replace(/\\"/g, '"').replace(/^\"/, "").replace(/\"$/, "");
   document.getElementById('main-editor').innerHTML = temp;
+  document.getElementById('add-photo').addEventListener('click', fileopen);
+  document.getElementById('btn-rotate').addEventListener('click', rotate);
+  document.getElementById('btn-cropstart').addEventListener('click', crop);
+  document.getElementById('btn-del').addEventListener('click', del);
+  document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
+  document.getElementById('btn-cropsave').addEventListener('click', crop);
+  document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
+  document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
+  document.getElementById('openfile').addEventListener('change', afterfileopen);
   $("#btns").show();
 }
 
@@ -362,11 +314,18 @@ function thumbnail_prev() {
         .done(function(data) {
           showPage(JSON.parse(data));
         })
-        .fail(function() {document.getElementById('main-editor').innerHTML = defaultEditer;});
-          // data = {};
-          // showPage(data);
-
-
+        .fail(function() {
+          document.getElementById('main-editor').innerHTML = defaultEditer;
+          document.getElementById('add-photo').addEventListener('click', fileopen);
+          document.getElementById('btn-rotate').addEventListener('click', rotate);
+          document.getElementById('btn-cropstart').addEventListener('click', crop);
+          document.getElementById('btn-del').addEventListener('click', del);
+          document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
+          document.getElementById('btn-cropsave').addEventListener('click', crop);
+          document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
+          document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
+          document.getElementById('openfile').addEventListener('change', afterfileopen);
+        });
       }
       else if (key >= 0 && key <= max_thumbnail + 1)
       {
@@ -392,8 +351,7 @@ function thumbnail_next() {
         thumbnail_item[key].classList.add("current-item");
         thumbnail_item[key].scrollIntoView();
 
-
-            const url = "http://thecamp.inity.co.kr/Book/pageGetData.asp";
+        const url = "http://thecamp.inity.co.kr/Book/pageGetData.asp";
             $.ajax({
               url: url,
               type: 'GET',
@@ -405,12 +363,18 @@ function thumbnail_next() {
             .done(function(data) {
               showPage(JSON.parse(data));
             })
-            .fail(function() {document.getElementById('main-editor').innerHTML = defaultEditer;});
-          // data = {};
-          // showPage(data);
-
-
-
+            .fail(function() {
+              document.getElementById('main-editor').innerHTML = defaultEditer;
+              document.getElementById('add-photo').addEventListener('click', fileopen);
+              document.getElementById('btn-rotate').addEventListener('click', rotate);
+              document.getElementById('btn-cropstart').addEventListener('click', crop);
+              document.getElementById('btn-del').addEventListener('click', del);
+              document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
+              document.getElementById('btn-cropsave').addEventListener('click', crop);
+              document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
+              document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
+              document.getElementById('openfile').addEventListener('change', afterfileopen);
+            });
       }
       else if (key >= 0 && key <= max_thumbnail + 1)
       {
@@ -446,6 +410,16 @@ function thumbnail_add() {
   // change page
   var page = document.getElementById('page');
   page.innerHTML = Number(page.innerHTML) + 1;
+  document.getElementById('main-editor').innerHTML = defaultEditer;
+  document.getElementById('add-photo').addEventListener('click', fileopen);
+  document.getElementById('btn-rotate').addEventListener('click', rotate);
+  document.getElementById('btn-cropstart').addEventListener('click', crop);
+  document.getElementById('btn-del').addEventListener('click', del);
+  document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
+  document.getElementById('btn-cropsave').addEventListener('click', crop);
+  document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
+  document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
+  document.getElementById('openfile').addEventListener('change', afterfileopen);
 }
 
 function formatMoney(number, decPlaces, decSep, thouSep) {
@@ -489,8 +463,7 @@ function addText() {
 function preview() {
   $("#btns").toggle();
 }
-// U page: 페지번호, data: 화상2진자료
-// D status : 200 정상 기타 오유
+
 function sendImage(data){
   var fd = new FormData();
   fd.append('sidx', sidx);
@@ -505,29 +478,14 @@ function sendImage(data){
     data: fd
   })
   .done(function(data) {
-    console.log(data);
+    console.log("화상이 보관되였습니다.");
+    var page = document.getElementById('main-editor').innerHTML;
+    page = JSON.stringify(page);
+    sendPage(page);
   })
-  .fail(function() {alert("error");});
+  .fail(function() {alert("화상보관중 오유가 발생하였습니다.");});
 }
 
-// U 없음
-// D data: [imageURL]
-function receiveImage() {
-  $.get(IMAGE_RECEIVE_URL,
-  {
-    sidx: sidx
-  },
-  function(data, status){
-    if (status == 200) {
-      /*접수자료처리*/data.data;
-    }
-    else
-      alert("오유가 발생하였습니다.");
-  });
-}
-
-// U page: 페지번호, data: HTML자료
-// D status: 200 정상 기타 오유
 function sendPage(data){
   $.post(PAGE_SEND_URL,
   {
@@ -536,37 +494,19 @@ function sendPage(data){
     data: data
   },
   function(data, status){
-    // console.log(data);
     if (status == "success")
     {
-      console.log("페지가 보관되였습니다.");
+      $("#btns").show();
       thumbnailSet();
     }
     else
-      alert("오유가 발생하였습니다.");
-  });
-}
-
-// U page: 페지번호
-// D status: 200 정상 기타 오유, data: HTML자료
-function receivePage(page) {
-  $.get(PAGE_RECEIVE_URL,
-  {
-    sidx: sidx,
-    page: page
-  },
-  function(data, status){
-    if (status == 200) {
-      // console.log(JSON.parse(data.data));
-    }
-    else
-      alert("오유가 발생하였습니다.");
+      alert("페지보관중 오유가 발생하였습니다.");
   });
 }
 
 function my_cart() {
   if (!confirm("아래의 내용으로 주문하시겠습니까?")) return;
-  const url = "";
+  const url = "http://thecamp.inity.co.kr/Book/Bookmake.asp";//최종보관URL
   $.post(
     url,
     {
@@ -575,7 +515,8 @@ function my_cart() {
     function(data, status) {
       if (status == "success") {
         alert("주문되였습니다.");
-        location.href = "cover.html";
+        sessionStorage.clear();
+        location.href = "index.html";
       }
       else {
         alert("오유가 발생하였습니다.");
@@ -606,5 +547,11 @@ function makeblob(dataURL) {
   return new Blob([uInt8Array], { type: contentType });
 }
 
+$body = $("body");
+
+$(document).on({
+    ajaxStart: function() { $body.addClass("loading");    },
+    ajaxStop: function() { $body.removeClass("loading"); }    
+});
 
 init();

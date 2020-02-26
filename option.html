@@ -11,10 +11,10 @@
     </head>
     <body>
         <div class="full-height col-12 align-center" style="overflow-x: hidden;">
-            <h3 class="content-title">더캠프 포토북</h3>
-            <div class="main-image">
+            <h3 style="font-size: 36px; margin-top: 30px;">더캠프 포토북</h3>
+            <!-- <div class="main-image">
                 <img src="assets/images/default-page.png" style="width:100%">
-            </div>
+            </div> -->
             <table class="table">
                 <tr>
                     <td>사이즈</td>
@@ -26,7 +26,7 @@
                 </tr>
                 <tr>
                     <td>내지</td>
-                    <td colspan="2">
+                    <td colspan="2" id="paper_type">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
                             <label class="btn btn-outline-secondary active">
                                 <input type="radio" name="options" id="opt_photo_paper" autocomplete="off" checked> 단면인화지
@@ -42,10 +42,10 @@
                     <td colspan="2">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
                             <label class="btn btn-outline-secondary active">
-                                <input type="radio" name="options" id="opt_easy_cut_on" autocomplete="off" checked> 있음
+                                <input type="radio" name="options" id="opt_easy_cut_off" autocomplete="off" checked> 없음
                             </label>
                             <label class="btn btn-outline-secondary">
-                                <input type="radio" name="options" id="opt_easy_cut_off" autocomplete="off"> 없음
+                                <input type="radio" name="options" id="opt_easy_cut_on" autocomplete="off"> 있음
                             </label>
                             </div>
                     </td>
@@ -77,7 +77,9 @@
                     <td colspan="3"></td>
                 </tr>
                 <tr>
-                    <td class="submit-button" colspan="3" onclick="make_photobook();">포토북편집</td>
+                    <td class="submit-td" colspan="3">
+                        <button style="width:30%; font-size: 24px;" class="btn btn-primary" onclick="make_photobook();">포토북편집</button>
+                    </td>
                 </tr>
             </table>
         </div>

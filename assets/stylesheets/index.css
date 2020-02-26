@@ -1,3 +1,4 @@
+
 .nav-background {
     background-color: #3f5058;
 }
@@ -162,16 +163,20 @@ h3.content-title {
 table.content-table {
     font-size: 4vw;
     margin: 0 10%;
-    table-layout: fixed;
 }
 
 table.content-table tr{
-    height: 5vh;
+    height: 60px;
+}
+
+table.content-table td:last-child {
+    width:100%;
+    padding-left: 80px;
 }
 
 table.table td {
-    font-size: 30px;
-    padding:16px;
+    font-size: 20px;
+    padding: 8px;
     border: transparent;
     vertical-align: middle;
 }
@@ -195,10 +200,10 @@ tr.result-row {
     font-weight: bold;
 }
 
-td.submit-button {
+td.submit-td {
     text-align: center;
-    color: white;
-    background-color: #2c2c2c;
+    /* color: white;
+    background-color:#3f5058; */
 }
 
 .nav-chapter-title {

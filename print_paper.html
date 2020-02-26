@@ -44,15 +44,15 @@
                                     <div id="image-workplace">
                                     </div>
                                     <div style="height: 360px; margin-top: -360px;" id="btns">
-                                        <button id="add-photo" onclick="fileopen();">+</button>
+                                        <button id="add-photo">+</button>
                                         <div class="btn-group ctrl-btn-group">
-                                            <button class="btn ctrl-btn btn-secondary btn-3" onclick="rotate();">회전</button>
-                                            <button class="btn ctrl-btn btn-secondary btn-3" onclick="crop();">편집</button>
-                                            <button class="btn ctrl-btn btn-secondary btn-3" onclick="del();">삭제</button>
-                                            <button class="btn ctrl-btn btn-secondary btn-hidden" onclick="scaleUp();" data-method="zoom" data-option="0.1">확대</button>
-                                            <button class="btn ctrl-btn btn-secondary btn-hidden" onclick="crop();">보관</button>
-                                            <button class="btn ctrl-btn btn-secondary btn-hidden" onclick="cancelCrop();">취소</button>
-                                            <button class="btn ctrl-btn btn-secondary btn-hidden" onclick="scaleDown();">축소</button>
+                                            <button id="btn-rotate" class="btn ctrl-btn btn-secondary btn-3">회전</button>
+                                            <button id="btn-cropstart" class="btn ctrl-btn btn-secondary btn-3">편집</button>
+                                            <button id="btn-del" class="btn ctrl-btn btn-secondary btn-3">삭제</button>
+                                            <button id="btn-scaleup" class="btn ctrl-btn btn-secondary btn-hidden" data-method="zoom" data-option="0.1">확대</button>
+                                            <button id="btn-cropsave" class="btn ctrl-btn btn-secondary btn-hidden">보관</button>
+                                            <button id="btn-cropcancel" class="btn ctrl-btn btn-secondary btn-hidden">취소</button>
+                                            <button id="btn-scaledown" class="btn ctrl-btn btn-secondary btn-hidden">축소</button>
                                         </div>
                                         <input type="file" id="openfile" onchange="afterfileopen();">
                                         <input type="hidden" id="dataRotate" value="0">
@@ -71,6 +71,7 @@
             </div>
         </div>
     </body>
+    <div class="modal"><!-- Place at bottom of page --></div>
     <script src="./assets/plugins/cropperjs/cropper.min.js"></script>
     <script src="./assets/plugins/html2canvas.js"></script>
     <script src="./assets/scripts/index.js"></script>
