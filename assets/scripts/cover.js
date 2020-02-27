@@ -1,17 +1,3 @@
-const COVER_SEND_URL = "";
-
-function screenShot() {
-  $("#btns").hide();
-  html2canvas(document.getElementById('main-editor')).then(function(canvas){
-    var link=document.createElement("a");
-    link.href=canvas.toDataURL('image/jpg');
-    link.download = 'screenshot.jpg';
-    // link.click();
-    $("#btns").show();
-  });
-}
-
-var max_thumbnail = 20;
 function init() {
   const cover_get_url = "http://thecamp.inity.co.kr/Book/CoverInfo.asp";
   $.get(
@@ -26,108 +12,47 @@ function init() {
       }
     }
   );
-  // showCovers(data);
 }
 
 function showCovers(data) {
-  // data = {
-  //     "coverinfo": [
-  //         {
-  //             "num": 22,
-  //             "url": "http://thecamp.inity.co.kr/Storage/Cover/2002/Cover_2002201445350939.jpg",
-  //             "thumb": "http://thecamp.inity.co.kr/Storage/Cover/2002/th_Cover_2002201445350939.jpg",
-  //             "title": "커버3"
-  //         },
-  //         {
-  //             "num": 21,
-  //             "url": "http://thecamp.inity.co.kr/Storage/Cover/2002/Cover_2002201445350919.jpg",
-  //             "thumb": "http://thecamp.inity.co.kr/Storage/Cover/2002/th_Cover_2002201445350919.jpg",
-  //             "title": "커버2"
-  //         },
-  //         {
-  //             "num": 20,
-  //             "url": "http://thecamp.inity.co.kr/Storage/Cover/2002/Cover_2002201445350909.jpg",
-  //             "thumb": "http://thecamp.inity.co.kr/Storage/Cover/2002/th_Cover_2002201445350909.jpg",
-  //             "title": "커버1"
-  //         }
-  //     ]
-  // };
   var coverInfo = data.coverinfo;
   coverInfo.forEach(element => {
+    var div = document.createElement('div');
+    div.classList.add("col-6");
+    div.classList.add("cover-item");
+    div.setAttribute('cover_num', element.num);
     var img = document.createElement('img');
     var figcaption = document.createElement('figcaption');
     img.src = element.thumb;
-    img.setAttribute('imgurl', element.url);
-    img.addEventListener('click', coverSelect);
+    img.setAttribute('width', "100%");
     figcaption.innerHTML = element.title;
-    var div = document.createElement('div');
-    div.classList.add('thumbnail-item');
-    div.appendChild(img);
-    div.appendChild(figcaption);
     div.setAttribute('page', element.num);
     div.addEventListener('click', selectItem);
-    document.getElementsByClassName('thumbnail-list')[0].appendChild(div);
+    div.appendChild(img);
+    div.appendChild(figcaption);
+    document.getElementById('main-cover-list').appendChild(div);
   });
 }
 
-const coverSelect = function() {
-    var coverShow = document.getElementById('cover-show');
-    coverShow.innerHTML = "";
-    var img = document.createElement('img');
-    img.src = this.getAttribute('imgurl');
-    coverShow.appendChild(img);
-}
-
 const selectItem = function() {
-  var items = document.getElementsByClassName('thumbnail-item');
-  for (const key in items) {
-    if (items.hasOwnProperty(key)) {
-      if (items[key].getAttribute('page') != this.getAttribute('page'))
-        items[key].classList.remove('current-item');
-      else {
-        cur_thumbnail = this.getAttribute('page');
-      }
-    }
-  }
+  cur_thumbnail = this.getAttribute("cover_num");
+  $('.cover-item').removeClass('current-item');
   this.classList.add("current-item");
 }
 
-function saveCover() {
-  var type = sessionStorage.getItem("type");
-  var easy_cutting = sessionStorage.getItem("easy_cutting");
-  if (type === null) {
-    type = 0;
-    sessionStorage.setItem("type", type);
-  }
-  if (easy_cutting === null) {
-    easy_cutting = 0;
-    sessionStorage.setItem("easy_cutting", easy_cutting);
-  }
-  sessionStorage.setItem("cover", cur_thumbnail);
-  sendCover(cur_thumbnail, type, easy_cutting);
-}
-
 function goBack() {
-  const sidx = sessionStorage.getItem('sidx');
-  if (sidx == null) {
-    alert("되돌아가실 수 없습니다.");
-    return false;
-  }
-  else {
-  saveCover();
   window.history.back();
-  }
 }
 
 function goOption() {
-  const sidx = sessionStorage.getItem('sidx');
-  if (sidx == null) {
-    alert("커버를 저장하세요.");
+  if (cur_thumbnail == -1) {
+    alert("커버를 선택하세요.");
     return false;
-  } else
-  location.href='option.html';
+  }
+  sessionStorage.setItem('cover', cur_thumbnail);
+  window.history.back();
 }
 
-var cur_thumbnail = 0;
+var cur_thumbnail = -1;
 
 init();

@@ -5,35 +5,26 @@
         <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="./assets/stylesheets/photoedit.css">
-        <link rel="stylesheet" type="text/css" href="./assets/plugins/cropperjs/cropper.min.css">
-        <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
-        <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
+
     </head>
     <body>
-        <div class="main-content">
-            <div id="cover-select-caption" style="text-align: center;">
-                <button class="btn btn-primary" style="float: left;" onclick="goOption();">옵션선택</button>
-                <span>커버선택</span>
-                <button class="btn btn-primary" style="float: right;" onclick="saveCover();">보관하기</button>
-                <button class="btn btn-primary" style="float: right; margin-right: 10px;" onclick="goBack();">되돌이</button>
+        <div class="full-height col-12 align-center" style="overflow-x: hidden;">
+            <div class="clearfix" style="display: flex; align-items: center;margin-top:60px; ">
+                <img class="float-left" src="./assets/images/arrow_before.png" onclick="goBack();" />
+                <div class="float-left" style="width: 90vw;">
+                    <h3 style="font-size: 36px;">커버디자인선택</h3>
+                </div>
+                <img class="float-right" src="./assets/images/arrow_after.png" onclick="goOption();" />
             </div>
             <div class="clearfix"></div>
-            <div class="main-editor" id="main-editor">
-                <div class="background-white full-height">
-                    <div class="row full-height">
-                        <div class="col-12 full-height" id="cover-show"></div>
-                    </div>
+            <div class="full-height"  style="background-color:whitesmoke; ">
+                <div id="main-cover-list" class="clearfix main-image row">
                 </div>
-            </div>
-            <div class="thumbnail-region">
-                <div style="width:100%;text-align: center; font-size: 32px;">커버디자인리스트</div>
-                <div class="thumbnail-list cover-list"></div>
             </div>
         </div>
     </body>
-    <script src="./assets/plugins/cropperjs/cropper.min.js"></script>
-    <script src="./assets/plugins/html2canvas.js"></script>
-    <script src="./assets/scripts/index.js"></script>
+    <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <script src="./assets/scripts/cover.js"></script>
 </html>

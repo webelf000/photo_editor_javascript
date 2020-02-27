@@ -19,6 +19,10 @@ div.nav {
     height: 6vw;
 }
 
+#nav-div {
+    width: 100%; background-color: white; padding: 30px 30px 0px 30px;
+}
+
 .nav-background {
     background-color: #3f5058;
 }
@@ -75,8 +79,9 @@ h1.disabled {
 }
 
 div.main-content {
-    width: 1320px;
-    margin: 30px;
+    width: 1380px;
+    height: 140vh;
+    background-color: whitesmoke;
 }
 
 tr.top-bottom-bordered {
@@ -133,11 +138,10 @@ td.blue-button {
 }
 
 div.main-editor {
-    background-color: #d4d4d4;
-    margin: 10px 0px;
-    width: 1320px;
-    height: 400px;
-    padding: 20px;
+    background-color: #f0f0f0;
+    padding: 30px 50px 20px 50px;
+    width: 1380px;
+    height: 410px;
 }
 
 div.background-white {
@@ -157,7 +161,7 @@ div.ctrl-btn-group {
     margin: -20px -20px -20px -20px;
     position: relative;
     top:65%;
-    left:30%;
+    left:25%;
 }
 
 div.ctrl-btn-group button {
@@ -229,7 +233,10 @@ div.main-editor canvas {
 }
 
 .thumbnail-region {
-    width: 100%;
+    background-color: whitesmoke;
+    width: 1320px;
+    height: 120px;
+    margin: 0px 30px 0px 30px;
 }
 
 .thumbnail-region > div{
@@ -237,7 +244,7 @@ div.main-editor canvas {
 }
 
 .thumbnail-list {
-    width: 90%;
+    width: 89%;
     height: 120px;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -268,7 +275,7 @@ div.main-editor canvas {
 }
 
 .thumbnail-control {
-    margin: 30px 10px 0px 10px;
+    margin: 28px 10px 0px 10px;
 }
 
 div.current-item img{
@@ -312,4 +319,8 @@ body.loading .modal {
 
 body.loading .modal {
     display: block;
+}
+
+.shadow {
+    box-shadow: 5px 10px 8px #888888;
 }

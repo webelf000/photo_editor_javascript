@@ -11,28 +11,46 @@
     </head>
     <body>
         <div class="full-height col-12 align-center" style="overflow-x: hidden;">
-            <h3 style="font-size: 36px; margin-top: 30px;">더캠프 포토북</h3>
-            <!-- <div class="main-image">
-                <img src="assets/images/default-page.png" style="width:100%">
-            </div> -->
-            <table class="table">
+            <div class="clearfix" style="display: flex; align-items: center;margin-top:60px; ">
+                <img class="float-left" style="width: 48px;"/>
+                <div class="float-left" style="width: 90vw;">
+                    <h3 style="font-size: 36px;">포토북옵션설정</h3>
+                </div>
+                <img class="float-right" src="./assets/images/arrow_after.png" onclick="make_photobook();"/>
+            </div>
+            <div class="clearfix"></div>
+            <div class="clearfix main-image" style="background-color:whitesmoke; display: flex; align-items: center;">
+                <img class="float-left" src="./assets/images/arrow_prev.png" onclick="prevCover();"/>
+                <div class="float-left" style="margin:30px 0px; background-color: white; width: 90vw; height: 30vw;">
+                    <img id="cover-image" />
+                </div>
+                <img class="float-right" src="./assets/images/arrow_next.png" onclick="nextCover();"/>
+            </div>
+            <button class="btn btn-primary" style="width:100%; font-size: 36px; margin-top: 30px; margin-bottom:60px; padding:20px 0px;" onclick="location.href='cover.html';">커버디자인보기</button>
+            <table class="table table-option">
                 <tr>
                     <td>사이즈</td>
                     <td>
-                        <select class="custom-select">
+                        <label class="btn btn-outline-primary disabled" style="width:280px;height: 60px;font-size: 28px;">
+                            17x10cm
+                        </label>
+                        <!-- <select class="custom-select">
                             <option value="1">17x10cm</option>
-                        </select>
+                        </select> -->
+                    </td>
+                    <td style="font-size: 16px;">
+                        사이즈는 재단과정에서 약간의<br>차이가 생길 수 있습니다
                     </td>
                 </tr>
                 <tr>
                     <td>내지</td>
                     <td colspan="2" id="paper_type">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
-                            <label class="btn btn-outline-secondary active">
-                                <input type="radio" name="options" id="opt_photo_paper" autocomplete="off" checked> 단면인화지
+                            <label class="btn btn-outline-primary active">
+                                <input type="radio" name="options" id="opt_photo_paper" autocomplete="off" checked> 인화지(단면)
                             </label>
-                            <label class="btn btn-outline-secondary">
-                                <input type="radio" name="options" id="opt_print_paper" autocomplete="off"> 양면인쇄지
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="options" id="opt_print_paper" autocomplete="off"> 인쇄지(양면)
                             </label>
                         </div>
                     </td>
@@ -41,10 +59,10 @@
                     <td>이지커팅</td>
                     <td colspan="2">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
-                            <label class="btn btn-outline-secondary active">
+                            <label class="btn btn-outline-primary active">
                                 <input type="radio" name="options" id="opt_easy_cut_off" autocomplete="off" checked> 없음
                             </label>
-                            <label class="btn btn-outline-secondary">
+                            <label class="btn btn-outline-primary">
                                 <input type="radio" name="options" id="opt_easy_cut_on" autocomplete="off"> 있음
                             </label>
                             </div>
@@ -55,7 +73,7 @@
                 </tr>
                 <tr>
                     <td>페이지 추가</td>
-                    <td colspan="2">21-50 페이지까지 추가 가능<br>1p 추가: 인쇄 250원 인화 500원</td>
+                    <td colspan="2">21-50 페이지까지 추가 가능<br>장당추가 | 인쇄 250원 인화 500원</td>
                 </tr>
                 <tr>
                     <td>배송안내</td>
@@ -76,11 +94,11 @@
                 <tr>
                     <td colspan="3"></td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td class="submit-td" colspan="3">
                         <button style="width:30%; font-size: 24px;" class="btn btn-primary" onclick="make_photobook();">포토북편집</button>
                     </td>
-                </tr>
+                </tr> -->
             </table>
         </div>
     </body>

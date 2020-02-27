@@ -8,6 +8,8 @@ var type = 0;
 var easy_cutting = 0;
 var cover = 0;
 var sidx;
+var isPreview = 0;
+var val = 9900;
 
 function fileopen() {
     $('#openfile').trigger('click');
@@ -61,7 +63,7 @@ function crop() {
   $('.ctrl-btn').toggleClass('btn-hidden');
 }
 
-function rotate() {
+function rotateR() {
   var img = document.getElementById("image");
   var rotationCanvas = document.createElement('canvas');
 
@@ -73,6 +75,23 @@ function rotate() {
   ctx.rotate(Math.PI/2);
   ctx.drawImage(img,-img.naturalWidth/2,-img.naturalHeight/2);
   ctx.rotate(-Math.PI/2);
+  ctx.translate(-rotationCanvas.width/2,-rotationCanvas.height/2);
+
+  img.src = rotationCanvas.toDataURL();
+}
+
+function rotateL() {
+  var img = document.getElementById("image");
+  var rotationCanvas = document.createElement('canvas');
+
+  rotationCanvas.height = img.naturalWidth;
+  rotationCanvas.width = img.naturalHeight;
+
+  var ctx = rotationCanvas.getContext("2d");
+  ctx.translate(rotationCanvas.width/2,rotationCanvas.height/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.drawImage(img,-img.naturalWidth/2,-img.naturalHeight/2);
+  ctx.rotate(Math.PI/2);
   ctx.translate(-rotationCanvas.width/2,-rotationCanvas.height/2);
 
   img.src = rotationCanvas.toDataURL();
@@ -114,7 +133,7 @@ var max_thumbnail = 20;
 function init() {
   sessionStorage.setItem("editing", 1);
   sidx = sessionStorage.getItem("sidx");
-  defaultEditer = document.getElementById('main-editor').innerHTML;
+
   type = sessionStorage.getItem("type");
   if (type == null) type = 0;
   easy_cutting = sessionStorage.getItem("easy_cutting");
@@ -171,9 +190,10 @@ function init() {
   tag = document.getElementById('type');
   tag.innerHTML = (type == 0 ? "인화지" : "인쇄지");
   tag = document.getElementById('easy_cutting');
-  tag.innerHTML = (easy_cutting == 0 ? "유" : "무");
+  tag.innerHTML = (easy_cutting == 1 ? "유" : "무");
   document.getElementById('add-photo').addEventListener('click', fileopen);
-  document.getElementById('btn-rotate').addEventListener('click', rotate);
+  document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
+  document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
   document.getElementById('btn-cropstart').addEventListener('click', crop);
   document.getElementById('btn-del').addEventListener('click', del);
   document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
@@ -181,6 +201,16 @@ function init() {
   document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
   document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
   document.getElementById('openfile').addEventListener('change', afterfileopen);
+  if (isPreview) {
+    $('#btns').hide();
+  }
+  else {
+    $('#btns').show();
+  }
+  if (easy_cutting == 1) {
+    document.getElementsByClassName('left-cutting-line')[0].setAttribute('style', 'border-left: 1px dashed #FF0000;');
+  }
+  defaultEditer = document.getElementById('main-editor').innerHTML;
 }
 
 thumbnailSet = function () {
@@ -258,7 +288,8 @@ var selectItem = function() {
     .fail(function() {
       document.getElementById('main-editor').innerHTML = defaultEditer;
       document.getElementById('add-photo').addEventListener('click', fileopen);
-      document.getElementById('btn-rotate').addEventListener('click', rotate);
+      document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
+      document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
       document.getElementById('btn-cropstart').addEventListener('click', crop);
       document.getElementById('btn-del').addEventListener('click', del);
       document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
@@ -266,6 +297,12 @@ var selectItem = function() {
       document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
       document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
       document.getElementById('openfile').addEventListener('change', afterfileopen);
+      if (isPreview) {
+        $('#btns').hide();
+      }
+      else {
+        $('#btns').show();
+      }
     });
 }
 
@@ -273,7 +310,8 @@ function showPage(data) {
   var temp = data.data.replace(/\\n/g, '').replace(/\\"/g, '"').replace(/^\"/, "").replace(/\"$/, "");
   document.getElementById('main-editor').innerHTML = temp;
   document.getElementById('add-photo').addEventListener('click', fileopen);
-  document.getElementById('btn-rotate').addEventListener('click', rotate);
+  document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
+  document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
   document.getElementById('btn-cropstart').addEventListener('click', crop);
   document.getElementById('btn-del').addEventListener('click', del);
   document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
@@ -281,7 +319,12 @@ function showPage(data) {
   document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
   document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
   document.getElementById('openfile').addEventListener('change', afterfileopen);
-  $("#btns").show();
+  if (isPreview) {
+    $('#btns').hide();
+  }
+  else {
+    $('#btns').show();
+  }
 }
 
 var cur_thumbnail = 1;
@@ -317,7 +360,8 @@ function thumbnail_prev() {
         .fail(function() {
           document.getElementById('main-editor').innerHTML = defaultEditer;
           document.getElementById('add-photo').addEventListener('click', fileopen);
-          document.getElementById('btn-rotate').addEventListener('click', rotate);
+          document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
+          document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
           document.getElementById('btn-cropstart').addEventListener('click', crop);
           document.getElementById('btn-del').addEventListener('click', del);
           document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
@@ -325,6 +369,12 @@ function thumbnail_prev() {
           document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
           document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
           document.getElementById('openfile').addEventListener('change', afterfileopen);
+          if (isPreview) {
+            $('#btns').hide();
+          }
+          else {
+            $('#btns').show();
+          }
         });
       }
       else if (key >= 0 && key <= max_thumbnail + 1)
@@ -333,6 +383,7 @@ function thumbnail_prev() {
       }
     }
   }
+
 }
 
 function thumbnail_next() {
@@ -366,7 +417,8 @@ function thumbnail_next() {
             .fail(function() {
               document.getElementById('main-editor').innerHTML = defaultEditer;
               document.getElementById('add-photo').addEventListener('click', fileopen);
-              document.getElementById('btn-rotate').addEventListener('click', rotate);
+              document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
+              document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
               document.getElementById('btn-cropstart').addEventListener('click', crop);
               document.getElementById('btn-del').addEventListener('click', del);
               document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
@@ -374,6 +426,12 @@ function thumbnail_next() {
               document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
               document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
               document.getElementById('openfile').addEventListener('change', afterfileopen);
+              if (isPreview) {
+                $('#btns').hide();
+              }
+              else {
+                $('#btns').show();
+              }
             });
       }
       else if (key >= 0 && key <= max_thumbnail + 1)
@@ -382,6 +440,7 @@ function thumbnail_next() {
       }
     }
   }
+
 }
 
 function thumbnail_add() {
@@ -412,7 +471,8 @@ function thumbnail_add() {
   page.innerHTML = Number(page.innerHTML) + 1;
   document.getElementById('main-editor').innerHTML = defaultEditer;
   document.getElementById('add-photo').addEventListener('click', fileopen);
-  document.getElementById('btn-rotate').addEventListener('click', rotate);
+  document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
+  document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
   document.getElementById('btn-cropstart').addEventListener('click', crop);
   document.getElementById('btn-del').addEventListener('click', del);
   document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
@@ -420,6 +480,12 @@ function thumbnail_add() {
   document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
   document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
   document.getElementById('openfile').addEventListener('change', afterfileopen);
+  if (isPreview) {
+    $('#btns').hide();
+  }
+  else {
+    $('#btns').show();
+  }
 }
 
 function formatMoney(number, decPlaces, decSep, thouSep) {
@@ -452,7 +518,6 @@ function selectDirectItem() {
 
 function addSideText() {
   addText();
-  document.getElementById('info-insert').setAttribute('style', 'border-left: 1px dashed #FF0000;');
 }
 
 function addText() {
@@ -461,7 +526,36 @@ function addText() {
 }
 
 function preview() {
-  $("#btns").toggle();
+  if (isPreview == 0) {
+    var el = document.getElementById('main-editor');
+    $("#btns").hide();
+    $("#nav-div").attr('style', 'visibility:hidden;');
+    $('.thumbnail-region').attr('style', 'visibility:hidden;');
+    Hammer(el).on('swipeleft', preview_next);
+    Hammer(el).on('swiperight', preview_prev);
+    Hammer(el).on('doubletap', escapePreview);
+    isPreview = 1;
+  }
+}
+
+function preview_next() {
+  if (isPreview)
+    thumbnail_next();
+}
+
+function preview_prev() {
+  if (isPreview)
+    thumbnail_prev();
+}
+
+function escapePreview() {
+  if (isPreview == 1) {
+    var el = document.getElementById('main-editor');
+    $("#btns").show();
+    $("#nav-div").attr('style', 'visibility:visible;');
+    $('.thumbnail-region').attr('style', 'visibility:visible;');
+    isPreview = 0;
+  }
 }
 
 function sendImage(data){
@@ -505,24 +599,10 @@ function sendPage(data){
 }
 
 function my_cart() {
-  if (!confirm("아래의 내용으로 주문하시겠습니까?")) return;
-  const url = "http://thecamp.inity.co.kr/Book/Bookmake.asp";//최종보관URL
-  $.post(
-    url,
-    {
-      sidx: sidx
-    },
-    function(data, status) {
-      if (status == "success") {
-        alert("주문되였습니다.");
-        sessionStorage.clear();
-        location.href = "index.html";
-      }
-      else {
-        alert("오유가 발생하였습니다.");
-      }
-    }
-  );
+  sessionStorage.setItem('page_add', max_thumbnail - 20);
+  sessionStorage.setItem('page_count', max_thumbnail);
+  sessionStorage.setItem('value', val);
+  location.href = "confirm.html";
 }
 
 function makeblob(dataURL) {
@@ -550,8 +630,8 @@ function makeblob(dataURL) {
 $body = $("body");
 
 $(document).on({
-    ajaxStart: function() { $body.addClass("loading");    },
-    ajaxStop: function() { $body.removeClass("loading"); }    
+    ajaxStart: function() { $body.addClass("loading"); },
+    ajaxStop: function() { $body.removeClass("loading"); }
 });
 
 init();

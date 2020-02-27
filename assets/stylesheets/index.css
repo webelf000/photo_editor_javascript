@@ -115,8 +115,8 @@ img.back-arrow {
 }
 
 div.main-image {
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
 .index-header {
@@ -174,8 +174,21 @@ table.content-table td:last-child {
     padding-left: 80px;
 }
 
+table.table-option {
+    margin: 0px 10%;
+    width: 80%;
+}
+
+table.table-option .btn-group, table.table-option select{
+    height: 60px;
+}
+table.table-option .btn-group label {
+    font-size: 28px;
+}
+
 table.table td {
-    font-size: 20px;
+    height: 80px;
+    font-size: 32px;
     padding: 8px;
     border: transparent;
     vertical-align: middle;
@@ -195,9 +208,9 @@ td.button div {
     border: 1px solid #dee2e6 !important;
 }
 
-tr.result-row {
-    font-size: large;
-    font-weight: bold;
+tr.result-row td{
+    font-size: 48px;
+    font-weight: 900;
 }
 
 td.submit-td {
@@ -208,4 +221,28 @@ td.submit-td {
 
 .nav-chapter-title {
     font-size: 2vw;
+}
+
+#main-cover-list figcaption {
+    font-size: 36px;
+}
+
+#main-cover-list .cover-item {
+    margin-top: 48px;
+}
+
+div.current-item img{
+    border: 2px solid royalblue;
+}
+
+img#cover-image {
+    display: block;
+    max-width:100%;
+    max-height:100%;
+    width: auto;
+    height: auto;
+}
+
+div {
+    border: whitesmoke 1px solid;
 }
