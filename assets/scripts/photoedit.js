@@ -50,7 +50,8 @@ function crop() {
     movable: false,
     zoomable: true,
     rotatable: false,
-    scalable: false
+    scalable: false,
+    viewMode: 2
   });
   } else {
     document.getElementById('image-workplace').innerHTML="";
@@ -191,6 +192,15 @@ function init() {
   tag.innerHTML = (type == 0 ? "인화지" : "인쇄지");
   tag = document.getElementById('easy_cutting');
   tag.innerHTML = (easy_cutting == 1 ? "유" : "무");
+  afterShowPage();
+  if (easy_cutting == 1) {
+    document.getElementsByClassName('left-cutting-line')[0].setAttribute('style', 'border-left: 1px dashed #FF0000;');
+  }
+
+  defaultEditer = document.getElementById('main-editor').innerHTML;
+}
+
+function afterShowPage() {
   document.getElementById('add-photo').addEventListener('click', fileopen);
   document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
   document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
@@ -201,16 +211,16 @@ function init() {
   document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
   document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
   document.getElementById('openfile').addEventListener('change', afterfileopen);
+  document.getElementsByClassName('preview-arrow-prev')[0].addEventListener('click', preview_prev);
+  document.getElementsByClassName('preview-arrow-next')[0].addEventListener('click', preview_next);
   if (isPreview) {
     $('#btns').hide();
+    $('.preview-arrow').show();
   }
   else {
     $('#btns').show();
+    $('.preview-arrow').hide();
   }
-  if (easy_cutting == 1) {
-    document.getElementsByClassName('left-cutting-line')[0].setAttribute('style', 'border-left: 1px dashed #FF0000;');
-  }
-  defaultEditer = document.getElementById('main-editor').innerHTML;
 }
 
 thumbnailSet = function () {
@@ -287,44 +297,14 @@ var selectItem = function() {
     })
     .fail(function() {
       document.getElementById('main-editor').innerHTML = defaultEditer;
-      document.getElementById('add-photo').addEventListener('click', fileopen);
-      document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
-      document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
-      document.getElementById('btn-cropstart').addEventListener('click', crop);
-      document.getElementById('btn-del').addEventListener('click', del);
-      document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
-      document.getElementById('btn-cropsave').addEventListener('click', crop);
-      document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
-      document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
-      document.getElementById('openfile').addEventListener('change', afterfileopen);
-      if (isPreview) {
-        $('#btns').hide();
-      }
-      else {
-        $('#btns').show();
-      }
+      afterShowPage();
     });
 }
 
 function showPage(data) {
   var temp = data.data.replace(/\\n/g, '').replace(/\\"/g, '"').replace(/^\"/, "").replace(/\"$/, "");
   document.getElementById('main-editor').innerHTML = temp;
-  document.getElementById('add-photo').addEventListener('click', fileopen);
-  document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
-  document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
-  document.getElementById('btn-cropstart').addEventListener('click', crop);
-  document.getElementById('btn-del').addEventListener('click', del);
-  document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
-  document.getElementById('btn-cropsave').addEventListener('click', crop);
-  document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
-  document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
-  document.getElementById('openfile').addEventListener('change', afterfileopen);
-  if (isPreview) {
-    $('#btns').hide();
-  }
-  else {
-    $('#btns').show();
-  }
+  afterShowPage();
 }
 
 var cur_thumbnail = 1;
@@ -332,6 +312,7 @@ var cur_thumbnail = 1;
 function thumbnail_prev() {
   if (cur_thumbnail == undefined || cur_thumbnail == 1) {
     cur_thumbnail = 1;
+    return;
   }
   else {
     cur_thumbnail--;
@@ -359,22 +340,7 @@ function thumbnail_prev() {
         })
         .fail(function() {
           document.getElementById('main-editor').innerHTML = defaultEditer;
-          document.getElementById('add-photo').addEventListener('click', fileopen);
-          document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
-          document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
-          document.getElementById('btn-cropstart').addEventListener('click', crop);
-          document.getElementById('btn-del').addEventListener('click', del);
-          document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
-          document.getElementById('btn-cropsave').addEventListener('click', crop);
-          document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
-          document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
-          document.getElementById('openfile').addEventListener('change', afterfileopen);
-          if (isPreview) {
-            $('#btns').hide();
-          }
-          else {
-            $('#btns').show();
-          }
+          afterShowPage();
         });
       }
       else if (key >= 0 && key <= max_thumbnail + 1)
@@ -389,9 +355,13 @@ function thumbnail_prev() {
 function thumbnail_next() {
   if (cur_thumbnail == undefined) {
     cur_thumbnail = 1;
+    return;
   }
   else if (cur_thumbnail < max_thumbnail) {
     cur_thumbnail ++;
+  }
+  else {
+    return;
   }
   var thumbnail_item = document.getElementsByClassName('thumbnail-item');
 
@@ -416,22 +386,7 @@ function thumbnail_next() {
             })
             .fail(function() {
               document.getElementById('main-editor').innerHTML = defaultEditer;
-              document.getElementById('add-photo').addEventListener('click', fileopen);
-              document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
-              document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
-              document.getElementById('btn-cropstart').addEventListener('click', crop);
-              document.getElementById('btn-del').addEventListener('click', del);
-              document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
-              document.getElementById('btn-cropsave').addEventListener('click', crop);
-              document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
-              document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
-              document.getElementById('openfile').addEventListener('change', afterfileopen);
-              if (isPreview) {
-                $('#btns').hide();
-              }
-              else {
-                $('#btns').show();
-              }
+              afterShowPage();
             });
       }
       else if (key >= 0 && key <= max_thumbnail + 1)
@@ -470,22 +425,7 @@ function thumbnail_add() {
   var page = document.getElementById('page');
   page.innerHTML = Number(page.innerHTML) + 1;
   document.getElementById('main-editor').innerHTML = defaultEditer;
-  document.getElementById('add-photo').addEventListener('click', fileopen);
-  document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
-  document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
-  document.getElementById('btn-cropstart').addEventListener('click', crop);
-  document.getElementById('btn-del').addEventListener('click', del);
-  document.getElementById('btn-scaleup').addEventListener('click', scaleUp);
-  document.getElementById('btn-cropsave').addEventListener('click', crop);
-  document.getElementById('btn-cropcancel').addEventListener('click', cancelCrop);
-  document.getElementById('btn-scaledown').addEventListener('click', scaleDown);
-  document.getElementById('openfile').addEventListener('change', afterfileopen);
-  if (isPreview) {
-    $('#btns').hide();
-  }
-  else {
-    $('#btns').show();
-  }
+  afterShowPage();
 }
 
 function formatMoney(number, decPlaces, decSep, thouSep) {
@@ -529,6 +469,7 @@ function preview() {
   if (isPreview == 0) {
     var el = document.getElementById('main-editor');
     $("#btns").hide();
+    $('.preview-arrow').show();
     $("#nav-div").attr('style', 'visibility:hidden;');
     $('.thumbnail-region').attr('style', 'visibility:hidden;');
     Hammer(el).on('swipeleft', preview_next);
@@ -552,6 +493,7 @@ function escapePreview() {
   if (isPreview == 1) {
     var el = document.getElementById('main-editor');
     $("#btns").show();
+    $('.preview-arrow').hide();
     $("#nav-div").attr('style', 'visibility:visible;');
     $('.thumbnail-region').attr('style', 'visibility:visible;');
     isPreview = 0;

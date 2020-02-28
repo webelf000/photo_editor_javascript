@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/stylesheets/photoedit.css">
-        <link rel="stylesheet" type="text/css" href="./assets/plugins/cropperjs/cropper.min.css">
+        <link rel="stylesheet" type="text/css" href="./assets/plugins/cropperjs/cropper.css">
         <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
         <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     </head>
@@ -30,7 +30,11 @@
                 </table>
             </div>
             <div class="main-editor" id="main-editor">
+                <div class="progress" style="display:none;">
+                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
                 <div class="background-white full-height shadow">
+                    <img class="float-left preview-arrow preview-arrow-prev" src="./assets/images/arrow_prev.png" style="margin-right: -100%; margin-top: 153px; display:none; position: relative; z-index: 20000;" />
                     <div class="row full-height">
                         <div class="col-6 border-right full-height"></div>
                         <div class="col-6 full-height">
@@ -63,6 +67,7 @@
                             </div>
                         </div>
                     </div>
+                    <img class="float-right preview-arrow preview-arrow-next" src="./assets/images/arrow_next.png" style="margin-left: -100%; margin-top: -207px; display: none; position: relative; z-index: 20000;" />
                 </div>
             </div>
             <div class="thumbnail-region">
@@ -73,8 +78,9 @@
                 <div class="thumbnail-control" style="margin-top:20px;" onclick="thumbnail_add();"><img src="./assets/images/add.png"></div>
             </div>
         </div>
+
+        <div class="modal"><!-- Place at bottom of page --></div>
     </body>
-    <div class="modal"><!-- Place at bottom of page --></div>
     <script src="./assets/plugins/cropperjs/cropper.min.js"></script>
     <script src="./assets/plugins/hammer.js"></script>
     <script src="./assets/plugins/html2canvas.js"></script>
