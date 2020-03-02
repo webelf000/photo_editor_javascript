@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/stylesheets/photoedit.css">
-        <link rel="stylesheet" type="text/css" href="./assets/plugins/cropperjs/cropper.min.css">
+        <link rel="stylesheet" type="text/css" href="./assets/plugins/cropperjs/cropper.css">
         <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
         <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     </head>
@@ -15,7 +15,7 @@
             <div id="nav-div">
                 <table class="content-control">
                     <tr class="top-bottom-bordered bold">
-                        <td class="content-logo">THE CAMP</td>
+                        <td class="content-logo"><img src="./assets/images/logo.png"></td>
                         <td class="content-type">포토북 (커버제목, 17 X 10 cm, <span id="type">인화지</span>, 이지커팅-<span id="easy_cutting">유</span>, <span id="page">20</span>p)</td>
                         <td class="content-value"><span id="value">9900</span>원</td>
                         <td class="bordered" onclick="location.href='option.html'">옵션변경</td>
@@ -30,7 +30,9 @@
                 </table>
             </div>
             <div class="main-editor" id="main-editor">
-                <div class="background-white full-height">
+                <div class="background-white full-height shadow" id="main-paper" style="position: relative;">
+                    <img id="main-paper-img" style="position: absolute;left: 0px;top: 0px;" width="1280" height="360">
+                    <img class="float-left preview-arrow preview-arrow-prev" src="./assets/images/arrow_prev.png" style="margin-right: -100%; margin-top: 153px; display:none; position: relative; z-index: 20000;" />
                     <div class="row full-height">
                         <div class="col-6 border-right full-height">
                             <div class="row full-height">
@@ -50,7 +52,7 @@
                                     </div>
                                     <div style="height: 360px; margin-top: -360px;" id="btns">
                                         <button id="add-photo">+</button>
-                                        <div class="btn-group ctrl-btn-group">
+                                        <div class="btn-group ctrl-btn-group" style="display: none;">
                                             <button id="btn-rotate-l" class="btn ctrl-btn btn-secondary">좌로</button>
                                             <button id="btn-rotate-r" class="btn ctrl-btn btn-secondary">우로</button>
                                             <button id="btn-cropstart" class="btn ctrl-btn btn-secondary">편집</button>
@@ -67,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+                    <img class="float-right preview-arrow preview-arrow-next" src="./assets/images/arrow_next.png" style="margin-left: -100%; margin-top: -207px; display: none; position: relative; z-index: 20000;" />
                 </div>
             </div>
             <div class="thumbnail-region">
@@ -77,9 +80,11 @@
                 <div class="thumbnail-control" style="margin-top:20px;" onclick="thumbnail_add();"><img src="./assets/images/add.png"></div>
             </div>
         </div>
-    </body>
+
     <div class="modal"><!-- Place at bottom of page --></div>
+    </body>
     <script src="./assets/plugins/cropperjs/cropper.min.js"></script>
+    <script src="./assets/plugins/hammer.js"></script>
     <script src="./assets/plugins/html2canvas.js"></script>
     <script src="./assets/scripts/photoedit.js"></script>
 </html>

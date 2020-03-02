@@ -27,6 +27,7 @@ function afterfileopen() {
         imgElement.setAttribute('id', 'image');
         imgElement.setAttribute('src', imgPath);
         document.getElementById('image-workplace').appendChild(imgElement);
+        $('.ctrl-btn-group').show();
         initCrop();
     }
 }
@@ -123,9 +124,12 @@ function cancelCrop() {
 
 function savePage() {
   $("#btns").hide();
-  html2canvas(document.getElementById('main-editor'), {dpi: 300}).then(function(canvas){
+  var mydiv = document.getElementById('main-paper');
+  console.log(mydiv);
+  html2canvas(mydiv, {/*allowTaint: true, foreignObjectRendering: true, useCORS:true, */dpi: 300}).then(function(canvas){
+    // console.log(canvas);
     var img = canvas.toDataURL('image/jpg');
-
+    
     sendImage(img);
   });
 }
@@ -151,6 +155,7 @@ function init() {
   figcaption.innerHTML = "커버";
   div.appendChild(figcaption);
   div.setAttribute('page', 0);
+  div.addEventListener('click', selectItem);
   document.getElementsByClassName('thumbnail-list')[0].appendChild(div);
 
   const url = "http://thecamp.inity.co.kr/Book/CoverInfo.asp";
@@ -159,7 +164,7 @@ function init() {
     {},
     function(data, status){
       if (status=="success") {
-        getCover(JSON.parse(data), img);
+        getCover(JSON.parse(data));
       }
     }
   );
@@ -193,14 +198,58 @@ function init() {
   tag = document.getElementById('easy_cutting');
   tag.innerHTML = (easy_cutting == 1 ? "유" : "무");
   afterShowPage();
-  if (easy_cutting == 1) {
+  if (easy_cutting == 1 && cur_thumbnail != 0) {
     document.getElementsByClassName('left-cutting-line')[0].setAttribute('style', 'border-left: 1px dashed #FF0000;');
   }
 
   defaultEditer = document.getElementById('main-editor').innerHTML;
 }
 
+function loadImg(id, imgUrl) {
+  var img = new Image();
+  // onload fires when the image is fully loadded, and has width and height
+  img.onload = function(){
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  var dataURL = canvas.toDataURL("image/png");
+      // dataURL = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  document.getElementById(id).src=dataURL;
+  // callback(dataURL); // the base64 string
+  };
+  // set attributes and src 
+  img.setAttribute('crossOrigin', 'anonymous'); //
+  img.src = imgUrl;
+}
+
 function afterShowPage() {
+  if (cur_thumbnail == 0) {
+
+  const url = "http://thecamp.inity.co.kr/Book/CoverInfo.asp";
+  $.get(
+    url,
+    {},
+    function(data, status){
+      if (status=="success") {
+        const coverdata = JSON.parse(data);
+        coverdata.coverinfo.forEach(element => {
+          if (element.num == cover) {
+            // document.getElementsByClassName("thumbnail-list")[0].getElementsByTagName('img')[0].src = element.url;
+            // document.getElementById("main-paper").removeAttribute("background");
+            // document.getElementById("main-paper").setAttribute("style", "background-image: url(\"" + element.url + "\");");
+            // document.getElementById("main-paper-img").setAttribute("src", element.url);
+            loadImg("main-paper-img", element.url);
+            // console.log(element.url);
+            document.getElementById("main-paper-img").setAttribute("width", 1280);
+            document.getElementById("main-paper-img").setAttribute("height", 360);
+          }
+        });
+      }
+    }
+  );
+  }
   document.getElementById('add-photo').addEventListener('click', fileopen);
   document.getElementById('btn-rotate-r').addEventListener('click', rotateR);
   document.getElementById('btn-rotate-l').addEventListener('click', rotateL);
@@ -220,6 +269,9 @@ function afterShowPage() {
   else {
     $('#btns').show();
     $('.preview-arrow').hide();
+  }
+  if (cur_thumbnail == 0) {
+    document.getElementsByClassName('left-cutting-line')[0].removeAttribute('style');
   }
 }
 
@@ -244,7 +296,7 @@ thumbnailSet = function () {
   );
 }
 
-function getCover(data, img) {
+function getCover(data) {
   data.coverinfo.forEach(element => {
     if (element.num == cover) {
       document.getElementsByClassName("thumbnail-list")[0].getElementsByTagName('img')[0].src = element.url;
@@ -297,6 +349,7 @@ var selectItem = function() {
     })
     .fail(function() {
       document.getElementById('main-editor').innerHTML = defaultEditer;
+      $('.ctrl-btn-group').hide();
       afterShowPage();
     });
 }
@@ -307,11 +360,11 @@ function showPage(data) {
   afterShowPage();
 }
 
-var cur_thumbnail = 1;
+var cur_thumbnail = 0;
 
 function thumbnail_prev() {
-  if (cur_thumbnail == undefined || cur_thumbnail == 1) {
-    cur_thumbnail = 1;
+  if (cur_thumbnail == undefined || cur_thumbnail ==0) {
+    cur_thumbnail = 0;
     return;
   }
   else {
@@ -340,6 +393,7 @@ function thumbnail_prev() {
         })
         .fail(function() {
           document.getElementById('main-editor').innerHTML = defaultEditer;
+          $('.ctrl-btn-group').hide();
           afterShowPage();
         });
       }
@@ -386,6 +440,7 @@ function thumbnail_next() {
             })
             .fail(function() {
               document.getElementById('main-editor').innerHTML = defaultEditer;
+              $('.ctrl-btn-group').hide();
               afterShowPage();
             });
       }
@@ -577,3 +632,10 @@ $(document).on({
 });
 
 init();
+
+// function screenshotexample(){
+//   console.log("screenshot");
+//   html2canvas(document.getElementById('main-paper')).then(function(canvas) {
+//     document.body.appendChild(canvas);
+//    });
+// }

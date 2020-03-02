@@ -324,3 +324,8 @@ body.loading .modal {
 .shadow {
     box-shadow: 5px 10px 8px #888888;
 }
+
+#main-paper{
+    background-repeat: no-repeat;
+    background-position: center;
+}
