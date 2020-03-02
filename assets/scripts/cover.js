@@ -25,6 +25,7 @@ function showCovers(data) {
     var figcaption = document.createElement('figcaption');
     img.src = element.thumb;
     img.setAttribute('width', "100%");
+    img.classList.add('shadow');
     figcaption.innerHTML = element.title;
     div.setAttribute('page', element.num);
     div.addEventListener('click', selectItem);

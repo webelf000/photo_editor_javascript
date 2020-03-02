@@ -126,7 +126,7 @@ function savePage() {
   $("#btns").hide();
   var mydiv = document.getElementById('main-paper');
   console.log(mydiv);
-  html2canvas(mydiv, {/*allowTaint: true, foreignObjectRendering: true, useCORS:true, */dpi: 300}).then(function(canvas){
+  html2canvas(mydiv, {/*dpi: 300*/}).then(function(canvas){
     // console.log(canvas);
     var img = canvas.toDataURL('image/jpg');
     
