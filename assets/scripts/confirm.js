@@ -12,7 +12,7 @@ function orderBook(){
           myAlert();
         }
         else {
-          alert("오유가 발생하였습니다.");
+          alert("오류가 발생하였습니다.");
         }
       }
     );

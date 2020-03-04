@@ -102,17 +102,8 @@ table.content-control tr{
     height: 50px;
 }
 
-td.content-logo {
-    /* width: 8vw; */
-}
-
 td.content-type {
-    /* width: 45vw; */
     font-size: 18px
-}
-
-td.content-value {
-    /* width: 5vw; */
 }
 
 td.bordered {
@@ -126,7 +117,6 @@ td.blue-button {
     color:white;
     background-color: #0e5983;
     width: 100px;
-    /* width: 7vw; */
 }
 
 .bold {
@@ -179,7 +169,7 @@ div.main-editor canvas {
     height: 100%;
 }
 
-#add-photo {
+.add-photo {
     height:40px; 
     width:40px; 
     margin: -20px -20px -20px -20px; 
@@ -193,7 +183,7 @@ div.main-editor canvas {
     left:50%;
 }
 
-#openfile {
+.openfile {
     height: 0px;
     opacity: 0;
     display: none;
@@ -203,7 +193,7 @@ div.main-editor canvas {
     margin-top: 0px !important;
 }
 
-#image-workplace {
+.image-workplace {
     width: 472.5px;
     height: 360px;
     margin: 0px;
@@ -218,7 +208,7 @@ div.main-editor canvas {
     margin: 0 auto;
 }
 
-#image-workplace img {
+.image-workplace img {
     position: relative;;
     margin: 0 auto;
     max-width: 100%;
@@ -282,11 +272,11 @@ div.current-item img{
     border: 2px solid royalblue;
 }
 
-div#info-insert {
+div.info-insert {
     padding-top: 20px;
 }
 
-div#info-insert.print-paper {
+div.info-insert.print-paper {
     margin:30% auto auto auto;
     text-align: center;
     height: 40px;
@@ -329,7 +319,46 @@ body.loading .modal {
     box-shadow: 2px 5px 4px #888888;
 }
 
-#main-paper{
-    background-repeat: no-repeat;
-    background-position: center;
+body.loading-confirm .modal-confirm {
+    overflow: hidden;   
+}
+
+.modal-confirm {
+    display: none;
+}
+
+body.loading-confirm .modal-confirm {
+    display: block;
+}
+
+body.loading-confirm .modal-confirm-mask {
+    width: 1380px;
+    height: 200vh;
+    position:fixed;
+    top:0;    
+    left:0;
+    background:gray;
+    opacity: 0.2;
+}
+
+.modal-confirm {
+    text-align: center;
+    box-shadow: 5px 10px 8px #888888;
+    border-radius: 30px;
+    background-color: white;
+    font-size: 30px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -300px;
+    width: 600px;
+    height: 200px;
+    padding-top: 20px;
+}
+
+.modal-confirm button {
+    float: left;
+    margin: 10px;
+    font-size: 20px;
 }
