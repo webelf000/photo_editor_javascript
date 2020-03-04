@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="main-content">
-            <div id="nav-div">
+            <div class="nav-div" style="display: block;">
                 <table class="content-control">
                     <tr class="top-bottom-bordered bold">
                         <td class="content-logo"><img src="./assets/images/logo.png"></td>
@@ -29,6 +29,11 @@
                     </tr>
                 </table>
             </div>
+            <div class="nav-div" style="display:none;">
+                <h1 style="padding: 30px 30px 15px 30px;font-weight: 900;text-align: left;">
+                    더캠프 포토북 미리보기
+                </h1>
+            </div>
             <div class="save-content">
                 <div class="main-editor">
                     <div id="main-editor" class="background-white full-height shadow" style="position: relative;">
@@ -37,15 +42,15 @@
                             <div class="paper-item" page="0">
                                 <img id="main-paper-img" style="position: absolute;left: 0px;top: 0px;" width="1280" height="360">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                             </div>
                                             <div class="col-9 full-height">
-                                                <div class="image-workplace">
+                                                <div class="image-workplace image-cover-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -57,7 +62,7 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -66,8 +71,8 @@
                             </div>
                             <div class="paper-item" page="1" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -78,7 +83,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -90,7 +95,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -99,8 +103,8 @@
                             </div>
                             <div class="paper-item" page="2" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -111,7 +115,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -123,7 +127,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -132,8 +135,8 @@
                             </div>
                             <div class="paper-item" page="3" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -144,7 +147,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -156,7 +159,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -165,8 +167,8 @@
                             </div>
                             <div class="paper-item" page="4" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -177,7 +179,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -189,7 +191,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -198,8 +199,8 @@
                             </div>
                             <div class="paper-item" page="5" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -210,7 +211,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -222,7 +223,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -231,8 +231,8 @@
                             </div>
                             <div class="paper-item" page="6" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -243,7 +243,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -255,7 +255,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -264,8 +263,8 @@
                             </div>
                             <div class="paper-item" page="7" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -276,7 +275,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -288,7 +287,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -297,8 +295,8 @@
                             </div>
                             <div class="paper-item" page="8" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -309,7 +307,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -321,7 +319,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -330,8 +327,8 @@
                             </div>
                             <div class="paper-item" page="9" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -342,7 +339,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -354,7 +351,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -363,8 +359,8 @@
                             </div>
                             <div class="paper-item" page="10" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -375,7 +371,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -387,7 +383,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -396,8 +391,8 @@
                             </div>
                             <div class="paper-item" page="11" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -408,7 +403,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -420,7 +415,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -429,8 +423,8 @@
                             </div>
                             <div class="paper-item" page="12" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -441,7 +435,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -453,7 +447,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -462,8 +455,8 @@
                             </div>
                             <div class="paper-item" page="13" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -474,7 +467,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -486,7 +479,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -495,8 +487,8 @@
                             </div>
                             <div class="paper-item" page="14" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -507,7 +499,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -519,7 +511,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -528,8 +519,8 @@
                             </div>
                             <div class="paper-item" page="15" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -540,7 +531,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -552,7 +543,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -561,8 +551,8 @@
                             </div>
                             <div class="paper-item" page="16" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -573,7 +563,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -585,7 +575,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -594,8 +583,8 @@
                             </div>
                             <div class="paper-item" page="17" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -606,7 +595,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -618,7 +607,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -627,8 +615,8 @@
                             </div>
                             <div class="paper-item" page="18" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -639,7 +627,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -651,7 +639,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -660,8 +647,8 @@
                             </div>
                             <div class="paper-item" page="19" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -672,7 +659,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -684,7 +671,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -693,8 +679,8 @@
                             </div>
                             <div class="paper-item" page="20" style="display: none;">
                                 <div class="row full-height">
-                                    <div class="col-6 border-right full-height"></div>
-                                    <div class="col-6 full-height">
+                                    <div class="col-6 border-right full-height left-half"></div>
+                                    <div class="col-6 full-height right-half">
                                         <div class="row full-height">
                                             <div class="col-3 full-height">
                                                 <div class="row full-height">
@@ -705,7 +691,7 @@
                                             <div class="col-9 full-height">
                                                 <div class="image-workplace">
                                                 </div>
-                                                <div style="height: 360px; margin-top: -360px;" class="btns">
+                                                <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
                                                         <button class="btn ctrl-btn ctrl-btn-default btn-secondary btn-rotate-l">좌로</button>
@@ -717,7 +703,6 @@
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropsave">저장</button>
                                                         <button class="btn ctrl-btn ctrl-btn-edit    btn-secondary btn-hidden btn-cropcancel">취소</button>
                                                     </div>
-                                                    <input type="file" class="openfile" onchange="afterfileopen();">
                                                 </div>
                                             </div>
                                         </div>
@@ -729,11 +714,11 @@
                     </div>
                 </div>
                 <div class="thumbnail-region">
-                    <div class="thumbnail-control" onclick="thumbnail_prev();"><img src="./assets/images/arrow_left.png"></div>
+                    <div class="thumbnail-control" id="thumbnail_prev"><img src="./assets/images/arrow_left.png"></div>
                     <div class="thumbnail-list"></div>
-                    <div class="thumbnail-control" onclick="thumbnail_next();"><img src="./assets/images/arrow_right.png"></div>
+                    <div class="thumbnail-control" id="thumbnail_next"><img src="./assets/images/arrow_right.png"></div>
                     <div class="thumbnail-control" style="margin:15px 0px 0px 0px;"><img src="./assets/images/bar.jpg"></div>
-                    <div class="thumbnail-control" style="margin-top:20px;" onclick="thumbnail_add();"><img src="./assets/images/add.png"></div>
+                    <div class="thumbnail-control" id="thumbnail_add" style="margin-top:20px;"><img src="./assets/images/add.png"></div>
                 </div>
             </div>
         </div>
@@ -748,6 +733,13 @@
             </div>
         </div>
         <div class="modal"><!-- Place at bottom of page --></div>
+        <div id="progress_bar" class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar"
+            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+              
+            </div>
+        </div>
+        <input type="file" id="openfile" multiple onchange="afterfileopen();">
     </body>
     <script src="./assets/plugins/cropperjs/cropper.min.js"></script>
     <script src="./assets/plugins/hammer.js"></script>

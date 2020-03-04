@@ -12,32 +12,95 @@ var isPreview = 0;
 var val = 9900;
 
 function fileopen() {
-    $('.openfile').eq(cur_thumbnail).trigger('click');
+    $('#openfile').trigger('click');
 }
 
+var filelist = [];
 function afterfileopen() {
-    var input = document.getElementsByClassName("openfile")[cur_thumbnail];
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-    fReader.onloadend = function(event){
-        var imgPath = event.target.result;
-        document.getElementsByClassName('image-workplace')[cur_thumbnail].innerHTML="";
-        var imgElement = document.createElement('img');
-        imgElement.setAttribute('class', 'image');
-        imgElement.setAttribute('src', imgPath);
-        document.getElementsByClassName('image-workplace')[cur_thumbnail].appendChild(imgElement);
-        $('.ctrl-btn-group').show();
-        initCrop();
-        getThumbnail();
+    var input = document.getElementById("openfile");
+    if (input.files.length == 0)
+      return;
+    for (var i = 0; i < input.files.length; i++) {
+      filelist.push(input.files[i]);
     }
+
+    imageFileOpen(0);
+    initCrop();
 }
+
+function imageFileOpen(i) {
+  if (i >= filelist.length) {
+    filelist = [];
+    var input = document.getElementById("openfile");
+    input.value = "";
+    afterShowPage();
+    return;
+  }
+
+  if (cur_thumbnail > max_thumbnail - i) {
+    if (max_thumbnail == 50) {
+      filelist = [];
+      var input = document.getElementById("openfile");
+      input.value = "";
+      afterShowPage();
+      return;
+    }
+    var thumbnail_item = document.getElementsByClassName('thumbnail-item');
+    img = document.createElement('img');
+    figcaption = document.createElement('figcaption');
+    img.src = defaultImage;
+    figcaption.innerHTML = "속지" + (max_thumbnail + 1);
+    var div = document.createElement('div');
+    div.classList.add('thumbnail-item');
+    div.appendChild(img);
+    div.appendChild(figcaption);
+    div.setAttribute('page', (max_thumbnail + 1));
+    div.addEventListener('click', selectItem);
+    max_thumbnail++;
+    thumbnail_item[max_thumbnail].setAttribute('page', (max_thumbnail + 1));
+    thumbnail_item[max_thumbnail].parentNode.insertBefore(div, thumbnail_item[max_thumbnail]);
+    thumbnail_item[Number(cur_thumbnail) + Number(i)].scrollIntoView();
+    var value = document.getElementById('value');
+    val = Number(value.innerHTML.replace(',', '')) + (type==0 ? 500 : 250); // Photo_paper
+    value.innerHTML = formatMoney(val, 0, 3, ',');
+    var page = document.getElementById('page');
+    page.innerHTML = Number(page.innerHTML) + 1;
+    
+    defaultEditer.setAttribute('page', Number(cur_thumbnail) + Number(i));
+    tempHTML = defaultEditer.outerHTML;
+    document.getElementById('main-paper').innerHTML += tempHTML;
+  }
+
+  var fReader = new FileReader();
+  fReader.readAsDataURL(filelist[i]);
+  fReader.onloadend = function (event) {
+    var imgPath = event.target.result;
+    document.getElementsByClassName('image-workplace')[Number(cur_thumbnail) + Number(i)].innerHTML="";
+    var imgElement = document.createElement('img');
+    imgElement.setAttribute('class', 'image');
+    imgElement.setAttribute('src', imgPath);
+    document.getElementsByClassName('image-workplace')[Number(cur_thumbnail) + Number(i)].appendChild(imgElement);
+    document.getElementsByClassName('paper-item')[Number(cur_thumbnail) + (i)].getElementsByClassName('image')[0].addEventListener('click', showBtns);
+    $('.paper-item').hide();
+    $('.paper-item').eq(Number(cur_thumbnail) + Number(i)).show();
+    $('.btns').hide();
+    $('.left-half').attr('style', 'border-right: 3px solid #808080 !important;');
+    var mydiv = document.getElementById('main-editor');
+    html2canvas(mydiv, {}).then(function(canvas){
+      document.getElementsByClassName("thumbnail-item")[Number(cur_thumbnail) + Number(i)].getElementsByTagName('img')[0].src = canvas.toDataURL('image/jpg');
+      $('.left-half').attr('style', '');
+      imageFileOpen(Number(i) + 1);
+    });
+  }
+}
+
 var cropping;
 var cropper;
 
 function initCrop() {
   cropper = null;
   cropping = false;
-  var input = document.getElementsByClassName("openfile")[cur_thumbnail];
+  var input = document.getElementById("openfile");
   input.value = "";
 }
 
@@ -63,6 +126,7 @@ function crop() {
     getThumbnail();
   }
   $('.ctrl-btn').toggleClass('btn-hidden');
+  afterShowPage();
 }
 
 function rotateR() {
@@ -80,7 +144,7 @@ function rotateR() {
   ctx.translate(-rotationCanvas.width/2,-rotationCanvas.height/2);
 
   img.src = rotationCanvas.toDataURL();
-  getThumbnail();
+  getThumbnail(btnsAfterEdit);
 }
 
 function rotateL() {
@@ -98,6 +162,12 @@ function rotateL() {
   ctx.translate(-rotationCanvas.width/2,-rotationCanvas.height/2);
 
   img.src = rotationCanvas.toDataURL();
+  getThumbnail(btnsAfterEdit);
+}
+
+function btnsAfterEdit() {
+  document.getElementsByClassName('btns')[cur_thumbnail].setAttribute("style", "");
+  document.getElementsByClassName('ctrl-btn-group')[cur_thumbnail].setAttribute("style", "");
 }
 
 function scaleUp(){
@@ -111,7 +181,12 @@ function scaleDown(){
 function del() {
   document.getElementsByClassName('image-workplace')[cur_thumbnail].innerHTML="";
   initCrop();
-  getThumbnail();
+  getThumbnail(btnsAfterDel);
+}
+
+function btnsAfterDel() {
+  document.getElementsByClassName('btns')[cur_thumbnail].setAttribute("style", "");
+  document.getElementsByClassName('ctrl-btn-group')[cur_thumbnail].setAttribute("style", "display:none;");
 }
 
 function cancelCrop() {
@@ -127,11 +202,11 @@ function cancelCrop() {
   $('.ctrl-btn-edit').addClass('btn-hidden');
 }
 
-var mydiv;
 function saveImages(cb = null) {
   $(".btns").hide();
   
-  mydiv = document.getElementsByClassName('paper-item');
+  $('body').addClass('loading-progress');
+  $('#progress_bar div').attr('style', 'width:0%;');
   cbSendImages(0, cb);
 }
 
@@ -139,56 +214,74 @@ function cbSendImages(i, cb=null) {
   if (i > max_thumbnail) {
     $(".btns").show();
     isSended = true;
+    $('body').removeClass('loading-progress');
     if (cb != null) cb();
     return;
   }
-  $('.paper-item').hide();
-  $('.paper-item').eq(i).show();
-    html2canvas(mydiv[i]).then(function(canvas){
-      var data = canvas.toDataURL('image/jpg');
-      var fd = new FormData();
-      fd.append('sidx', sidx);
-      fd.append('page', i);
-      fd.append('data', makeblob(data));
-      $.ajax({
-        url: IMAGE_SEND_URL,
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: fd
-      })
-      .done(function(data) {
-        cbSendImages(i + 1, cb);
-      })
-      .fail(function() {alert("화상보관중 오류가 발생하였습니다.");});
-    });
+  var progressing = i / max_thumbnail * 100;
+  $('#progress_bar div').attr('style', 'width:' + progressing + '%;');
+  $('#progress_bar div').html(Math.round(progressing) + "%");
+  var data = document.getElementsByClassName("thumbnail-item")[i].getElementsByTagName("img")[0].src;
+  var fd = new FormData();
+  fd.append('sidx', sidx);
+  fd.append('page', i);
+  fd.append('data', makeblob(data));
+  $.ajax({
+    url: IMAGE_SEND_URL,
+    type: 'POST',
+    processData: false,
+    contentType: false,
+    data: fd
+  })
+  .done(function(data) {
+    cbSendImages(i + 1, cb);
+  })
+  .fail(function() {alert("화상보관중 오류가 발생하였습니다.");});
 }
 
 function init() {
   sessionStorage.setItem("editing", 1);
   sidx = sessionStorage.getItem("sidx");
-  const url = "http://thecamp.inity.co.kr/Book/pageGetData.asp";
+
+  $('body').addClass('loading-progress');
+  $('#progress_bar div').attr('style', 'width:0%;');
+  $('#progress_bar div').html("0%");
   $.ajax({
-    url: url,
-    type: 'GET',
-    data: {
-      sidx: sidx,
-      page: 0
-    }
-  })
-  .done(function(data) {
-    data = JSON.parse(data);
-    var temp = data.data.replace(/\\n/g, '').replace(/\\"/g, '"').replace(/^\"/, "").replace(/\"$/, "");
-    document.getElementsByClassName('save-content')[0].innerHTML = temp;
-    afterinit(true);
-  })
-  .fail(function() {
-    afterinit(false);
-  });
+      xhr: function(){
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function(evt){
+        }, false);
+        xhr.addEventListener("progress", function(evt){
+          if (evt.lengthComputable) {
+            var percentComplete = evt.loaded / evt.total * 100;
+            $('#progress_bar div').attr('style', 'width:' + percentComplete + '%;');
+            $('#progress_bar div').html(Math.round(percentComplete) + "%");
+          }
+        }, false);
+        return xhr;
+      },
+      type: 'GET',
+      url: "http://thecamp.inity.co.kr/Book/pageGetData.asp",
+      data: {
+        sidx: sidx,
+        page: 0
+      },
+      success: function(data){
+        $('body').removeClass('loading-progress');
+        data = JSON.parse(data);
+        var temp = data.data.replace(/\\n/g, '').replace(/\\"/g, '"').replace(/^\"/, "").replace(/\"$/, "");
+        document.getElementsByClassName('save-content')[0].innerHTML = temp;
+        afterinit1(true);
+      },
+      error: function(data) {
+        $('body').removeClass('loading-progress');
+        afterinit1(false);
+      }
+    });
 }
 
 var max_thumbnail = 20;
-function afterinit(isSaved) {
+function afterinit1(isSaved) {
   sessionStorage.setItem("editing", 1);
   sidx = sessionStorage.getItem("sidx");
 
@@ -224,7 +317,7 @@ function afterinit(isSaved) {
     var number = max_thumbnail;
     for (var i = 0; i < number; i++) {
       img = document.createElement('img');
-      img.src = "./assets/images/white.png";
+      // img.src = "./assets/images/white.png";
       figcaption = document.createElement('figcaption');
       figcaption.innerHTML = "속지" + (i + 1);
       div = document.createElement('div');
@@ -249,9 +342,7 @@ function afterinit(isSaved) {
     tag = document.getElementById('easy_cutting');
     tag.innerHTML = (easy_cutting == 1 ? "유" : "무");
     afterShowPage();
-    if (easy_cutting == 1 && cur_thumbnail != 0) {
-      document.getElementsByClassName('left-cutting-line')[0].setAttribute('style', 'border-left: 1px dashed #FF0000;');
-    }
+
   }
   else {
     var div = document.getElementsByClassName('thumbnail-item');
@@ -265,24 +356,45 @@ function afterinit(isSaved) {
   defaultEditer.getElementsByClassName('info-insert')[0].innerHTML = "";
 }
 
+var defaultImage = "";
+
 function loadImg(id, imgUrl) {
   var img = new Image();
   img.onload = function(){
-  var canvas = document.createElement("canvas");
-  canvas.width = img.width;
-  canvas.height = img.height;
-  var ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0);
-  var dataURL = canvas.toDataURL("image/png");
-  document.getElementById(id).src=dataURL;
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    document.getElementById(id).src=dataURL;
+    document.getElementsByClassName("thumbnail-item")[0].getElementsByTagName('img')[0].src=dataURL;
   };
   img.setAttribute('crossOrigin', 'anonymous');
   img.src = imgUrl;
+  var img2 = new Image();
+  img2.onload = function(){
+    var canvas = document.createElement("canvas");
+    canvas.width = img2.width;
+    canvas.height = img2.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img2, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    defaultImage = dataURL;
+    for (var i = 1; i <= max_thumbnail; i++) {
+      document.getElementsByClassName("thumbnail-item")[i].getElementsByTagName('img')[0].src=dataURL;
+    }
+  };
+  img2.setAttribute('crossOrigin', 'anonymous');
+  img2.src = "http://thecamp.inity.co.kr/assets/images/white.png";
 }
 
 function afterShowPage() {
   if (document.getElementsByClassName('paper-item')[cur_thumbnail].getElementsByClassName('image')[0] == undefined) {
+    $('.btns').show();
     document.getElementsByClassName('ctrl-btn-group')[cur_thumbnail].setAttribute('style', 'display:none;');
+  } else {
+    document.getElementsByClassName('paper-item')[cur_thumbnail].getElementsByClassName('image')[0].addEventListener('click', showBtns);
   }
   document.getElementsByClassName('add-photo')[cur_thumbnail].addEventListener('click', fileopen);
   document.getElementsByClassName('btn-rotate-r')[cur_thumbnail].addEventListener('click', rotateR);
@@ -295,10 +407,16 @@ function afterShowPage() {
   document.getElementsByClassName('btn-cropcancel')[cur_thumbnail].addEventListener('click', cancelCrop);
   document.getElementsByClassName('btn-scaledown')[cur_thumbnail].addEventListener('click', scaleDown);
 
-  document.getElementsByClassName('openfile')[cur_thumbnail].addEventListener('change', afterfileopen);
+  document.getElementById("openfile").addEventListener('change', afterfileopen);
   document.getElementsByClassName('preview-arrow-prev')[0].addEventListener('click', preview_prev);
   document.getElementsByClassName('preview-arrow-next')[0].addEventListener('click', preview_next);
-  
+
+  document.getElementById('thumbnail_prev').addEventListener('click', thumbnail_prev);
+  document.getElementById('thumbnail_next').addEventListener('click', thumbnail_next);
+  document.getElementById('thumbnail_add').addEventListener('click', thumbnail_add);
+  if (easy_cutting == 1 && cur_thumbnail != 0) {
+    document.getElementsByClassName('left-cutting-line')[cur_thumbnail - 1].setAttribute('style', 'border-left: 1px dashed #FF0000;');
+  }
   $('.thumbnail-item').removeClass('current-item');
   $('.thumbnail-item').eq(cur_thumbnail).addClass('current-item');
   $('.paper-item').hide();
@@ -308,15 +426,22 @@ function afterShowPage() {
     $('.preview-arrow').show();
   }
   else {
-    $('.btns').show();
+    // $('.btns').show();
     $('.preview-arrow').hide();
   }
+}
+
+function showBtns() {
+  document.getElementsByClassName('btns')[cur_thumbnail].setAttribute('style', '');
+  document.getElementsByClassName('ctrl-btn-group')[cur_thumbnail].setAttribute('style', '');
+  // $('.btns').show();
+  // $('.ctrl-btn-group').show();
 }
 
 function getCover(data) {
   data.coverinfo.forEach(element => {
     if (element.num == cover) {
-      document.getElementsByClassName("thumbnail-list")[0].getElementsByTagName('img')[0].src = element.url;
+      // document.getElementsByClassName("thumbnail-list")[0].getElementsByTagName('img')[0].src = element.url;
       loadImg("main-paper-img", element.url);
       document.getElementById("main-paper-img").setAttribute("width", 1280);
       document.getElementById("main-paper-img").setAttribute("height", 360);
@@ -327,7 +452,6 @@ function getCover(data) {
 var selectItem = function() {
   cancelCrop();
   getThumbnail();
-  $(".btns").hide();
 
   cur_thumbnail = this.getAttribute('page');
   afterShowPage();
@@ -382,7 +506,7 @@ function thumbnail_add() {
   var thumbnail_item = document.getElementsByClassName('thumbnail-item');
   img = document.createElement('img');
   figcaption = document.createElement('figcaption');
-  img.src = "./assets/images/white.png";
+  img.src = defaultImage;
   figcaption.innerHTML = "속지" + (max_thumbnail + 1);
   var div = document.createElement('div');
   div.classList.add('thumbnail-item');
@@ -404,6 +528,19 @@ function thumbnail_add() {
   defaultEditer.setAttribute('page', cur_thumbnail);
   tempHTML = defaultEditer.outerHTML;
   document.getElementById('main-paper').innerHTML += tempHTML;
+  var img2 = new Image();
+  img2.onload = function(){
+    var canvas = document.createElement("canvas");
+    canvas.width = img2.width;
+    canvas.height = img2.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img2, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    defaultImage = dataURL;
+    document.getElementsByClassName("thumbnail-item")[max_thumbnail].getElementsByTagName('img')[0].src=dataURL;
+  };
+  img2.setAttribute('crossOrigin', 'anonymous');
+  img2.src = "http://thecamp.inity.co.kr/assets/images/white.png";
   afterShowPage();
 }
 
@@ -440,6 +577,7 @@ function preview() {
     Hammer(el).on('swipeleft', preview_next);
     Hammer(el).on('swiperight', preview_prev);
     Hammer(el).on('doubletap', escapePreview);
+    $('.nav-div').toggle();
     isPreview = 1;
   }
 }
@@ -462,27 +600,51 @@ function escapePreview() {
     $("#nav-div").attr('style', 'visibility:visible;');
     $('.thumbnail-region').attr('style', 'visibility:visible;');
     isPreview = 0;
+    $('.nav-div').toggle();
+    afterShowPage();
   }
 }
 
 function sendPage(callback=undefined){
   var data = document.getElementsByClassName('save-content')[0].innerHTML;
   data = JSON.stringify(data);
-  $.post(PAGE_SEND_URL,
-  {
-    sidx: sidx,
-    page: 0,
-    data: data
-  },
-  function(data, status){
-    if (status == "success")
-    {
-      if (callback != undefined)
-        callback();
-    }
-    else
-      alert("페지보관중 오류가 발생하였습니다.");
-  });
+
+  $('body').addClass('loading-progress');
+  $('#progress_bar div').attr('style', 'width:0%;');
+  $('#progress_bar div').html("0%");
+  $.ajax({
+      xhr: function(){
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function(evt){
+          if (evt.lengthComputable) {
+            var percentComplete = evt.loaded / evt.total * 100;
+            $('#progress_bar div').attr('style', 'width:' + percentComplete + '%;');
+            $('#progress_bar div').html(Math.round(percentComplete) + "%");
+          }
+        }, false);
+        xhr.addEventListener("progress", function(evt){
+        }, false);
+        return xhr;
+      },
+      type: 'POST',
+      url: PAGE_SEND_URL,
+      data: {
+        sidx: sidx,
+        page: 0,
+        data: data
+      },
+      success: function(data){
+        $('body').removeClass('loading-progress');
+        if (callback != undefined)
+          callback();
+      },
+      error: function(data) {
+        $('body').removeClass('loading-progress');
+        alert("페지보관중 오류가 발생하였습니다.");
+      }
+    });
+
+
 }
 
 function my_cart() {
@@ -532,11 +694,13 @@ function getThumbnail(cb = null) {
   isSended = false;
   var mydiv = document.getElementById('main-editor');
   $('.btns').hide();
+  $('.left-half').attr('style', 'border-right: 3px solid #808080 !important;');
   const temp_thumbnail = cur_thumbnail;
   if (!isPreview) {
     html2canvas(mydiv, {}).then(function(canvas){
       document.getElementsByClassName("thumbnail-item")[temp_thumbnail].getElementsByTagName('img')[0].src = canvas.toDataURL('image/jpg');
-      $('.btns').show();
+      $('.left-half').attr('style', '');
+      // $('.btns').show();
       if (cb != null)
         cb();
     });
@@ -576,12 +740,5 @@ function goCover() {
 function cancelAlert() {
   $('body').removeClass("loading-confirm");
 }
-
-$body = $("body");
-
-$(document).on({
-    ajaxStart: function() { $body.addClass("loading"); },
-    ajaxStop: function() { $body.removeClass("loading"); }
-});
 
 init();

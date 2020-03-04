@@ -242,3 +242,27 @@ img#cover-image {
     width: auto;
     height: auto;
 }
+
+.btn-external {
+    color: #fff;
+    background-color: #0e5983;
+    border-color: #0e5983;
+}
+
+.btn-external.disabled {
+color: #fff;
+background-color: #0e5983;
+border-color: #0e5983;
+}
+
+.btn-outline-external {
+color: #212121;
+border-color: #9e9e9e;
+background-color: transparent;
+}
+
+.btn-outline-external.active {
+    color: #212121;
+    border-color: #212121;
+    background-color: transparent;
+}

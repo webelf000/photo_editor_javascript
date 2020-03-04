@@ -42,9 +42,8 @@ $(function(){
     if (easy_cutting == 1)
         $('#easy_cutting').html("있음");
     else
-        $('#easy_cutting').html("있음");
+        $('#easy_cutting').html("없음");
     var page_add = sessionStorage.getItem('page_add');
-    console.log(page_add);
     if (page_add > 0)
         $('#page_add').html("있음");
     else

@@ -19,7 +19,7 @@ div.nav {
     height: 6vw;
 }
 
-#nav-div {
+.nav-div {
     width: 100%; background-color: white; padding: 30px 30px 0px 30px;
 }
 
@@ -139,7 +139,7 @@ div.background-white {
 }
 
 div.border-right {
-    border-right: 1px solid #d4d4d4;
+    border-right: 1px solid #d4d4d4 !important;
 }
 
 .full-height {
@@ -183,7 +183,7 @@ div.main-editor canvas {
     left:50%;
 }
 
-.openfile {
+#openfile {
     height: 0px;
     opacity: 0;
     display: none;
@@ -191,6 +191,10 @@ div.main-editor canvas {
 
 .image-container.target {
     margin-top: 0px !important;
+}
+
+.image-workplace:not(.image-cover-workplace) {
+    background-color: whitesmoke;
 }
 
 .image-workplace {
@@ -218,8 +222,14 @@ div.main-editor canvas {
 .btn-hidden {
     display:none;
 }
+
 .btn-3 {
     width: 75px;
+}
+
+.btns {
+    height: 360px;
+    margin-top: -360px;
 }
 
 .thumbnail-region {
@@ -361,4 +371,38 @@ body.loading-confirm .modal-confirm-mask {
     float: left;
     margin: 10px;
     font-size: 20px;
+}
+
+body.loading-progress .progress {
+    overflow: hidden;   
+}
+
+.progress {
+    display: none;
+}
+
+body.loading-progress .progress {
+    display: block;
+}
+
+body.loading-progress .modal-confirm-mask {
+    width: 1380px;
+    height: 200vh;
+    position:fixed;
+    top:0;
+    left:0;
+    background:gray;
+    opacity: 0.2;
+}
+
+.progress {
+    position: fixed;
+    top: 50%;
+    left: 10%;
+    width: 80%;
+    height:5%;
+}
+.progress-bar {
+    font-size: 20px;
+    height:100%;
 }
