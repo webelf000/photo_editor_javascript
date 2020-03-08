@@ -1,4 +1,4 @@
-html, body {height: 100%;}
+
 .nav-background {
     background-color: #3f5058;
 }
@@ -276,8 +276,9 @@ background-color: transparent;
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: whitesmoke; /* Black*/
+    background-color: #111; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
   }
   
@@ -317,17 +318,61 @@ background-color: transparent;
     .sidenav a {font-size: 18px;}
   }
 
-  .sidenav .text{
-      font-size: 40px;
-  }
-  .sidenav .nav-username {
-      font-weight: 900;
-  }
-  .sidenav .coupon-count {
-    color:red;
+  .vertical-middle {
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    font-size: 40px;
   }
 
-  .sidenav-list {
-      font-weight: 800;
-      padding: 40px;
-  }
+.infor-title {
+    background-color: #eef3f6;
+    font-weight: 800;
+    padding: 60px;
+    font-size: 40px;
+}
+
+.infor-content {
+    background-color: white;
+    font-weight: 800;
+    padding: 60px;
+    font-size: 30px;
+}
+
+.infor-content .infor-lg {
+    font-size: 36px;
+}
+
+.infor-content .infor-sm {
+    font-size: 20px;
+}
+
+.form-group {
+    height: 20px;
+}
+
+.shadow.blog {
+    margin-bottom: 20px;
+}
+
+.blog .form-control {
+    font-size: 28px;
+}
+
+button.form-control {
+    height: 80px;
+}
+
+.btn-main {
+    background-color: #0e5983;
+    color:white;
+}
+
+hr.line {
+    margin:1px 0px 1px 0px;
+}
+
+.ticket-container {
+    text-align: center;
+    padding: 80px 30px;
+}

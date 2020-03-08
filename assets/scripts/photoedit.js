@@ -86,7 +86,8 @@ function imageFileOpen(i) {
     $('.btns').hide();
     $('.left-half').attr('style', 'border-right: 3px solid #808080 !important;');
     var mydiv = document.getElementById('main-editor');
-    html2canvas(mydiv, {}).then(function(canvas){
+    window.scrollTo(0, 0);
+    html2canvas(mydiv).then(function(canvas){
       document.getElementsByClassName("thumbnail-item")[Number(cur_thumbnail) + Number(i)].getElementsByTagName('img')[0].src = canvas.toDataURL('image/jpg');
       $('.left-half').attr('style', '');
       imageFileOpen(Number(i) + 1);
@@ -221,11 +222,10 @@ function cbSendImages(i, cb=null) {
   var progressing = i / max_thumbnail * 100;
   $('#progress_bar div').attr('style', 'width:' + progressing + '%;');
   $('#progress_bar div').html(Math.round(progressing) + "%");
-  var data = document.getElementsByClassName("thumbnail-item")[i].getElementsByTagName("img")[0].src;
   var fd = new FormData();
   fd.append('sidx', sidx);
   fd.append('page', i);
-  fd.append('data', makeblob(data));
+  fd.append('data', makeblob(document.getElementsByClassName("thumbnail-item")[i].getElementsByTagName("img")[0].src));
   $.ajax({
     url: IMAGE_SEND_URL,
     type: 'POST',
@@ -242,11 +242,13 @@ function cbSendImages(i, cb=null) {
 function init() {
   sessionStorage.setItem("editing", 1);
   sidx = sessionStorage.getItem("sidx");
+  var pagesaved = sessionStorage.getItem("pagesaved");
+  if (pagesaved == 1) {
+    $('body').addClass('loading-progress');
+    $('#progress_bar div').attr('style', 'width:0%;');
+    $('#progress_bar div').html("0%");
 
-  $('body').addClass('loading-progress');
-  $('#progress_bar div').attr('style', 'width:0%;');
-  $('#progress_bar div').html("0%");
-  $.ajax({
+    $.ajax({
       xhr: function(){
         var xhr = new window.XMLHttpRequest();
         xhr.upload.addEventListener("progress", function(evt){
@@ -278,6 +280,10 @@ function init() {
         afterinit1(false);
       }
     });
+  }
+  else {
+    afterinit1(false);
+  }
 }
 
 var max_thumbnail = 20;
@@ -379,10 +385,9 @@ function loadImg(id, imgUrl) {
     canvas.height = img2.height;
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img2, 0, 0);
-    var dataURL = canvas.toDataURL("image/png");
-    defaultImage = dataURL;
+    defaultImage = canvas.toDataURL("image/png");
     for (var i = 1; i <= max_thumbnail; i++) {
-      document.getElementsByClassName("thumbnail-item")[i].getElementsByTagName('img')[0].src=dataURL;
+      document.getElementsByClassName("thumbnail-item")[i].getElementsByTagName('img')[0].src=defaultImage;
     }
   };
   img2.setAttribute('crossOrigin', 'anonymous');
@@ -606,9 +611,12 @@ function escapePreview() {
 }
 
 function sendPage(callback=undefined){
-  var data = document.getElementsByClassName('save-content')[0].innerHTML;
-  data = JSON.stringify(data);
-
+  var tempinput = document.createElement("input");
+  tempinput.setAttribute('type', 'hidden');
+  tempinput.setAttribute('id', 'tempinput');
+  document.body.appendChild(tempinput);
+  tempinput.value = JSON.stringify(document.getElementsByClassName('save-content')[0].innerHTML);
+  sessionStorage.setItem("pagesaved", 1);
   $('body').addClass('loading-progress');
   $('#progress_bar div').attr('style', 'width:0%;');
   $('#progress_bar div').html("0%");
@@ -631,7 +639,7 @@ function sendPage(callback=undefined){
       data: {
         sidx: sidx,
         page: 0,
-        data: data
+        data: tempinput.value
       },
       success: function(data){
         $('body').removeClass('loading-progress');
@@ -660,11 +668,11 @@ function my_cart() {
 
 function goConfirm() {
   // sendPage(goConfirm2); // 페지 데이터를 업로드하려는 경우
-  location.href = "confirm.html";
+  location.href = "temp_cart.html";
 }
 
 function goConfirm2() {
-  location.href = "confirm.html";
+  location.href = "temp_cart.html";
 }
 
 function makeblob(dataURL) {
@@ -697,7 +705,8 @@ function getThumbnail(cb = null) {
   $('.left-half').attr('style', 'border-right: 3px solid #808080 !important;');
   const temp_thumbnail = cur_thumbnail;
   if (!isPreview) {
-    html2canvas(mydiv, {}).then(function(canvas){
+    window.scrollTo(0, 0);
+    html2canvas(mydiv).then(function(canvas){
       document.getElementsByClassName("thumbnail-item")[temp_thumbnail].getElementsByTagName('img')[0].src = canvas.toDataURL('image/jpg');
       $('.left-half').attr('style', '');
       // $('.btns').show();

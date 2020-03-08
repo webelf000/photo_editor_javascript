@@ -1,4 +1,4 @@
-html, body {height: 100%;}
+
 .nav-background {
     background-color: #3f5058;
 }
@@ -266,7 +266,6 @@ background-color: transparent;
     border-color: #212121;
     background-color: transparent;
 }
-
 
 /* The side navigation menu */
 .sidenav {

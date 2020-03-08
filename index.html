@@ -7,12 +7,67 @@
         <link href="./assets/manifest.json" rel="manifest">
         <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
         <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+        <script src="./assets/plugins/hammer.js"></script>
         <script src="./assets/scripts/index.js"></script>
     </head>
     <body>
-        <div class="full-screen align-center" style="background-color: whitesmoke;">
+        <div id="mySidenav" class="sidenav">
+            <div class="shadow text row" style="background-color: white; padding:30px;">
+                    <div class="col-3">
+                        <img id="image-face" src="./assets/images/face.png" style="float:left;" width="150" height="150">
+                    </div>
+                    <div style="float:left; margin: 10px 0px 0px 30px;" class="nav-text">
+                        <span style="font-size: 48px;"><span class="nav-username">천 서 영</span> 님 </span> 반갑습니다!<br>사용가능 쿠폰 <span class="coupon-count">1</span>장
+                    </div>
+            </div>
+            <div class="shadow text row" style="background-color: white; margin-top: 30px; height: 90%;">
+                <div class="col-12">
+                    <div class="row sidenav-list">
+                        <div class="col-11">
+                            주문 - 배송조회
+                        </div>
+                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
+                            <img src="./assets/images/blue_arrow.png">
+                        </div>
+                    </div>
+                    <div class="row sidenav-list">
+                        <div class="col-11">
+                            임시보관함<span style="font-weight: normal;">(편집중인 포토북 <span class="editing_count" style="color:red;">2</span>)</span>
+                        </div>
+                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
+                            <img src="./assets/images/blue_arrow.png">
+                        </div>
+                    </div>
+                    <div class="row sidenav-list">
+                        <div class="col-11">
+                            쿠폰함
+                        </div>
+                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
+                            <img src="./assets/images/blue_arrow.png">
+                        </div>
+                    </div>
+                    <div class="row sidenav-list">
+                        <div class="col-11">
+                            1:1문의
+                        </div>
+                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
+                            <img src="./assets/images/blue_arrow.png">
+                        </div>
+                    </div>
+                    <div class="row sidenav-list">
+                        <div class="col-11">
+                            자주하는 질문
+                        </div>
+                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
+                            <img src="./assets/images/blue_arrow.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main" class="full-screen align-center" style="background-color: whitesmoke;">
             <div class="shadow" style="background-color: white;">
-                <h1 style="padding: 30px 30px 0px 30px;font-weight: 900;text-align: left;">
+                <h1 style="padding: 30px 30px 0px 30px;font-weight: 900;text-align: left;" onclick="openNav();">
                     더캠프 포토북
                 </h1>
                 <h3 style="margin: 30px; text-align: left;">
