@@ -2,157 +2,170 @@
     <head>
         <meta charset="UTF-8">
         <title>The Camp Photobook</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <link href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="./assets/stylesheets/temp_cart.css" rel="stylesheet" type="text/css">
+        <link href="./assets/stylesheets/index.css" rel="stylesheet" type="text/css">
         <link href="./assets/manifest.json" rel="manifest">
-        <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
-        <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				transform: rotate(90deg);
+				transform-origin: top right;
+				position: absolute;
+				top:100%;
+				right:0%;
+			}
+			html, body {
+				/* 높이 너비값이 다른 스타일 정의와 충돌하여 무효화 되면 안됨 */
+				width:100vh !important;
+				height:100vw !important;
+            }
+        }
+      </style>
     </head>
     <body>
-        <div class="row">
-            <div class="full-height col-12" style="overflow-x: hidden;background:whitesmoke;">
-                <div class="shadow blog">
-                    <div class="row infor-top-title">
-                        <div class="col-2">
-                            <img src="./assets/images/arrow_before.png">
-                        </div>
-                        <div class="col-8" style="text-align: center;">
-                            임시보관함
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow blog">
-                    <div class="infor-content row">
-                        <div class="col-12">
-                            <label class="checkbox-container">전체선택
-                                <input type="checkbox" checked>
-                                <span class="checkmark"></span>
-                              </label>
-                        </div>
-                    </div>
-                    <hr class="line">
-                    <div class="infor-content row">
-                        <div class="col-12">
-                            <label class="checkbox-container">포토북 17x10cm C.일반셀프커버
-                                <input type="checkbox" checked>
-                                <span class="checkmark"></span>
-                              </label>
-                        </div>
-                        <div class="col-5">
-                            <div style="padding:40px;background:whitesmoke; border-radius: 20px;">
-                                <img class="cover_thumb" width="280px">
+        <div class="container">
+            <div class="row">
+                <div class="full-height col-12" style="overflow-x: hidden;background:whitesmoke;">
+                    <div class="blog">
+                        <div class="shadow-sm row infor-title">
+                            <div class="col-2">
+                                <img src="./assets/images/arrow_before.png" height="20">
+                            </div>
+                            <div class="col-8" style="text-align: center;">
+                                임시보관함
                             </div>
                         </div>
-                        <div class="col-7">
-                            <div class="form-group">
+                    </div>
+                    <div class="blog">
+                        <div class="infor-content row">
+                            <div class="col-12">
+                                <label class="checkbox-container">전체선택
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="line">
+                        <div class="infor-content row">
+                            <div class="col-12">
+                                <label class="checkbox-container">포토북 17x10cm C.일반셀프커버
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-5">
+                                <div style="padding:1em;background:whitesmoke; border-radius: 0.5em;">
+                                    <img class="cover_thumb" width="100%" src="./assets/images/default-page.png">
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div>
+                                    <ul>
+                                        <li>내지종류:<span class="paper_type" num="0">인화지(단면)</span></li>
+                                        <li>이지커팅:<span class="easy_cutting" num="0">없음</span></li>
+                                        <li>페이지추가:<span class="page_add" num="0">없음</span></li>
+                                        <li>총페이지:<span class="page_count" num="0">20p</span></li>
+                                        <li>수량: <select class="book_count" style="width:100px">
+                                            <option>1</option>
+                                        </select></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="infor-content row">
+                            <div class="col-8 recommend_photo_add">
+                                사진을 채워 편집을 완료해주세요<sup>*</sup>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <button class="form-control" onclick="location.href=photo_paper.html;">편집하기</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shadow-sm infor-title-grayback row">
+                            <div class="col-9">
+                                상품금액
+                            </div>
+                            <div class="col-3">
+                                9,900원
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog">
+                        <div class="infor-content row">
+                            <div class="col-12">
+                                <label class="checkbox-container">포토북 17x10cm C.일반셀프커버
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-5">
+                                <div style="padding:1em;background:whitesmoke; border-radius: 0.5em;">
+                                    <img src="./assets/images/default-page.png" width="100%">
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div>
+                                    <ul>
+                                        <li>내지종류:<span class="paper_type" num="1">인화지(단면)</span></li>
+                                        <li>이지커팅:<span class="easy_cutting" num="1">없음</span></li>
+                                        <li>페이지추가:<span class="page_add" num="1">없음</span></li>
+                                        <li>총페이지:<span class="page_count" num="1">20p</span></li>
+                                        <li>수량: <select class="book_count" style="width:100px">
+                                            <option>1</option>
+                                        </select></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="infor-content row">
+                            <div class="col-8 recommend_photo_add">
+                                사진을 채워 편집을 완료해주세요<sup>*</sup>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <button class="form-control" onclick="returnEdit();">편집하기</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shadow-sm infor-title-grayback row">
+                            <div class="col-9">
+                                상품금액
+                            </div>
+                            <div class="col-3">
+                                <span class="value"></span>원
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow-sm blog">
+                        <div class="row infor-title" style="background-color: white;">
+                            <div class="col-12">
+                                이용안내
+                            </div>
+                        </div>
+                        <hr class="line">
+                        <div class="row infor-content">
+                            <div class="col-12">
                                 <ul>
-                                    <li>내지종류:<span class="paper_type" num="0">인화지(단면)</span></li>
-                                    <li>이지커팅:<span class="easy_cutting" num="0">없음</span></li>
-                                    <li>페이지추가:<span class="page_add" num="0">없음</span></li>
-                                    <li>총페이지:<span class="page_count" num="0">20p</span></li>
-                                    <li>수량: <select class="book_count" style="width:100px">
-                                        <option>1</option>
-                                    </select></li>
+                                    <li>90일 동안 로그인을 하지 않으시면 보관함의 상품이 삭제됩니다.</li>
+                                    <li>총 결제금액이 4만원 이상인 경우 무료배송 됩니다.</li>
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-8 recommend_photo_add">
-                            사진을 채워 편집을 완료해주세요<sup>*</sup>
+                        <div class="row">
+                            <button class="btn btn-external" style="width:100%; margin-top: 0.5em; margin-bottom:1em;" onclick="orderBook();">주문하기</button>
                         </div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <button class="form-control" style="height: 60px;">편집하기</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="infor-title row">
-                        <div class="col-9">
-                            상품금액
-                        </div>
-                        <div class="col-3">
-                            9,900원
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow blog">
-                    <div class="infor-content row">
-                        <div class="col-12">
-                            <label class="checkbox-container">전체선택
-                                <input type="checkbox" checked>
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <hr class="line">
-                    <div class="infor-content row">
-                        <div class="col-12">
-                            <label class="checkbox-container">포토북 17x10cm C.일반셀프커버
-                                <input type="checkbox" checked>
-                                <span class="checkmark"></span>
-                              </label>
-                        </div>
-                        <div class="col-5">
-                            <div style="padding:40px;background:whitesmoke; border-radius: 20px;">
-                                <img src="./assets/images/default-page.png" width="100%">
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <div class="form-group">
-                                <ul>
-                                    <li>내지종류:<span class="paper_type" num="1">인화지(단면)</span></li>
-                                    <li>이지커팅:<span class="easy_cutting" num="1">없음</span></li>
-                                    <li>페이지추가:<span class="page_add" num="1">없음</span></li>
-                                    <li>총페이지:<span class="page_count" num="1">20p</span></li>
-                                    <li>수량: <select class="book_count" style="width:100px">
-                                        <option>1</option>
-                                    </select></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-8 recommend_photo_add">
-                            사진을 채워 편집을 완료해주세요<sup>*</sup>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-group">
-                                <button class="form-control" style="height: 60px;">편집하기</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="infor-title row">
-                        <div class="col-9">
-                            상품금액
-                        </div>
-                        <div class="col-3">
-                            <span class="value"></span>원
-                        </div>
-                    </div>
-                </div>
-                <div class="shadow blog">
-                    <div class="row infor-title" style="background-color: white;">
-                        <div class="col-1"></div>
-                        <div class="col-10">
-                            이용안내
-                        </div>
-                        <div class="col-1"></div>
-                    </div>
-                    <hr class="line">
-                    <div class="row infor-content" style="padding-top:30px;">
-                        <div class="col-12">
-                            <ul>
-                                <li>90일 동안 로그인을 하지 않으시면 보관함의 상품이 삭제됩니다.</li>
-                                <li>총 결제금액이 4만원 이상인 경우 무료배송 됩니다.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <button class="btn btn-external" style="width:100%; font-size: 36px; margin-top: 30px; margin-bottom:60px; padding:20px 0px;" onclick="orderBook();">주문하기</button>
                     </div>
                 </div>
             </div>
         </div>
     </body>
+    <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 </html>

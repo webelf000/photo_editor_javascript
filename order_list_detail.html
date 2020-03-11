@@ -2,157 +2,181 @@
     <head>
         <meta charset="UTF-8">
         <title>The Camp Photobook</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <link href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="./assets/stylesheets/order_list_detail.css" rel="stylesheet" type="text/css">
+        <link href="./assets/stylesheets/index.css" rel="stylesheet" type="text/css">
         <link href="./assets/manifest.json" rel="manifest">
-        <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
-        <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				transform: rotate(90deg);
+				transform-origin: top right;
+				position: absolute;
+				top:100%;
+				right:0%;
+			}
+			html, body {
+				/* 높이 너비값이 다른 스타일 정의와 충돌하여 무효화 되면 안됨 */
+				width:100vh !important;
+				height:100vw !important;
+            }
+        }
+      </style>
     </head>
     <body>
-        <div class="row">
-            <div class="full-height col-12" style="overflow-x: hidden;background:whitesmoke;">
-                <div class="shadow blog">
-                    <div class="infor-content row">
-                        <div class="col-12">
-                            출고일:2020.03.05 | 주문번호:TCP0835201145
+        <div class="container">
+            <div class="row">
+                <div class="full-height col-12" style="overflow-x: hidden;background:whitesmoke;">
+                    <div class="shadow-sm blog">
+                        <div class="infor-content row">
+                            <div class="col-12">
+                                출고일:2020.03.05 | 주문번호:TCP0835201145
+                            </div>
                         </div>
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-12">
-                            <b>결제 정보</b>
+                        <div class="infor-content row">
+                            <div class="col-12">
+                                <b>결제 정보</b>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-boldline">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-6">
-                            결제방법
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-boldline">
                         </div>
-                        <div class="col-6" style="text-align: right;">
-                            신용카드
+                        <div class="infor-content row">
+                            <div class="col-6">
+                                결제방법
+                            </div>
+                            <div class="col-6" style="text-align: right;">
+                                신용카드
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-6">
-                            상품 총 금액
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
                         </div>
-                        <div class="col-6" style="text-align: right;">
-                            22,400원
+                        <div class="infor-content row">
+                            <div class="col-6">
+                                상품 총 금액
+                            </div>
+                            <div class="col-6" style="text-align: right;">
+                                22,400원
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-6">
-                            쿠폰
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
                         </div>
-                        <div class="col-6" style="text-align: right;">
-                            -
+                        <div class="infor-content row">
+                            <div class="col-6">
+                                쿠폰
+                            </div>
+                            <div class="col-6" style="text-align: right;">
+                                -
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-6">
-                            배송비
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
                         </div>
-                        <div class="col-6" style="text-align: right;">
-                            2,500원
+                        <div class="infor-content row">
+                            <div class="col-6">
+                                배송비
+                            </div>
+                            <div class="col-6" style="text-align: right;">
+                                2,500원
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-6">
-                            최종결제금액
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
                         </div>
-                        <div class="col-6" style="text-align: right;">
-                            <span style="color:red;">24,900원</span>
+                        <div class="infor-content row">
+                            <div class="col-6">
+                                최종결제금액
+                            </div>
+                            <div class="col-6" style="text-align: right;">
+                                <span style="color:red;">24,900원</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-12">
-                            배송 정보
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-boldline">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-3">
-                            받으시는 분
+                        <div class="infor-content row">
                         </div>
-                        <div class="col-9" style="text-align: right;">
-                            홍길동
+                        <div class="infor-content row">
+                            <div class="col-12">
+                                배송 정보
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-3">
-                            연락처
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-boldline">
                         </div>
-                        <div class="col-9" style="text-align: right;">
-                            010-1234-5690
+                        <div class="infor-content row">
+                            <div class="col-3">
+                                받으시는 분
+                            </div>
+                            <div class="col-9" style="text-align: right;">
+                                홍길동
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-3">
-                            주소
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
                         </div>
-                        <div class="col-9" style="text-align: right;">
-                            (08594) 서울특별시 금천구 가산디지털1로 5<br>
-                            대륭테크로타운 20차<br>
-                            B125원제로소프트
+                        <div class="infor-content row">
+                            <div class="col-3">
+                                연락처
+                            </div>
+                            <div class="col-9" style="text-align: right;">
+                                010-1234-5690
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-3">
-                            배송 메세지
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
                         </div>
-                        <div class="col-9" style="text-align: right;">
-                            빠른 배송 부탁드려요
+                        <div class="infor-content row">
+                            <div class="col-3">
+                                주소
+                            </div>
+                            <div class="col-9" style="text-align: right;">
+                                (08594) 서울특별시 금천구 가산디지털1로 5<br>
+                                대륭테크로타운 20차<br>
+                                B125원제로소프트
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-3">
-                            주문상품 . 수량
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
                         </div>
-                        <div class="col-9" style="text-align: right;">
-                            C.일반-셀프커버-1개
+                        <div class="infor-content row">
+                            <div class="col-3">
+                                배송 메세지
+                            </div>
+                            <div class="col-9" style="text-align: right;">
+                                빠른 배송 부탁드려요
+                            </div>
                         </div>
-                    </div>
-                    <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
-                        <hr class="md-line">
-                    </div>
-                    <div class="infor-content row">
-                        <div class="col-12">
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
+                        </div>
+                        <div class="infor-content row">
+                            <div class="col-3">
+                                주문상품 . 수량
+                            </div>
+                            <div class="col-9" style="text-align: right;">
+                                C.일반-셀프커버-1개
+                            </div>
+                        </div>
+                        <div class="row" style="background-color: white; width: 100%; margin-left: 0px;">
+                            <hr class="md-line">
+                        </div>
+                        <div class="infor-content row">
+                            <div class="col-12">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
+    <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 </html>

@@ -12,6 +12,7 @@ function make_photobook() {
   }
   sessionStorage.setItem("type", type);
   sessionStorage.setItem("easy_cutting", easy_cutting);
+  // location.href = type == 0 ? "photo_paper.html" : "print_paper.html";
   sendCover(type, easy_cutting, 0);
 }
 
@@ -30,10 +31,10 @@ function sendCover(type, easy_cutting, toOption = 1){
   function(data, status){
     if (status == "success") {
       sessionStorage.setItem("sidx", JSON.parse(data).sidx);
-      if (toOption == 0)
+      // if (toOption == 0)
         location.href = type == 0 ? "photo_paper.html" : "print_paper.html";
-      else
-        alert('보관되였습니다.');
+      // else
+      //   alert('보관되였습니다.');
     }
     else
       alert("보관도중 오유가 발생하였습니다.");
@@ -150,7 +151,7 @@ $(function(){
       $('#opt_photo_paper').parent().removeClass("active");
       $('#opt_photo_paper').parent().addClass("disabled");
     }
-    $('#paper_type input').closest('tr').hide();
+    $('#paper_type').hide();
   }
   getAllCover();
 });

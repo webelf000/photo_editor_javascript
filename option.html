@@ -1,106 +1,130 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <title>The Camp Photobook</title>
         <link href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="./assets/stylesheets/option.css" rel="stylesheet" type="text/css">
         <link href="./assets/manifest.json" rel="manifest">
-        <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
-        <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-        <script src="./assets/scripts/option.js"></script>
+
+        <style>
+            @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				transform: rotate(90deg);
+				transform-origin: top right;
+				position: absolute;
+				top:100%;
+				right:0%;
+			}
+			html, body {
+				/* 높이 너비값이 다른 스타일 정의와 충돌하여 무효화 되면 안됨 */
+				width:100vh !important;
+				height:100vw !important;
+            }
+        }
+      </style>
     </head>
     <body>
-        <div class="row">
-            <div class="full-height col-12 align-center" style="overflow-x: hidden;background:whitesmoke;">
-                <div class="shadow" style="background:white;">
-                    <div class="clearfix" style="display: flex; align-items: center;padding-top:60px; ">
-                        <img class="float-left" style="width: 48px;"/>
-                        <div class="float-left" style="width: 90vw;">
-                            <h3 style="font-size: 36px;">포토북옵션설정</h3>
+        <div class="container">
+            <div class="row">
+                <div class="full-height col-12 align-center" style="overflow-x: hidden;background:whitesmoke;">
+                    <div class="row shadow-sm">
+                        <div class="col-12 infor-title" style="display: flex; align-items: center;">
+                            <img class="float-left" height="20px"/>
+                            <div class="float-left" style="width: 90vw;">
+                                포토북옵션설정
+                            </div>
+                            <img class="float-right" height="20" src="./assets/images/arrow_after.png" onclick="make_photobook();"/>
                         </div>
-                        <img class="float-right" src="./assets/images/arrow_after.png" onclick="make_photobook();"/>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="clearfix main-image" style="background-color:whitesmoke; display: flex; align-items: center;">
-                        <img class="float-left" src="./assets/images/arrow_prev.png" onclick="prevCover();"/>
-                        <div class="float-left" style="margin:30px 0px; background-color: white; width: 94vw; height: 28vw;">
-                            <img id="cover-image" />
+                        <div class="clearfix"></div>
+                        <div class="clearfix main-image" style="background-color:whitesmoke; display: flex; align-items: center;">
+                            <img class="float-left" height="20" src="./assets/images/arrow_prev.png" onclick="prevCover();"/>
+                            <div class="float-left" style="margin:1em 0px; background-color: white; width: 92vw; height: 28vw;">
+                                <img id="cover-image" />
+                            </div>
+                            <img class="float-right" height="20" src="./assets/images/arrow_next.png" onclick="nextCover();"/>
                         </div>
-                        <img class="float-right" src="./assets/images/arrow_next.png" onclick="nextCover();"/>
+                        <button class="btn btn-external" style="width:100%; margin-top: 0.5em; margin-bottom:1em;" onclick="location.href='cover.html';">커버디자인보기</button>
                     </div>
-                    <button class="btn btn-external" style="width:100%; font-size: 36px; margin-top: 30px; margin-bottom:60px; padding:20px 0px;" onclick="location.href='cover.html';">커버디자인보기</button>
-                </div>
-                <div class="shadow" style="background:white; margin-top: 30px;">
-                    <table class="table table-option">
-                        <tr>
-                            <td>사이즈</td>
-                            <td>
-                                <label class="btn btn-outline-external disabled active" style="width:280px;height: 60px;font-size: 28px;margin-right: 10px; text-align: left;">
-                                    17x10cm
-                                </label>
-                                <!-- <select class="custom-select">
-                                    <option value="1">17x10cm</option>
-                                </select> -->
-                            </td>
-                            <td style="font-size: 16px;">
-                                사이즈는 재단과정에서 약간의<br>차이가 생길 수 있습니다
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>내지</td>
-                            <td colspan="2" id="paper_type">
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
-                                    <label class="btn btn-outline-external active" style="margin-right: 10px; text-align: left;">
-                                        <input type="radio" name="options" id="opt_photo_paper" autocomplete="off" checked> 인화지(단면)
+                    <div class="row shadow-sm" style="background:white; margin-top:0.5em;">
+                        <table class="table table-option">
+                            <tr>
+                                <td width="33%">사이즈</td>
+                                <td width="66%" colspan="2">
+                                    <label class="btn btn-outline-external disabled active float-left" style="width:49%">
+                                        17x10cm
                                     </label>
-                                    <label class="btn btn-outline-external" style="margin-left: 10px; text-align: left;">
-                                        <input type="radio" name="options" id="opt_print_paper" autocomplete="off"> 인쇄지(양면)
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>이지커팅</td>
-                            <td colspan="2">
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 100%;">
-                                    <label class="btn btn-outline-external active" style="margin-right: 10px; text-align: left;">
-                                        <input type="radio" name="options" id="opt_easy_cut_off" autocomplete="off" checked> 없음
-                                    </label>
-                                    <label class="btn btn-outline-external" style="margin-left: 10px; text-align: left;">
-                                        <input type="radio" name="options" id="opt_easy_cut_on" autocomplete="off"> 있음
-                                    </label>
+                                    <div class="float-left" style="width:45%; margin-left:8px;font-size: 0.5rem;">사이즈는 재단과정에서 약간의 차이가 생길 수 있습니다</div>
+                                </td>
+                            </tr>
+                            <tr id="paper_type">
+                                <td width="33%">내지</td>
+                                <td colspan="2" width="67%">
+                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-outline-external active" style="text-align: left;width: 49%;">
+                                            <input type="radio" name="options" id="opt_photo_paper" autocomplete="off" checked> 인화지(단면)
+                                        </label>
+                                        <label class="btn btn-outline-external" style="text-align: left;width: 49%;">
+                                            <input type="radio" name="options" id="opt_print_paper" autocomplete="off"> 인쇄지(양면)
+                                        </label>
                                     </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"></td>
-                        </tr>
-                        <tr>
-                            <td>페이지추가</td>
-                            <td colspan="2">21-50 페이지까지 추가 가능<br>장당추가 | 인쇄 250원 인화 500원</td>
-                        </tr>
-                        <tr>
-                            <td>배송안내</td>
-                            <td colspan="2">제작 1-2일 및 택배 1-2 소요</td>
-                        </tr>
-                        <tr>
-                            <td>배송비용</td>
-                            <td colspan="2">2500원(4만원이상 무료)</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"></td>
-                        </tr>
-                        <tr class="result-row">
-                            <td>총금액</td>
-                            <td>20p</td>
-                            <td>9,900원</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"></td>
-                        </tr>
-                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="33%">이지커팅</td>
+                                <td colspan="2" width="67%">
+                                    <div class="btn-group-toggle" data-toggle="buttons" style="width: 100%;">
+                                        <label class="btn btn-outline-external active" style="text-align: left; width:49%;">
+                                            <input type="radio" name="options" id="opt_easy_cut_off" autocomplete="off" checked> 없음
+                                        </label>
+                                        <label class="btn btn-outline-external" style="text-align: left; width:49%;">
+                                            <input type="radio" name="options" id="opt_easy_cut_on" autocomplete="off"> 있음
+                                        </label>
+                                        </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <hr class="line">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>페이지추가</td>
+                                <td colspan="2">21-50 페이지까지 추가 가능<br>장당추가 | 인쇄 250원 인화 500원</td>
+                            </tr>
+                            <tr>
+                                <td>배송안내</td>
+                                <td colspan="2">제작 1-2일 및 택배 1-2 소요</td>
+                            </tr>
+                            <tr>
+                                <td>배송비용</td>
+                                <td colspan="2">2500원(4만원이상 무료)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <hr class="line">
+                                </td>
+                            </tr>
+                            <tr class="result-row">
+                                <td>총금액</td>
+                                <td>20p</td>
+                                <td>9,900원</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </body>
+    <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="./assets/scripts/option.js"></script>
 </html>

@@ -1,26 +1,48 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>The Camp Photobook</title>
-        <link href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="./assets/stylesheets/question.css" rel="stylesheet" type="text/css">
-        <link href="./assets/manifest.json" rel="manifest">
-        <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
-        <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-    </head>
-    <body>
+
+<head>
+    <meta charset="UTF-8">
+    <title>The Camp Photobook</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="./assets/stylesheets/index.css" rel="stylesheet" type="text/css">
+    <link href="./assets/manifest.json" rel="manifest">
+    <style>
+        @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            transform: rotate(90deg);
+            transform-origin: top right;
+            position: absolute;
+            top:100%;
+            right:0%;
+        }
+        html, body {
+            /* 높이 너비값이 다른 스타일 정의와 충돌하여 무효화 되면 안됨 */
+            width:100vh !important;
+            height:100vw !important;
+        }
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
         <div class="row">
             <div class="full-height col-12" style="overflow-x: hidden;background:whitesmoke;">
-                <div class="shadow blog">
-                    <div class="row infor-title">
+                <div class="blog">
+                    <div class="row infor-title-grayback shadow-sm">
                         <div class="col-2">
-                            <img src="./assets/images/receiver.png">
+                            <img src="./assets/images/receiver.png" height="40">
                         </div>
-                        <div class="col-9">
+                        <div class="col-8 text-align:center">
                             <span class="vertical-middle">고객만족센터 1833-3212</span>
                         </div>
-                        <div class="col-1">
-                            <img class="vertical-middle" src="./assets/images/blue_arrow.png">
+                        <div class="col-2">
+                            <img class="vertical-middle" height=20 src="./assets/images/blue_arrow.png">
                         </div>
                     </div>
                     <div class="row infor-content">
@@ -29,15 +51,15 @@
                         점심시간. 12:00 ~ 13:00[주말.공유일 휴일]<br>
                         서울시 금천구 가산디지털1로 19대륭테크노타운18차 1006호
                     </div>
-                    <div class="row infor-title">
+                    <div class="row infor-title-grayback">
                         <div class="col-2">
-                            <img src="./assets/images/document.png">
+                            <img src="./assets/images/document.png" height="40">
                         </div>
-                        <div class="col-9">
+                        <div class="col-8">
                             <span class="vertical-middle">1:1문의하기</span>
                         </div>
-                        <div class="col-1">
-                            <img class="vertical-middle" src="./assets/images/blue_arrow.png">
+                        <div class="col-2">
+                            <img class="vertical-middle" src="./assets/images/blue_arrow.png" height="20">
                         </div>
                     </div>
                     <div class="row infor-content">
@@ -77,7 +99,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" style="margin-bottom: 20px; height: 168px;">
+                            <div class="row" style="margin-bottom: 60px;">
                                 <div class="col-3">
                                     <span>내용</span>
                                 </div>
@@ -91,39 +113,39 @@
                                 <div class="col-3">
                                     <span>연락처</span>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-3" style="padding-right: 1px;">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" >
+                                        <input type="text" class="form-control" placeholder="010">
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-3" style="padding-left: 1px; padding-right: 1px;">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" >
+                                        <input type="text" class="form-control">
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-3" style="padding-left: 1px;">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" >
+                                        <input type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="row" style="margin-bottom: 20px;">
-                                <div class="col-3">
+                                <div class="col-3" style="padding-right: 0px;">
                                     <span>이미지첨부</span>
                                 </div>
                                 <div class="col-9">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" >
+                                        <input type="text" class="form-control" placeholder="5MB이하 3개까지 첨부가능">
                                     </div>
                                 </div>
                             </div>
                             <div class="row" style="margin-bottom: 20px;">
-                                <div class="col-6">
+                                <div class="col-6" style="padding: 0px;">
                                     <div class="form-group">
                                         <button class="form-control">나의 문의 내역 보기</button>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6" style="padding: 0px;">
                                     <div class="form-group">
                                         <button class="btn-main form-control">문의하기</button>
                                     </div>
@@ -132,13 +154,13 @@
                         </div>
                     </div>
                     <div>
-                        <div class="row" style="padding-right: 40px; margin-bottom: 20px; background-color: #f7f7f7;">
-                            <div class="col-12" style="text-align: right; margin: 100px 0px;">
-                                <img src="./assets/images/logo2.png">
-                                <div style="font-size:30px;">
+                        <div class="row" style="padding-right: 0.6em; margin-bottom: 0.3em; background-color: #f7f7f7;">
+                            <div class="col-12" style="text-align: right; margin: 2em 0px;">
+                                <img src="./assets/images/logo2.png" width="80%">
+                                <div style="font-size:0.6rem;">
                                     캠프포토북은 더캠프와 마이포토북이 함께 만듭니다
                                 </div>
-                                <div style="margin-top: 100px; font-size:26px;">
+                                <div style="margin-top: 4em; font-size:0.6rem;">
                                     <b>| 사업자정보</b><br>
                                     상호: 인에이블다운소프트, 대표 조성곤<br>
                                     사업자등록번호:509-88-00859
@@ -151,5 +173,8 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+<script src="./assets/plugins/jquery-3.4.1.min.js"></script>
+<script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 </html>

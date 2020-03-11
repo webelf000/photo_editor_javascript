@@ -2,20 +2,40 @@
     <head>
         <meta charset="UTF-8">
         <title>The Camp Photobook</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/stylesheets/photoedit.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/cropperjs/cropper.css">
-        <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
-        <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				transform: rotate(90deg);
+				transform-origin: top right;
+				position: absolute;
+				top:100%;
+				right:0%;
+			}
+			html, body {
+				/* 높이 너비값이 다른 스타일 정의와 충돌하여 무효화 되면 안됨 */
+				width:100vh !important;
+				height:100vw !important;
+            }
+        }
+      </style>
     </head>
     <body>
         <div class="main-content">
             <div class="nav-div">
                 <table class="content-control">
                     <tr class="top-bottom-bordered bold">
-                        <td class="content-logo"><img src="./assets/images/logo.png"></td>
+                        <td class="content-logo"><img src="./assets/images/logo.png" width="50"></td>
                         <td class="content-type">포토북 (커버제목, 17 X 10 cm, <span id="type">인쇄지</span>, 이지커팅-<span id="easy_cutting">유</span>, <span id="page">20</span>p)</td>
                         <td class="content-value"><span id="value">9900</span>원</td>
                         <td class="bordered" onclick="changeOptions();">옵션변경</td>
@@ -29,27 +49,29 @@
                     </tr>
                 </table>
             </div>
-            <div class="nav-div" style="display:none;">
-                <h1 style="padding: 30px 30px 15px 30px;font-weight: 900;text-align: left;">
+            <div class="nav-div" style="display: none;">
+                <div style="font-size: 1rem; padding: 1em 1em 0.5em 1em;font-weight: 900;text-align: left;">
                     더캠프 포토북 미리보기
-                </h1>
+                </div>
             </div>
             <div class="save-content">
                 <div class="main-editor">
+                    <div id="for-aspect-ratio-out">
+                        <div id="for-aspect-ratio-in">
                     <div id="main-editor" class="background-white full-height shadow" style="position: relative;">
-                        <img class="float-left preview-arrow preview-arrow-prev" src="./assets/images/arrow_prev.png" style="margin-right: -100%; margin-top: 153px; display:none; position: relative; z-index: 20000;" />
-                        <div id="main-paper">
-                            <div class="paper-item" page="0">
-                                <img id="main-paper-img" style="position: absolute;left: 0px;top: 0px;" width="1280" height="360">
-                                <div class="row full-height">
-                                    <div class="col-6 border-right full-height left-half"></div>
-                                    <div class="col-6 full-height right-half">
+                                <img class="float-left preview-arrow preview-arrow-prev" height="20" src="./assets/images/arrow_prev.png" style="margin-right: -100%; margin-top: 6em; display:none; position: relative; z-index: 20000;" />
+                                <div id="main-paper">
+                                    <div class="paper-item" page="0">
+                                        <img id="main-paper-img" style="position: absolute;left: 0px;top: 0px; max-width: 100%; max-height: 100%;">
                                         <div class="row full-height">
-                                            <div class="col-3 full-height">
-                                            </div>
-                                            <div class="col-9 full-height">
-                                                <div class="image-workplace image-cover-workplace">
-                                                </div>
+                                            <div class="col-6 border-right full-height left-half"></div>
+                                            <div class="col-6 full-height right-half">
+                                                <div class="row full-height">
+                                                    <div class="col-3 full-height">
+                                                    </div>
+                                                    <div class="col-9 full-height" style="display:flex;">
+                                                        <div class="image-workplace image-cover-workplace">
+                                                        </div>
                                                 <div class="btns">
                                                     <button class="add-photo">+</button>
                                                     <div class="btn-group ctrl-btn-group" style="display: none;">
@@ -83,7 +105,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -119,7 +141,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -155,7 +177,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -191,7 +213,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -227,7 +249,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -263,7 +285,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -299,7 +321,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -335,7 +357,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -371,7 +393,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -407,7 +429,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -443,7 +465,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -479,7 +501,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -515,7 +537,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -551,7 +573,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -587,7 +609,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -623,7 +645,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -659,7 +681,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -695,7 +717,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -731,7 +753,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -767,7 +789,7 @@
                                                     <div class="col-6 full-height left-cutting-line"></div>
                                                 </div>
                                             </div>
-                                            <div class="col-9 full-height">
+                                                    <div class="col-9 full-height" style="display:flex;">
                                                 <div class="image-workplace">
                                                 </div>
                                                 <div class="btns">
@@ -789,26 +811,28 @@
                                 </div>
                             </div>
                         </div>
-                        <img class="float-right preview-arrow preview-arrow-next" src="./assets/images/arrow_next.png" style="margin-left: -100%; margin-top: -207px; display: none; position: relative; z-index: 20000;" />
+                                <img class="float-right preview-arrow preview-arrow-next" height="20" src="./assets/images/arrow_next.png" style="margin-left: -100%; margin-top: -7.5em; display: none; position: relative; z-index: 20000;" />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="thumbnail-region">
                     <div class="thumbnail-control" id="thumbnail_prev"><img src="./assets/images/arrow_left.png"></div>
                     <div class="thumbnail-list"></div>
                     <div class="thumbnail-control" id="thumbnail_next"><img src="./assets/images/arrow_right.png"></div>
-                    <div class="thumbnail-control" style="margin:15px 0px 0px 0px;"><img src="./assets/images/bar.jpg"></div>
-                    <div class="thumbnail-control" id="thumbnail_add" style="margin-top:20px;"><img src="./assets/images/add.png"></div>
+                    <div class="thumbnail-control" style="margin:5px 2px 0px 2px;"><img src="./assets/images/bar.jpg"></div>
+                    <div class="thumbnail-control" id="thumbnail_add" style="margin-top:0.75em;"><img src="./assets/images/add.png" height="20"></div>
                 </div>
-            </div>            
+            </div>
         </div>
         <div class="modal-confirm-mask"></div>
         <div class="modal-confirm">
             <div>
                 이행하시려면 저장하여야 합니다.<br> 저장하시겠습니까?
             </div>
-            <div style="padding-left:180px;">
-                <button style="width: 100px;" class="btn btn-primary" onclick="okAlert();">예</button>
-                <button style="width: 100px;" class="btn btn-danger" onclick="cancelAlert();">아니오</button>
+            <div style="padding-left:1em;">
+                <button style="width: 8em;" class="btn btn-primary" onclick="okAlert();">예</button>
+                <button style="width: 8em;" class="btn btn-danger" onclick="cancelAlert();">아니오</button>
             </div>
         </div>
         <div class="modal"><!-- Place at bottom of page --></div>
@@ -820,6 +844,8 @@
         </div>
         <input type="file" id="openfile" multiple onchange="afterfileopen();">
     </body>
+    <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
     <script src="./assets/plugins/cropperjs/cropper.min.js"></script>
     <script src="./assets/plugins/hammer.js"></script>
     <script src="./assets/plugins/html2canvas.js"></script>

@@ -1,26 +1,51 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <title>The Camp Photobook</title>
         <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/fontawesome/css/all.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
-
+        <style>
+            @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				transform: rotate(90deg);
+				transform-origin: top right;
+				position: absolute;
+				top:100%;
+				right:0%;
+			}
+			html, body {
+				/* 높이 너비값이 다른 스타일 정의와 충돌하여 무효화 되면 안됨 */
+				width:100vh !important;
+				height:100vw !important;
+            }
+        }
+      </style>
     </head>
     <body>
-        <div class="row">
-            <div class="full-height col-12 align-center" style="overflow-x: hidden;">
-                <div class="clearfix" style="display: flex; align-items: center;margin-top:60px; ">
-                    <img class="float-left" src="./assets/images/arrow_before.png" onclick="goBack();" />
-                    <div class="float-left" style="width: 90vw;">
-                        <h3 style="font-size: 36px;">커버디자인선택</h3>
+        <div class="container">
+            <div class="row">
+                <div class="full-height col-12 align-center" style="overflow-x: hidden;">
+                    <div class="clearfix" style="display: flex; align-items: center;margin-top:1em; ">
+                        <img class="float-left" height="20" src="./assets/images/arrow_before.png" onclick="goBack();" />
+                        <div class="float-left" style="width: 90vw; text-align: center;">
+                            <h3 style="font-size: 1rem;">커버디자인선택</h3>
+                        </div>
+                        <img class="float-right" height="20" src="./assets/images/arrow_after.png" onclick="goOption();" />
                     </div>
-                    <img class="float-right" src="./assets/images/arrow_after.png" onclick="goOption();" />
-                </div>
-                <div class="clearfix"></div>
-                <div class="full-height"  style="background-color:whitesmoke; padding: 0px 30px;">
-                    <div id="main-cover-list" class="clearfix main-image row">
+                    <div class="clearfix"></div>
+                    <div class="row" style="background-color: whitesmoke;">
+                        <div class="full-height"  style="padding: 1em;">
+                            <div id="main-cover-list" class="clearfix main-image row">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

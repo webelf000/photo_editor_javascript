@@ -17,10 +17,10 @@ function orderBook(){
       }
     );
 }
-
+var type;
 var cover;
 $(function(){
-    var type = sessionStorage.getItem('type');
+    type = sessionStorage.getItem('type');
     cover = sessionStorage.getItem('cover');
     var easy_cutting = sessionStorage.getItem('easy_cutting');
     if (type == 1)
@@ -42,7 +42,7 @@ $(function(){
     if (val == 0) val = 9900;
     $('.value').eq(0).html(formatMoney(val, 0, 3, ','));
     // $('#all_value').html(formatMoney((parseInt(val) + 2500), 0, 3, ','));
-
+    console.log("data");
     $.get(
         "http://thecamp.inity.co.kr/Book/CoverInfo.asp",
         {},
@@ -80,4 +80,6 @@ function formatMoney(number, decPlaces, decSep, thouSep) {
       (decPlaces ? decSep + Math.abs(number - i).toFixed(decPlaces).slice(2) : "");
     }
 
-// initConfirm();
+function returnEdit() {
+    location.href = type == 0 ? "photo_paper.html" : "print_paper.html";
+}

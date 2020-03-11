@@ -226,6 +226,11 @@ function cbSendImages(i, cb=null) {
   fd.append('sidx', sidx);
   fd.append('page', i);
   fd.append('data', makeblob(document.getElementsByClassName("thumbnail-item")[i].getElementsByTagName("img")[0].src));
+  // console.log(fd);
+  for (var pair of fd.entries()) {
+    console.log(pair);
+  }
+  // return;
   $.ajax({
     url: IMAGE_SEND_URL,
     type: 'POST',
@@ -448,8 +453,8 @@ function getCover(data) {
     if (element.num == cover) {
       // document.getElementsByClassName("thumbnail-list")[0].getElementsByTagName('img')[0].src = element.url;
       loadImg("main-paper-img", element.url);
-      document.getElementById("main-paper-img").setAttribute("width", 1280);
-      document.getElementById("main-paper-img").setAttribute("height", 360);
+      // document.getElementById("main-paper-img").setAttribute("width", 1280);
+      // document.getElementById("main-paper-img").setAttribute("height", 360);
     }
   });
 }
@@ -611,11 +616,12 @@ function escapePreview() {
 }
 
 function sendPage(callback=undefined){
-  var tempinput = document.createElement("input");
-  tempinput.setAttribute('type', 'hidden');
-  tempinput.setAttribute('id', 'tempinput');
-  document.body.appendChild(tempinput);
-  tempinput.value = JSON.stringify(document.getElementsByClassName('save-content')[0].innerHTML);
+  // var tempinput = document.createElement("input");
+  // tempinput.setAttribute('type', 'hidden');
+  // tempinput.setAttribute('id', 'tempinput');
+  // document.body.appendChild(tempinput);
+  // tempinput.value = JSON.stringify(document.getElementsByClassName('save-content')[0].innerHTML);
+  var temp = document.getElementsByClassName('save-content')[0].innerHTML;
   sessionStorage.setItem("pagesaved", 1);
   $('body').addClass('loading-progress');
   $('#progress_bar div').attr('style', 'width:0%;');
@@ -639,7 +645,7 @@ function sendPage(callback=undefined){
       data: {
         sidx: sidx,
         page: 0,
-        data: tempinput.value
+        data: temp//tempinput.value
       },
       success: function(data){
         $('body').removeClass('loading-progress');
@@ -667,8 +673,7 @@ function my_cart() {
 }
 
 function goConfirm() {
-  // sendPage(goConfirm2); // 페지 데이터를 업로드하려는 경우
-  location.href = "temp_cart.html";
+  sendPage(goConfirm2); // 페지 데이터를 업로드하려는 경우
 }
 
 function goConfirm2() {

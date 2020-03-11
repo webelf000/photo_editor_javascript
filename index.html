@@ -1,118 +1,337 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <title>The Camp Photobook</title>
         <link href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="./assets/stylesheets/index.css" rel="stylesheet" type="text/css">
         <link href="./assets/manifest.json" rel="manifest">
-        <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
-        <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-        <script src="./assets/plugins/hammer.js"></script>
-        <script src="./assets/scripts/index.js"></script>
+        <style>
+            @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				transform: rotate(90deg);
+				transform-origin: top right;
+				position: absolute;
+				top:100%;
+				right:0%;
+			}
+			html, body {
+				/* 높이 너비값이 다른 스타일 정의와 충돌하여 무효화 되면 안됨 */
+				width:100vh !important;
+				height:100vw !important;
+            }
+        }
+      </style>
     </head>
     <body>
         <div id="mySidenav" class="sidenav">
-            <div class="shadow text row" style="background-color: white; padding:30px;">
+            <div class="shadow-sm row" style="background-color: white; padding:2em;">
                     <div class="col-3">
-                        <img id="image-face" src="./assets/images/face.png" style="float:left;" width="150" height="150">
+                        <img id="image-face" src="./assets/images/face.png" style="float:left;border-radius:25px; border:0.3em solid lightblue" width="50" height="50">
                     </div>
-                    <div style="float:left; margin: 10px 0px 0px 30px;" class="nav-text">
-                        <span style="font-size: 48px;"><span class="nav-username">천 서 영</span> 님 </span> 반갑습니다!<br>사용가능 쿠폰 <span class="coupon-count">1</span>장
+                    <div style="float:left; margin: 1em 0px 0px 0.5em;" class="nav-text">
+                        <span style="font-size: 1rem;"><span class="nav-username">천 서 영</span> 님 </span> 반갑습니다!<br>사용가능 쿠폰 <span class="coupon-count">1</span>장
                     </div>
             </div>
-            <div class="shadow text row" style="background-color: white; margin-top: 30px; height: 90%;">
+            <div class="shadow-sm text row" style="height: 90%;">
                 <div class="col-12">
-                    <div class="row sidenav-list">
-                        <div class="col-11">
+                    <div class="row sidenav-list" onclick="location.href='order_send_list.html'">
+                        <div class="col-10">
                             주문 - 배송조회
                         </div>
-                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
-                            <img src="./assets/images/blue_arrow.png">
+                        <div class="col-2" style="display:flex;">
+                            <img src="./assets/images/blue_arrow.png" height="18">
                         </div>
                     </div>
-                    <div class="row sidenav-list">
-                        <div class="col-11">
+                    <div class="row sidenav-list" onclick="location.href='temp_cart.html'">
+                        <div class="col-10">
                             임시보관함<span style="font-weight: normal;">(편집중인 포토북 <span class="editing_count" style="color:red;">2</span>)</span>
                         </div>
-                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
-                            <img src="./assets/images/blue_arrow.png">
+                        <div class="col-2" style="display:flex;">
+                            <img src="./assets/images/blue_arrow.png" height="18">
                         </div>
                     </div>
-                    <div class="row sidenav-list">
-                        <div class="col-11">
+                    <div class="row sidenav-list" onclick="location.href='couponbox.html'">
+                        <div class="col-10">
                             쿠폰함
                         </div>
-                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
-                            <img src="./assets/images/blue_arrow.png">
+                        <div class="col-2" style="display:flex;">
+                            <img src="./assets/images/blue_arrow.png" height="18">
                         </div>
                     </div>
-                    <div class="row sidenav-list">
-                        <div class="col-11">
+                    <div class="row sidenav-list" onclick="location.href='question.html'">
+                        <div class="col-10">
                             1:1문의
                         </div>
-                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
-                            <img src="./assets/images/blue_arrow.png">
+                        <div class="col-2" style="display:flex;">
+                            <img src="./assets/images/blue_arrow.png" height="18">
                         </div>
                     </div>
                     <div class="row sidenav-list">
-                        <div class="col-11">
+                        <div class="col-10">
                             자주하는 질문
                         </div>
-                        <div class="col-1" style="display:flex; height: 60px; padding: 10px;">
-                            <img src="./assets/images/blue_arrow.png">
+                        <div class="col-2" style="display:flex;">
+                            <img src="./assets/images/blue_arrow.png" height="18">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="main" class="full-screen align-center" style="background-color: whitesmoke;">
-            <div class="shadow" style="background-color: white;">
-                <h1 style="padding: 30px 30px 0px 30px;font-weight: 900;text-align: left;" onclick="openNav();">
+        <div id="main" class="full-screen" style="background-color: whitesmoke;">
+            <video width="100%" controls>
+                <source src="./assets/videos/sample.ogv"/>
+
+            </video>
+            <div class="shadow-sm  align-center" style="background-color: white;">
+                <h5>
                     더캠프 포토북
-                </h1>
-                <h3 style="margin: 30px; text-align: left;">
+                </h5>
+                <p class="text-sm" style="margin: 1em; text-align: left;">
                     입영훈련 간의 추억을 포토북으로 담아 경험의 가치를 선물하세요
-                </h3>
-                <img src="./assets/images/default-page.jpg" style="width: 100%;">
-                <button class="btn btn-external" style="width:100%; font-size: 36px; margin:30px 0px; padding:20px 0px;" onclick="location.href='option.html';">포토북만들기</button>
+                </p>
+                <!-- Slideshow container -->
+                <div class="slideshow-container">
+
+                    <!-- Full-width images with number and caption text -->
+                    <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="./assets/images/default-page.jpg" style="width:100%">
+                    <div class="slide-text">Caption Text</div>
+                    </div>
+                
+                    <div class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <img src="./assets/images/default-page.jpg" style="width:100%">
+                    <div class="slide-text">Caption Two</div>
+                    </div>
+                
+                    <div class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <img src="./assets/images/default-page.jpg" style="width:100%">
+                    <div class="slide-text">Caption Three</div>
+                    </div>
+                
+                    <!-- Next and previous buttons -->
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <br>
+                
+                <!-- The dots/circles -->
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+                <button class="btn btn-external" style="width:100%; margin:0.5em 0px; border-radius: 0px;" onclick="location.href='option.html';">포토북만들기</button>
             </div>
-            <div class="shadow" style="background-color: white; margin-top: 20px; padding-bottom: 20px;">
-                <h1 style="margin: 30px;font-weight: 900;text-align: left;">
+            <div class="shadow-sm" style="background-color: white; margin-top: 0.5em; padding-bottom: 0.5em;">
+                <h5>
                     더캠프 포토북 제작방법
-                </h1>
-                <table class="content-table" style="margin-bottom: 30px;">
+                </h5>
+                <table class="content-table" style="margin-bottom: 0.5em;">
                     <tr>
                         <td>
-                            <img src="assets/images/icon1.jpg" height="80px">
+                            <img src="assets/images/icon1.jpg" height="40">
                         </td>
                         <td>포토북만들기 버튼 클릭</td>
                     </tr>
                     <tr>
                         <td>
-                            <img src="assets/images/icon2.jpg" height="80px">
+                            <img src="assets/images/icon2.jpg" height="40">
                         </td>
                         <td>옵션설정</td>
                     </tr>
                     <tr>
                         <td>
-                            <img src="assets/images/icon3.jpg" height="80px">
+                            <img src="assets/images/icon3.jpg" height="40">
                         </td>
                         <td>꾸미기<small>[사진삽입]/글쓰기/커버선택]</small></td>
                     </tr>
                     <tr>
                         <td>
-                            <img src="assets/images/icon4.jpg" height="80px">
+                            <img src="assets/images/icon4.jpg" height="40">
                         </td>
                         <td>미리보기 선택</td>
                     </tr>
                     <tr>
                         <td>
-                            <img src="assets/images/icon5.jpg" height="80px">
+                            <img src="assets/images/icon5.jpg" height="40">
                         </td>
                         <td>구매하기</td>
                     </tr>
                 </table>
             </div>
+            <div class="shadow-sm" style="background-color: white; margin-top: 0.5em; padding-bottom: 0.5em;">
+                <h5>
+                    더캠프 포토북 미리보기
+                </h5>
+                <div style="text-align: center;">
+                    <img src="./assets/images/default_cover.png" width="90%" style="margin:1em auto;">
+                </div>
+            </div>
+            <div class="shadow-sm" style="background-color: white; margin-top: 0.5em; padding-bottom: 0.5em;">
+                <h5>
+                    더캠프 포토북 커버디자인
+                </h5>
+                <div style="text-align: center;">
+                    <img src="./assets/images/cover_designs.png" width="90%" style="margin:1em auto;">
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="full-height col-12" style="overflow-x: hidden;background:whitesmoke;">
+                        <div class="blog">
+                            <div class="row infor-title-grayback shadow-sm">
+                                <div class="col-2">
+                                    <img src="./assets/images/receiver.png" height="40">
+                                </div>
+                                <div class="col-8 text-align:center">
+                                    <span class="vertical-middle">고객만족센터 1833-3212</span>
+                                </div>
+                                <div class="col-2">
+                                    <img class="vertical-middle" height=20 src="./assets/images/blue_arrow.png">
+                                </div>
+                            </div>
+                            <div class="row infor-content">
+                                TEL. 1833-3212 | 010-4965-6004<br>
+                                상담시간. 10:00 ~ 18:00<br>
+                                점심시간. 12:00 ~ 13:00[주말.공유일 휴일]<br>
+                                서울시 금천구 가산디지털1로 19대륭테크노타운18차 1006호
+                            </div>
+                            <div class="row infor-title-grayback">
+                                <div class="col-2">
+                                    <img src="./assets/images/document.png" height="40">
+                                </div>
+                                <div class="col-8">
+                                    <span class="vertical-middle">1:1문의하기</span>
+                                </div>
+                                <div class="col-2">
+                                    <img class="vertical-middle" src="./assets/images/blue_arrow.png" height="20">
+                                </div>
+                            </div>
+                            <div class="row shadow-sm infor-content">
+                                <div class="infor-lg">
+                                    고객님, 어떤 도움이 필요하세요?
+                                </div>
+                                <div class="infor-sm">
+                                    긍금하신 사항은 입력하신 연락처로 답변 완료시 회신을 드립니다.<br>
+                                    빠른 답변을 위하여 항상 최선을 다하겠습니다.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shadow blog">
+                            <div class="infor-content row">
+                                <div class="col-12">
+                                    <div class="row" style="margin-bottom: 20px;">
+                                        <div class="col-3">
+                                            <span>문의유형</span>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="form-group">
+                                                <select class="form-control">
+                                                    <option>배송관련</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom: 20px;">
+                                        <div class="col-3">
+                                            <span>주문번호</span>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="form-group">
+                                                <select class="form-control">
+                                                    <option>선택안함</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom: 60px;">
+                                        <div class="col-3">
+                                            <span>내용</span>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows=4 placeholder="문의하실 내용 입력"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom: 20px;">
+                                        <div class="col-3">
+                                            <span>연락처</span>
+                                        </div>
+                                        <div class="col-3" style="padding-right: 1px;">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="010">
+                                            </div>
+                                        </div>
+                                        <div class="col-3" style="padding-left: 1px; padding-right: 1px;">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-3" style="padding-left: 1px;">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom: 20px;">
+                                        <div class="col-3">
+                                            <span>이미지첨부</span>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="5MB이하 3개까지 첨부가능">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-bottom: 20px;">
+                                        <div class="col-6" style="padding: 0px;">
+                                            <div class="form-group">
+                                                <button class="form-control" style="border-radius: 0px;">나의 문의 내역 보기</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-6" style="padding: 0px;">
+                                            <div class="form-group">
+                                                <button class="btn-main form-control" style="border-radius: 0px;">문의하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row" style="padding-right: 0.6em; margin-bottom: 0.3em; background-color: #f7f7f7;">
+                                    <div class="col-12" style="text-align: right; margin: 2em 0px;">
+                                        <img src="./assets/images/logo2.png" width="80%">
+                                        <div style="font-size:0.6rem;">
+                                            캠프포토북은 더캠프와 마이포토북이 함께 만듭니다
+                                        </div>
+                                        <div style="margin-top: 4em; font-size:0.6rem;">
+                                            <b>| 사업자정보</b><br>
+                                            상호: 인에이블다운소프트, 대표 조성곤<br>
+                                            사업자등록번호:509-88-00859
+                                            전화:1661-9990<br>
+                                            서울시 성동구 연무장5길, 9-16 1007호 [성수동2가,블루스톤타워]
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
+    <script src="./assets/plugins/jquery-3.4.1.min.js"></script>
+    <script src="./assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="./assets/plugins/hammer.js"></script>
+    <script src="./assets/scripts/index.js"></script>
 </html>

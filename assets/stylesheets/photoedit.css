@@ -7,8 +7,7 @@ html {
 }
 
 body {
-    display: inline-block;
-    width: 1380px;
+    width: 100%;
 }
 
 #cover-select-caption span {
@@ -20,7 +19,7 @@ div.nav {
 }
 
 .nav-div {
-    width: 100%; background-color: white; padding: 30px 30px 0px 30px;
+    width: 100%; background-color: white; padding: 1em 1em 0px 1em;
 }
 
 .nav-background {
@@ -79,8 +78,8 @@ h1.disabled {
 }
 
 div.main-content {
-    width: 1380px;
-    height: 140vh;
+    width: 100%;
+    height: 100vh;
     background-color: whitesmoke;
 }
 
@@ -90,33 +89,29 @@ tr.top-bottom-bordered {
 }
 
 table.content-control {
-    width: 1320px;
+    width: 100%
 }
 
 table.content-control td {
     box-sizing: content-box;
-    font-size: 24px;
+    font-size: 0.5rem;
 }
 
 table.content-control tr{
-    height: 50px;
-}
-
-td.content-type {
-    font-size: 18px
+    height: 1.5em;
 }
 
 td.bordered {
+    width: 5em;
     text-align: center;
     border: 1px solid #d4d4d4;
-    width: 100px;
 }
 
 td.blue-button {
+    width:7em;
     text-align: center;
     color:white;
     background-color: #0e5983;
-    width: 100px;
 }
 
 .bold {
@@ -129,9 +124,22 @@ td.blue-button {
 
 div.main-editor {
     background-color: #f0f0f0;
-    padding: 30px 50px 20px 50px;
-    width: 1380px;
-    height: 410px;
+    padding: 15px;
+    width: 100%;
+}
+
+#for-aspect-ratio-out {
+    width:100%;
+    padding-top:29.41%;
+    position:relative;
+}
+
+#for-aspect-ratio-in {
+    position: absolute;
+    left:0;
+    top:0;
+    bottom: 0;
+    right: 0;
 }
 
 div.background-white {
@@ -147,22 +155,20 @@ div.border-right {
 }
 
 div.ctrl-btn-group {
-    height: 40px !important;
     margin: -20px -20px -20px -20px;
     position: relative;
     top:65%;
-    left:25%;
+    left:0%;
 }
 
 div.ctrl-btn-group button {
-    font-size: 20px;
+    padding:0.5em;
+    font-size: 0.5rem;
 }
 
-/* @media screen and (max-width: 1024px) {
-    div.ctrl-btn-group {
-        left:15%;
-    }
-} */
+.ctrl-btn {
+    border-radius: 0px;
+}
 
 div.main-editor canvas {
     width: 100%;
@@ -170,13 +176,14 @@ div.main-editor canvas {
 }
 
 .add-photo {
-    height:40px; 
-    width:40px; 
-    margin: -20px -20px -20px -20px; 
-    border-radius: 20px;
+    height:1.5em; 
+    width:1.5em; 
+    margin: -0.5em; 
+    border-radius: 0.75em;
+    padding: 0px;
     border: 0px;
     color: white;
-    font-size: 20px;
+    font-size: 1rem;
     background-color: #d4d4d4;
     position:relative;
     top:50%;
@@ -198,13 +205,14 @@ div.main-editor canvas {
 }
 
 .image-workplace {
-    width: 472.5px;
-    height: 360px;
+    width: 100%;
+    height: 100%;
     margin: 0px;
     padding: 0px;
     border: 0px;
-    display:table-cell;
-    text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
     vertical-align: middle;
 }
 
@@ -213,7 +221,7 @@ div.main-editor canvas {
 }
 
 .image-workplace img {
-    position: relative;;
+    position: relative;
     margin: 0 auto;
     max-width: 100%;
     max-height: 100%;
@@ -228,15 +236,14 @@ div.main-editor canvas {
 }
 
 .btns {
-    height: 360px;
-    margin-top: -360px;
+    margin-left:-65%;
 }
 
 .thumbnail-region {
     background-color: whitesmoke;
-    width: 1320px;
-    height: 120px;
-    margin: 0px 30px 0px 30px;
+    width: 100%;
+    height: 5em;
+    padding: 1em;
 }
 
 .thumbnail-region > div{
@@ -245,7 +252,7 @@ div.main-editor canvas {
 
 .thumbnail-list {
     width: 89%;
-    height: 120px;
+    height: 100%;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -256,13 +263,13 @@ div.main-editor canvas {
 }
 
 .thumbnail-list > div {
-    height: 80px;
+    height: 3em;
 }
 
 .thumbnail-list img {
     border: 1px solid #d4d4d4;
-    height: 50px;
-    margin: 10px;
+    height: 2em;
+    margin: 0px 3px;
 }
 
 .thumbnail-list div {
@@ -271,11 +278,11 @@ div.main-editor canvas {
 }
 
 .thumbnail-list figcaption {
-    font-size: 24px;
+    font-size: 0.5rem;
 }
 
 .thumbnail-control {
-    margin: 28px 10px 0px 10px;
+    margin: 1em 0px 0px 0px;
 }
 
 div.current-item img{
@@ -283,7 +290,8 @@ div.current-item img{
 }
 
 div.info-insert {
-    padding-top: 20px;
+    font-size:0.5rem;
+    padding: 20px 8px 4px 8px;
 }
 
 div.info-insert.print-paper {
@@ -342,8 +350,8 @@ body.loading-confirm .modal-confirm {
 }
 
 body.loading-confirm .modal-confirm-mask {
-    width: 1380px;
-    height: 200vh;
+    width: 100%;
+    height: 100%;
     position:fixed;
     top:0;    
     left:0;
@@ -354,23 +362,21 @@ body.loading-confirm .modal-confirm-mask {
 .modal-confirm {
     text-align: center;
     box-shadow: 5px 10px 8px #888888;
-    border-radius: 30px;
+    border-radius: 10px;
     background-color: white;
-    font-size: 30px;
     position: fixed;
     top: 50%;
     left: 50%;
-    margin-top: -200px;
-    margin-left: -300px;
-    width: 600px;
-    height: 200px;
-    padding-top: 20px;
+    margin-top: -6em;
+    margin-left: -10em;
+    width: 20em;
+    height: 7em;
+    padding-top: 0.5em;
 }
 
 .modal-confirm button {
     float: left;
     margin: 10px;
-    font-size: 20px;
 }
 
 body.loading-progress .progress {
@@ -386,8 +392,8 @@ body.loading-progress .progress {
 }
 
 body.loading-progress .modal-confirm-mask {
-    width: 1380px;
-    height: 200vh;
+    width: 100%;
+    height: 100%;
     position:fixed;
     top:0;
     left:0;
@@ -405,6 +411,5 @@ body.loading-progress .modal-confirm-mask {
 
 .progress-bar {
     background-color: #0e5983;
-    font-size: 20px;
     height:100%;
 }

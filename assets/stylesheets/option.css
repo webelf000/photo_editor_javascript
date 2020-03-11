@@ -1,200 +1,140 @@
-
-.nav-background {
-    background-color: #3f5058;
+html, body {
+    width:100%;
 }
 
-.main-color {
-    color: white;
+.btn-external {
+    color: #fff;
+    background-color: #0e5983;
+    border-color: #0e5983;
 }
 
-.full-height {
-    overflow-x: hidden;
-    height: 100vh;
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+.infor-title {
+    background-color: white;
+    font-weight: 800;
+    padding: 0.5em;
+    font-size: 0.9rem;
 }
 
-.full-screen {
-    overflow-x:hidden;
-    height: 100vh;
-    width: 100vw;
+.infor-content {
+    background-color: white;
+    font-weight: 800;
+    padding: 1em;
+    font-size: 0.5rem;
 }
 
-.chapter-number {
-    margin-top: 10vh;
+.infor-content .infor-lg {
+    font-size: 0.6rem;
 }
 
-.chapter-title {
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+.infor-content .infor-sm {
+    font-size: 0.4rem;
 }
 
-div.chapter-subtitle {
-    margin-top: 25vh;
+.form-group {
+    height: 0.3em;
 }
 
-h1.chapter-subtitle {
-    margin-top: 5vh;
+.shadow-sm.blog {
+    margin-bottom: 0.3em;
 }
 
-line.border-line {
-    stroke: white;
-    stroke-width: 3;
+.blog .form-control {
+    font-size: 0.5rem
 }
 
-svg.shape {
-    margin-bottom: -100vh;
-    margin-right: -100vw;
-    height: 100vh;
-    width: 100vw;
+button.form-control {
+    height: 1.2em;
 }
 
-svg.sidebar {
-    width: 100%;
-    height: 5px;
+.btn-main {
+    background-color: #0e5983;
+    color:white;
 }
 
-svg.nav-bar {
-    margin-top: 3vh;
-    width: 100%;
-    height: 5px;
+hr.line {
+    margin:1px 0px 1px 0px;
 }
 
-h1.title {
-    font-size: 8vh;
-    color: white;
-    margin-left: 18vw;
-    margin-top: 20vh;
+.ticket-container {
+    text-align: center;
+    padding: 1.3em 0.5em;
 }
 
-h1.index-subtitle {
-    font-size: 4vh;
-    margin-left: 20vw;
-    color: white;
-}
-
-h1.end-title {
-    font-size: 7vh;
-    color: white;
-    margin-left: 20vw;
-    margin-top: 38vh;
-}
-
-h1.subtitle {
-    font-size: 4vh;
-    color: white;
-}
-
-h1.disabled {
-    color: #657379 !important;
-}
-
-h1.chapter-number {
-    font-size: 6vw;
-    color: white;
-}
-
-h1.chapter-title {
-    font-size: 4vw;
-    color: white;
-}
-
-h1.chapter-subtitle {
-    font-size: 2vw;
-    color: white;
-}
-
-img.arrow {
-    margin-top: 47vh;
-    margin-left: 77vw;
-    width: 8vh;
-}
-
-img.back-arrow {
-    margin-top: 35vh;
-    margin-left: 77vw;
-    width: 8vh;
-}
-
-div.main-image {
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-}
-
-.index-header {
-    width: 100%;
-    height: 60%;
-    background-image: url("../images/index_background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 0% 50%;
-    margin-bottom: 5vh;
-}
-
-.index-title {
-    color: lightgray;
-    font-size: 12vw;
-}
-
-.index-subtitle {
-    margin-left: 1vw;
-    font-size: 3vw;
-}
-
-.index-content {
-    color: black;
-    margin-top: 4vh;
-    font-size: 3vw;
-}
 .align-center {
     text-align: center;
 }
 
-a:hover, a:link, a:visited, a:active {
-    text-decoration: none;
-}
-
-h3.content-title {
-    font-size: 40px
-}
-.content-title {
-    margin-top: 180px;
-    margin-bottom: 16px;
-}
-
-table.content-table {
-    font-size: 4vw;
-    margin: 0 10%;
-}
-
-table.content-table tr{
-    height: 60px;
-}
-
-table.content-table td:last-child {
-    width:100%;
-    padding-left: 80px;
-}
-
 table.table-option {
-    margin: 0px 10%;
-    width: 80%;
+    margin: 0px 15px;
+    width: 100%;
 }
 
 table.table-option .btn-group, table.table-option select{
-    height: 60px;
+    height: 1em;
 }
 table.table-option .btn-group label {
-    font-size: 28px;
+    font-size: 0.8rem;
 }
 
 table.table td {
-    height: 80px;
-    font-size: 32px;
+    height: 1em;
+    font-size: 0.8rem;
     padding: 8px;
     border: transparent;
     vertical-align: middle;
 }
-table.table option, table.table select, table.table label {
-    font-size:20px;
+table.table-option, table.table select, table.table label {
+    font-size:0.8rem;
 }
 
 td.button {
@@ -209,8 +149,12 @@ td.button div {
 }
 
 tr.result-row td{
-    font-size: 48px;
+    font-size: 1.2rem;
     font-weight: 900;
+}
+
+td label {
+    margin-bottom: 0px;
 }
 
 td.submit-td {
