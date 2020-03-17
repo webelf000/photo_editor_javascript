@@ -316,9 +316,15 @@ div.info-insert.print-paper {
     height:     100%;
     width:      100%;
     background: rgba( 255, 255, 255, .8 ) 
-                url('http://i.stack.imgur.com/FhHRx.gif') 
+                url('../images/spinner.gif') 
                 50% 50% 
                 no-repeat;
+}
+
+.modal .message {
+    position: relative;
+    top: 20%;
+    text-align: center;
 }
 
 body.loading .modal {

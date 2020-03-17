@@ -17,6 +17,7 @@ function fileopen() {
 
 var filelist = [];
 function afterfileopen() {
+  document.body.classList.add("loading");
     var input = document.getElementById("openfile");
     if (input.files.length == 0)
       return;
@@ -85,9 +86,12 @@ function imageFileOpen(i) {
     $('.paper-item').eq(Number(cur_thumbnail) + Number(i)).show();
     $('.btns').hide();
     $('.left-half').attr('style', 'border-right: 3px solid #808080 !important;');
+    
+    document.body.classList.remove("loading");
     var mydiv = document.getElementById('main-editor');
     window.scrollTo(0, 0);
     html2canvas(mydiv).then(function(canvas){
+      document.body.classList.add("loading");
       document.getElementsByClassName("thumbnail-item")[Number(cur_thumbnail) + Number(i)].getElementsByTagName('img')[0].src = canvas.toDataURL('image/jpg');
       $('.left-half').attr('style', '');
       imageFileOpen(Number(i) + 1);
@@ -203,34 +207,37 @@ function cancelCrop() {
   $('.ctrl-btn-edit').addClass('btn-hidden');
 }
 
-function saveImages(cb = null) {
+var mainUrls = [];
+
+function saveImages() {
   $(".btns").hide();
   
   $('body').addClass('loading-progress');
   $('#progress_bar div').attr('style', 'width:0%;');
-  cbSendImages(0, cb);
+  mainUrls = [];
+  cbSendImages(0);
 }
 
-function cbSendImages(i, cb=null) {
+function cbSendImages(i) {
   if (i > max_thumbnail) {
     $(".btns").show();
     isSended = true;
     $('body').removeClass('loading-progress');
-    if (cb != null) cb();
+    goConfirm();
     return;
   }
   var progressing = i / max_thumbnail * 100;
   $('#progress_bar div').attr('style', 'width:' + progressing + '%;');
   $('#progress_bar div').html(Math.round(progressing) + "%");
+  if (document.getElementsByClassName("image-workplace")[i].getElementsByTagName("img").length == 0) {
+    cbSendImages(i + 1);
+    return;
+  }
   var fd = new FormData();
   fd.append('sidx', sidx);
   fd.append('page', i);
   fd.append('data', makeblob(document.getElementsByClassName("thumbnail-item")[i].getElementsByTagName("img")[0].src));
-  // console.log(fd);
-  for (var pair of fd.entries()) {
-    console.log(pair);
-  }
-  // return;
+  fd.append('sdata', makeblob(document.getElementsByClassName("image-workplace")[i].getElementsByTagName("img")[0].src));
   $.ajax({
     url: IMAGE_SEND_URL,
     type: 'POST',
@@ -239,12 +246,15 @@ function cbSendImages(i, cb=null) {
     data: fd
   })
   .done(function(data) {
-    cbSendImages(i + 1, cb);
+    data = JSON.parse(data);
+    document.getElementsByClassName("image-workplace")[data.page].getElementsByTagName("img")[0].src = "http://thecamp.inity.co.kr/" + data.url;
+    cbSendImages(i + 1);
   })
   .fail(function() {alert("화상보관중 오류가 발생하였습니다.");});
 }
 
 function init() {
+  menu = "";
   sessionStorage.setItem("editing", 1);
   sidx = sessionStorage.getItem("sidx");
   var pagesaved = sessionStorage.getItem("pagesaved");
@@ -278,7 +288,7 @@ function init() {
         data = JSON.parse(data);
         var temp = data.data.replace(/\\n/g, '').replace(/\\"/g, '"').replace(/^\"/, "").replace(/\"$/, "");
         document.getElementsByClassName('save-content')[0].innerHTML = temp;
-        afterinit1(true);
+        main_img_load(0);
       },
       error: function(data) {
         $('body').removeClass('loading-progress');
@@ -328,7 +338,7 @@ function afterinit1(isSaved) {
     var number = max_thumbnail;
     for (var i = 0; i < number; i++) {
       img = document.createElement('img');
-      // img.src = "./assets/images/white.png";
+      img.src = "./assets/images/white.png";
       figcaption = document.createElement('figcaption');
       figcaption.innerHTML = "속지" + (i + 1);
       div = document.createElement('div');
@@ -338,7 +348,6 @@ function afterinit1(isSaved) {
       div.setAttribute('page', i + 1);
       div.addEventListener('click', selectItem);
       document.getElementsByClassName('thumbnail-list')[0].appendChild(div);
-      
     }
       
     div = document.createElement('div');
@@ -357,14 +366,66 @@ function afterinit1(isSaved) {
   }
   else {
     var div = document.getElementsByClassName('thumbnail-item');
-    for (var i = 0; i < div.length; i++) {
+    thumbnail_load(1);
+    for (var i = 0; i < div.length - 1; i++) {
       div[i].addEventListener('click', selectItem);      
     }
-    afterShowPage();
   }
   defaultEditer = document.getElementsByClassName('paper-item')[1].cloneNode(true);
   defaultEditer.getElementsByClassName('image-workplace')[0].innerHTML = "";
   defaultEditer.getElementsByClassName('info-insert')[0].innerHTML = "";
+}
+
+function main_img_load(i) {
+  if (i >= document.getElementsByClassName('thumbnail-item').length - 1) {
+    afterinit1(true);
+    return;
+  }
+  var div = document.getElementsByClassName('image-workplace');
+  if (document.getElementsByClassName("image-workplace")[i].getElementsByTagName("img").length != 0) {
+    var img2 = new Image();
+    img2.onload = function(){
+      var canvas = document.createElement("canvas");
+      canvas.width = img2.width;
+      canvas.height = img2.height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img2, 0, 0);
+      defaultImage = canvas.toDataURL("image/png");
+      div[i].getElementsByTagName("img")[0].src=defaultImage;
+      main_img_load(i + 1);
+    };
+    img2.setAttribute('crossOrigin', 'anonymous');
+    img2.src = div[i].getElementsByTagName("img")[0].src;
+  }
+  else {
+    main_img_load(i + 1);
+  }
+}
+
+function thumbnail_load(i) {
+  if (i >= document.getElementsByClassName('thumbnail-item').length - 1) {
+    afterShowPage();
+    return;
+  }
+  var div = document.getElementsByClassName('thumbnail-item');
+  if (document.getElementsByClassName("image-workplace")[i].getElementsByTagName("img").length != 0) {
+    var img2 = new Image();
+    img2.onload = function(){
+      var canvas = document.createElement("canvas");
+      canvas.width = img2.width;
+      canvas.height = img2.height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img2, 0, 0);
+      defaultImage = canvas.toDataURL("image/png");
+      div[i].getElementsByTagName("img")[0].src=defaultImage;
+      thumbnail_load(i + 1);
+    };
+    img2.setAttribute('crossOrigin', 'anonymous');
+    img2.src = div[i].getElementsByTagName("img")[0].src;
+  }
+  else {
+    thumbnail_load(i + 1);
+  }
 }
 
 var defaultImage = "";
@@ -379,24 +440,10 @@ function loadImg(id, imgUrl) {
     ctx.drawImage(img, 0, 0);
     var dataURL = canvas.toDataURL("image/png");
     document.getElementById(id).src=dataURL;
-    document.getElementsByClassName("thumbnail-item")[0].getElementsByTagName('img')[0].src=dataURL;
+    document.getElementsByClassName("thumbnail-item")[0].getElementsByTagName('img')[0].src=imgUrl;
   };
   img.setAttribute('crossOrigin', 'anonymous');
   img.src = imgUrl;
-  var img2 = new Image();
-  img2.onload = function(){
-    var canvas = document.createElement("canvas");
-    canvas.width = img2.width;
-    canvas.height = img2.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img2, 0, 0);
-    defaultImage = canvas.toDataURL("image/png");
-    for (var i = 1; i <= max_thumbnail; i++) {
-      document.getElementsByClassName("thumbnail-item")[i].getElementsByTagName('img')[0].src=defaultImage;
-    }
-  };
-  img2.setAttribute('crossOrigin', 'anonymous');
-  img2.src = "http://thecamp.inity.co.kr/assets/images/white.png";
 }
 
 function afterShowPage() {
@@ -436,25 +483,21 @@ function afterShowPage() {
     $('.preview-arrow').show();
   }
   else {
-    // $('.btns').show();
     $('.preview-arrow').hide();
   }
+
+  document.body.classList.remove("loading");
 }
 
 function showBtns() {
   document.getElementsByClassName('btns')[cur_thumbnail].setAttribute('style', '');
   document.getElementsByClassName('ctrl-btn-group')[cur_thumbnail].setAttribute('style', '');
-  // $('.btns').show();
-  // $('.ctrl-btn-group').show();
 }
 
 function getCover(data) {
   data.coverinfo.forEach(element => {
     if (element.num == cover) {
-      // document.getElementsByClassName("thumbnail-list")[0].getElementsByTagName('img')[0].src = element.url;
       loadImg("main-paper-img", element.url);
-      // document.getElementById("main-paper-img").setAttribute("width", 1280);
-      // document.getElementById("main-paper-img").setAttribute("height", 360);
     }
   });
 }
@@ -615,69 +658,100 @@ function escapePreview() {
   }
 }
 
-function sendPage(callback=undefined){
-  // var tempinput = document.createElement("input");
-  // tempinput.setAttribute('type', 'hidden');
-  // tempinput.setAttribute('id', 'tempinput');
-  // document.body.appendChild(tempinput);
-  // tempinput.value = JSON.stringify(document.getElementsByClassName('save-content')[0].innerHTML);
-  var temp = document.getElementsByClassName('save-content')[0].innerHTML;
+function sendPage(){
+
   sessionStorage.setItem("pagesaved", 1);
   $('body').addClass('loading-progress');
   $('#progress_bar div').attr('style', 'width:0%;');
   $('#progress_bar div').html("0%");
+
+  // 이미지 URL을 서버로부터 받아서 Base64데이터를 갱신시킨다.
   $.ajax({
-      xhr: function(){
-        var xhr = new window.XMLHttpRequest();
-        xhr.upload.addEventListener("progress", function(evt){
-          if (evt.lengthComputable) {
-            var percentComplete = evt.loaded / evt.total * 100;
-            $('#progress_bar div').attr('style', 'width:' + percentComplete + '%;');
-            $('#progress_bar div').html(Math.round(percentComplete) + "%");
-          }
-        }, false);
-        xhr.addEventListener("progress", function(evt){
-        }, false);
-        return xhr;
-      },
-      type: 'POST',
-      url: PAGE_SEND_URL,
-      data: {
-        sidx: sidx,
-        page: 0,
-        data: temp//tempinput.value
-      },
-      success: function(data){
-        $('body').removeClass('loading-progress');
-        if (callback != undefined)
-          callback();
-      },
-      error: function(data) {
-        $('body').removeClass('loading-progress');
-        alert("페지보관중 오류가 발생하였습니다.");
-      }
-    });
+    url: IMAGE_RECEIVE_URL,
+    type: "GET",
+    data: {
+      sidx: sidx
+    },
+    success: function(data) {
+      data = JSON.parse(data);
+      var imgInfo = data.imginfo;
+      imgInfo.forEach(element => {
+        document.getElementsByClassName("thumbnail-item")[element.page].getElementsByTagName("img")[0].src = element.url;
+      });
 
+      
+      var temp = document.getElementsByClassName('save-content')[0].innerHTML;
+      // 이미지데이터를 URL로 갱신한 다음 페이지데이터를 전송한다.(통신량감소)
+      $.ajax({
+        xhr: function(){
+          var xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress", function(evt){
+            if (evt.lengthComputable) {
+              var percentComplete = evt.loaded / evt.total * 100;
+              $('#progress_bar div').attr('style', 'width:' + percentComplete + '%;');
+              $('#progress_bar div').html(Math.round(percentComplete) + "%");
+            }
+          }, false);
+          xhr.addEventListener("progress", function(evt){
+          }, false);
+          return xhr;
+        },
+        type: 'POST',
+        url: PAGE_SEND_URL,
+        data: {
+          sidx: sidx,
+          page: 0,
+          data: temp
+        },
+        success: function(data){
+          $('body').removeClass('loading-progress');
+          goConfirm2();
+        },
+        error: function(data) {
+          $('body').removeClass('loading-progress');
+          alert("페지보관중 오류가 발생하였습니다.");
+        }
+      });
 
+    },
+    error: function(data) {
+      $('body').removeClass('loading-progress');
+        alert("화상적재중 오류가 발생하였습니다.");
+    }
+  });
 }
 
 function my_cart() {
+  menu = "confirm";
   sessionStorage.setItem('page_add', max_thumbnail - 20);
   sessionStorage.setItem('page_count', max_thumbnail);
   sessionStorage.setItem('value', val);
   if (!isSended) {
-    saveImages(goConfirm);
+    saveImages();
   } else {
     goConfirm();
   }
 }
 
 function goConfirm() {
-  sendPage(goConfirm2); // 페지 데이터를 업로드하려는 경우
+  sendPage(); // 페지 데이터를 업로드하려는 경우
 }
 
 function goConfirm2() {
-  location.href = "temp_cart.html";
+  switch (menu) {
+    case "confirm":
+      location.href="BookMake.asp";
+      break;
+    case "cover":
+      location.href="cover.html";
+      break;
+    case "option":
+      location.href="option.html";
+      break;
+    default:
+      location.reload();
+      break;
+  }
 }
 
 function makeblob(dataURL) {
@@ -704,17 +778,22 @@ function makeblob(dataURL) {
 
 var isSended = false;
 function getThumbnail(cb = null) {
-  isSended = false;
-  var mydiv = document.getElementById('main-editor');
   $('.btns').hide();
   $('.left-half').attr('style', 'border-right: 3px solid #808080 !important;');
+  if (document.getElementsByClassName("image-workplace")[cur_thumbnail].getElementsByTagName("img").length == 0) {
+    if (cb != null)
+      cb();
+    return;
+  }
+
+  isSended = false;
+  var mydiv = document.getElementById('main-editor');
   const temp_thumbnail = cur_thumbnail;
   if (!isPreview) {
     window.scrollTo(0, 0);
     html2canvas(mydiv).then(function(canvas){
       document.getElementsByClassName("thumbnail-item")[temp_thumbnail].getElementsByTagName('img')[0].src = canvas.toDataURL('image/jpg');
       $('.left-half').attr('style', '');
-      // $('.btns').show();
       if (cb != null)
         cb();
     });
@@ -738,19 +817,13 @@ function myAlert() {
 
 function okAlert() {
   $('body').removeClass("loading-confirm");
-  if (menu == "option") {
-    sendPage(goOption);
-  } else if (menu == "cover") {
-    sendPage(goCover);
+  if (!isSended) {
+    saveImages();
+  }
+  else {
+    goConfirm();
   }
 }
-function goOption() {
-  location.href='option.html';
-}
-function goCover() {
-  location.href='cover.html';
-}
-
 function cancelAlert() {
   $('body').removeClass("loading-confirm");
 }

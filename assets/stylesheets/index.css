@@ -50,7 +50,7 @@ html, body {height: 100%;}
   div.current-item img{
     border: 2px solid royalblue;
   }
-  
+
   .sidenav {
     font-size: 0.8rem;
   }
@@ -290,6 +290,10 @@ background-color: white;
 }
 .recommend_photo_add {
   color: red;
+}
+
+ul {
+  padding-inline-start: 1em;
 }
 
 /* For red checkbox*/

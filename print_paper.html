@@ -8,27 +8,6 @@
         <link rel="stylesheet" type="text/css" href="./assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./assets/stylesheets/photoedit.css">
         <link rel="stylesheet" type="text/css" href="./assets/plugins/cropperjs/cropper.css">
-        <style>
-            @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
-			html {
-				transform: rotate(90deg);
-				transform-origin: top right;
-				position: absolute;
-				top:100%;
-				right:0%;
-			}
-			html, body {
-				/* 높이 너비값이 다른 스타일 정의와 충돌하여 무효화 되면 안됨 */
-				width:100vh !important;
-				height:100vw !important;
-            }
-        }
-      </style>
     </head>
     <body>
         <div class="main-content">
@@ -835,7 +814,7 @@
                 <button style="width: 8em;" class="btn btn-danger" onclick="cancelAlert();">아니오</button>
             </div>
         </div>
-        <div class="modal"><!-- Place at bottom of page --></div>
+        <div class="modal"><div class="message">사진을 배치하는중입니다.<br>잠시만 기다려 주세요</div></div>
         <div id="progress_bar" class="progress">
             <div class="progress-bar progress-bar-striped active" role="progressbar"
             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
