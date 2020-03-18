@@ -222,6 +222,7 @@ function cbSendImages(i) {
   if (i > max_thumbnail) {
     $(".btns").show();
     isSended = true;
+    sessionStorage.setItem("isSended", 1);
     $('body').removeClass('loading-progress');
     goConfirm();
     return;
@@ -726,10 +727,12 @@ function my_cart() {
   sessionStorage.setItem('page_add', max_thumbnail - 20);
   sessionStorage.setItem('page_count', max_thumbnail);
   sessionStorage.setItem('value', val);
-  if (!isSended) {
+  isSended = sessionStorage.getItem("isSended");
+  if (isSended == undefined) isSended = 0;
+  if (isSended == 0) {
     saveImages();
   } else {
-    goConfirm();
+    goConfirm2();
   }
 }
 
@@ -776,7 +779,7 @@ function makeblob(dataURL) {
   return new Blob([uInt8Array], { type: contentType });
 }
 
-var isSended = false;
+var isSended = 0;
 function getThumbnail(cb = null) {
   $('.btns').hide();
   $('.left-half').attr('style', 'border-right: 3px solid #808080 !important;');
@@ -786,7 +789,8 @@ function getThumbnail(cb = null) {
     return;
   }
 
-  isSended = false;
+  isSended = 0;
+  sessionStorage.setItem("isSended", 0);
   var mydiv = document.getElementById('main-editor');
   const temp_thumbnail = cur_thumbnail;
   if (!isPreview) {
@@ -803,12 +807,20 @@ function getThumbnail(cb = null) {
 var menu = "";
 function changeCover() {
   menu = "cover";
-  myAlert();
+  isSended = sessionStorage.getItem("isSended");
+  if (isSended == 0)
+    myAlert();
+  else
+    okAlert();
 }
 
 function changeOptions() {
   menu = "option";
-  myAlert();
+  isSended = sessionStorage.getItem("isSended");
+  if (isSended == 0)
+    myAlert();
+  else
+    okAlert();
 }
 
 function myAlert() {
@@ -817,11 +829,13 @@ function myAlert() {
 
 function okAlert() {
   $('body').removeClass("loading-confirm");
-  if (!isSended) {
+  isSended = sessionStorage.getItem("isSended");
+  if (isSended == undefined) isSended = 0;
+  if (isSended == 0) {
     saveImages();
   }
   else {
-    goConfirm();
+    goConfirm2();
   }
 }
 function cancelAlert() {
@@ -829,3 +843,10 @@ function cancelAlert() {
 }
 
 init();
+
+window.addEventListener( "pageshow", function ( event ) {
+  var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+  if ( historyTraversal ) {
+    window.location.reload();
+  }
+});

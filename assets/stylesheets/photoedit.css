@@ -291,7 +291,7 @@ div.current-item img{
 
 div.info-insert {
     font-size:0.5rem;
-    padding: 20px 8px 4px 8px;
+    padding: 1em 0.4em 0.2em 0.4em;/*20px 8px 4px 8px; */
 }
 
 div.info-insert.print-paper {
