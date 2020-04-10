@@ -227,6 +227,29 @@ div.main-editor canvas {
     max-height: 100%;
 }
 
+.image-workplace.image-cover-workplace {
+    display:block;
+}
+
+.image-workplace .text {
+    position: absolute;
+    width: 210px;
+    height: 1.5em;
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+.text.bordered {
+    border: 1px solid rgba(255, 123, 184, 0.4);
+}
+
+.receive-to {
+    margin-top:35px
+}
+.send-from {
+    margin-top: 130px;
+}
+
 .btn-hidden {
     display:none;
 }
@@ -237,6 +260,10 @@ div.main-editor canvas {
 
 .btns {
     margin-left:-65%;
+}
+
+.hidden {
+    display:none !important;
 }
 
 .thumbnail-region {
